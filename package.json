@@ -19,5 +19,13 @@
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/CrowdHailer/level/issues"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.10",
+    "require-dir": "~0.1.0",
+    "vinyl-source-stream": "~1.0.0",
+    "gulp-uglify": "~1.1.0",
+    "browserify": "~8.1.1",
+    "del": "~1.1.1"
   }
 }

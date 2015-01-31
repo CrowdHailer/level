@@ -1,0 +1,6 @@
+{
+  "name": "level",
+  "root": "www",
+  "clean_urls": true,
+  "error_page": "error.html"
+}
