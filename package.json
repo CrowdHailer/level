@@ -1,0 +1,23 @@
+{
+  "name": "level",
+  "version": "0.0.0",
+  "description": "'Spirit level web app'",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CrowdHailer/level.git"
+  },
+  "keywords": [
+    "webapp",
+    "offline",
+    "level"
+  ],
+  "author": "Peter Saxton",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/CrowdHailer/level/issues"
+  }
+}
