@@ -27,10 +27,18 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
   document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
   document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
   document.getElementById("doDirection").innerHTML = Math.round(dir);
+  c = document.querySelector('circle');
+  c.setAttribute('cx', (-1* tiltLR))
+  c.setAttribute('cy', (-1* tiltFB))
 
   // Apply the transform to the image
-  var logo = document.getElementById("imgLogo");
-  logo.style.webkitTransform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
-  logo.style.MozTransform = "rotate("+ tiltLR +"deg)";
-  logo.style.transform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+  // var logo = document.getElementById("imgLogo");
+  // logo.style.webkitTransform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+  // logo.style.MozTransform = "rotate("+ tiltLR +"deg)";
+  // logo.style.transform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
 }
+
+window.addEventListener("orientationchange", function() {
+  // Announce the new orientation number
+  alert(window.orientation);
+}, false);
