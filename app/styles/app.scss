@@ -20,6 +20,7 @@ html, body {
 
 html {
   font-size: 160%;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
 }
 
 // SPLASH-SCREEN
@@ -36,7 +37,6 @@ html {
 
   section {
     @include scut-center-transform;
-    font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
     h1 {
       font-size: 400%;
     }
@@ -46,6 +46,37 @@ html {
       border-top: 2px solid black;
       padding-top: 0.4em;
       margin-top: 0.4em;
+    }
+  }
+  z-index: 10;
+}
+$charcol: #26353F;
+#menu {
+  @include scut-fill;
+  background-color: lighten($charcol, 50);
+  padding: 1em;
+  text-align: right;
+  h1 {
+    font-size: 200%;
+    // color: white;
+  }
+  ul {
+
+    padding: 0;
+  }
+  li {
+    list-style: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 1em;
+    // line-height: 1.6;
+    span {
+      background-color: red;
+      width: 0.8em;
+      height: 0.8em;
+      display: inline-block;
+      vertical-align: middle;
+      border-radius: 4px;
+      border: 1px solid white;
     }
   }
 }
