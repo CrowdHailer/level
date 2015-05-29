@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo 'no test' && exit 1",
     "prestart": "gulp clean",
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "fetch:scut": "curl https://raw.githubusercontent.com/davidtheclark/scut/master/dist/_scut.scss > ./app/styles/vendor/_scut.scss"
   },
   "repository": {
     "type": "git",
