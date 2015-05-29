@@ -12,7 +12,7 @@ module.exports = Router.extend({
 
     // ------- ROUTE HANDLERS ---------
     home: function () {
-        this.trigger('closeMenu');
+        this.trigger('home');
     },
     about: function () {
         window.console.log('about');

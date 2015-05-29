@@ -15,7 +15,7 @@ var Main = State.extend({
             type: 'boolean',
             default: false
         },
-        showMenu: {
+        menuShown: {
             type: 'boolean',
             default: false
         }
@@ -32,16 +32,40 @@ var Main = State.extend({
         this.opened = true;
     },
     showMenu: function () {
-        this.showMenu = true;
+        this.menuShown = true;
+    },
+    hideMenu: function () {
+        this.menuShown = false;
     }
 });
 
 // END
 
+function getClosest(el, tag) {
+  // this is necessary since nodeName is always in upper case
+  tag = tag.toUpperCase();
+  do {
+    if (el.nodeName === tag) {
+      // tag name is found! let's return it. :)
+      return el;
+    }
+  } while (el = el.parentNode);
+
+  // not found :(
+  return null;
+}
 
 // BELONGS IN VIEW
 var View = require('ampersand-view');
 var MainView = View.extend({
+    session: {
+        router: {
+            type: 'object',
+        }
+    },
+    initialize: function (attribute) {
+        this.router = this.router || app.router;
+    },
     bindings: {
         'model.loadStatus': {
             type: 'text',
@@ -52,7 +76,7 @@ var MainView = View.extend({
             selector: '#splash-screen',
             name: 'hidden'
         },
-        'model.showMenu': {
+        'model.menuShown': {
             type: 'booleanClass',
             selector: '#spirit-level',
             name: 'minimised'
@@ -66,18 +90,19 @@ var MainView = View.extend({
         var screenfull = require('screenfull');
 
         if (screenfull.enabled) {
-            screenfull.request();
+            // screenfull.request();
         }
         this.model.open();
     },
     handleLinkClick: function (evt) {
         evt.preventDefault();
         var link = evt.target;
+        link = getClosest(link, 'a');
         var local = window.location.host === link.host;
         var path = link.pathname.slice(1);
         if (local) {
             evt.preventDefault();
-            level.router.navigate(path);
+            this.router.navigate(path);
         }
     },
 });
@@ -95,6 +120,7 @@ module.exports = app.extend({
         app.router = new Router({pushState: true});
 
         app.router.on('menu', app.model.showMenu, app.model);
+        app.router.on('home', app.model.hideMenu, app.model);
         var domready = require('domready');
         domready(function () {
             app.view = new MainView({
