@@ -25,9 +25,20 @@ html {
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
 }
 
+// Core components
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:visited {
+    color: inherit;
+  }
+}
+
 // SPLASH-SCREEN
 #splash-screen {
   @include scut-fill;
+  cursor: pointer;
 
   background-color: $apple-green;
   background: linear-gradient(left, $apple-green, $lime-green);
@@ -119,4 +130,8 @@ footer.page {
   left: 0;
   right: 0;
   z-index: 9;
+  padding: 0.5em;
+  .right {
+    float: right
+  }
 }
