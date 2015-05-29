@@ -22,6 +22,6 @@ module.exports = Router.extend({
     },
     catchAll: function (path) {
         window.console.warn(path);
-        this.redirectTo('');
+        this.trigger('colorSelect', path);
     }
 });

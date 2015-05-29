@@ -18,6 +18,10 @@ var Main = State.extend({
         menuShown: {
             type: 'boolean',
             default: false
+        },
+        colorScheme: {
+            type: 'text',
+            default: 'default'
         }
     },
     derived: {
@@ -35,8 +39,13 @@ var Main = State.extend({
         this.menuShown = true;
     },
     hideMenu: function () {
+        this.colorScheme = 'default';
         this.menuShown = false;
-    }
+    },
+    selectColour: function (path) {
+        this.colorScheme = path;
+        this.menuShown = false;
+    },
 });
 
 // END
@@ -80,6 +89,10 @@ var MainView = View.extend({
             type: 'booleanClass',
             selector: '#spirit-level',
             name: 'minimised'
+        },
+        'model.colorScheme': {
+            type: 'class',
+            selector: '#spirit-level > svg'
         }
     },
     events: {
@@ -104,7 +117,7 @@ var MainView = View.extend({
             evt.preventDefault();
             this.router.navigate(path);
         }
-    },
+    }
 });
 
 // END
@@ -121,6 +134,7 @@ module.exports = app.extend({
 
         app.router.on('menu', app.model.showMenu, app.model);
         app.router.on('home', app.model.hideMenu, app.model);
+        app.router.on('colorSelect', app.model.selectColour, app.model);
         var domready = require('domready');
         domready(function () {
             app.view = new MainView({

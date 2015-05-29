@@ -64,6 +64,25 @@ $charcol: #26353F;
   }
   // border: 4px solid white;
   // margin: -4px;
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    &.default {
+      background-color: $apple-green;
+      background: linear-gradient(left, $apple-green, $lime-green);
+    }
+    &.pinky {
+      background-color: #FF08A4;
+      background: linear-gradient(left, #0B7EE3, #FF08A4);
+    }
+    &.grey {
+      background-color: #111;
+      background: linear-gradient(bottom, #112, #347);
+    }
+  }
 }
 #menu {
   @include scut-fill;
