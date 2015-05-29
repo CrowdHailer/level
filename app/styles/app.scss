@@ -53,6 +53,18 @@ html {
   z-index: 10;
 }
 $charcol: #26353F;
+#spirit-level {
+  @include scut-fill;
+  z-index: 8;
+  transform: translateX(0);
+  transition: transform 1s ease-in-out;
+  &.minimised {
+    transform: translateX(-40%) scale(0.7);
+
+  }
+  // border: 4px solid white;
+  // margin: -4px;
+}
 #menu {
   @include scut-fill;
   background-color: lighten($charcol, 50);
