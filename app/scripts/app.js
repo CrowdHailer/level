@@ -50,6 +50,11 @@ var View = View.extend({
         "click #splash-screen": 'notify',
     },
     notify: function (evt) {
+        var screenfull = require('screenfull');
+
+        if (screenfull.enabled) {
+            screenfull.request();
+        }
         this.model.open();
     },
 });
