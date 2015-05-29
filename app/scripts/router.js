@@ -18,8 +18,7 @@ module.exports = Router.extend({
         window.console.log('about');
     },
     menu: function (attribute) {
-        console.log('router')
-        this.trigger('visitMenu');
+        this.trigger('menu');
     },
     catchAll: function (path) {
         window.console.warn(path);

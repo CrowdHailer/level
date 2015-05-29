@@ -14,6 +14,10 @@ var Main = State.extend({
         opened: {
             type: 'boolean',
             default: false
+        },
+        showMenu: {
+            type: 'boolean',
+            default: false
         }
     },
     derived: {
@@ -27,6 +31,9 @@ var Main = State.extend({
     open: function (attribute) {
         this.opened = true;
     },
+    showMenu: function () {
+        this.showMenu = true;
+    }
 });
 
 // END
@@ -44,6 +51,11 @@ var MainView = View.extend({
             type: 'booleanClass',
             selector: '#splash-screen',
             name: 'hidden'
+        },
+        'model.showMenu': {
+            type: 'booleanClass',
+            selector: '#spirit-level',
+            name: 'minimised'
         }
     },
     events: {
@@ -82,15 +94,13 @@ module.exports = app.extend({
         app.model = new Main();
         app.router = new Router({pushState: true});
 
+        app.router.on('menu', app.model.showMenu, app.model);
         var domready = require('domready');
         domready(function () {
             app.view = new MainView({
                 el: document.body,
                 model: app.model
             });
-        //     // app.view.render();
-        //     app.router.on('openMenu', app.page.openMenu, app.page);
-        //     app.router.on('closeMenu', app.page.closeMenu, app.page);
             app.router.history.start();
             app.ready();
         });
