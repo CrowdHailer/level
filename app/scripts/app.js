@@ -11,7 +11,22 @@ var Model = State.extend({
             type: 'boolean',
             default: false
         },
-    }
+        opened: {
+            type: 'boolean',
+            default: false
+        }
+    },
+    derived: {
+        loadStatus: {
+            deps: ['ready'],
+            fn: function () {
+                return this.ready ? 'Ready! Click to begin' : 'Loading...';
+            },
+        }
+    },
+    open: function (attribute) {
+        this.opened = true;
+    },
 });
 
 // END
@@ -19,22 +34,23 @@ var Model = State.extend({
 
 // BELONGS IN VIEW
 var View = require('ampersand-view');
-var view = View.extend({
+var View = View.extend({
     bindings: {
-        'model.ready': {
+        'model.loadStatus': {
             type: 'text',
-            hook: 'status'
+            hook: 'load-status'
         },
-        'model.menuState': {
-            selector: 'aside',
+        'model.opened': {
             type: 'booleanClass',
-            yes: 'opened',
-            no: 'closed'
+            selector: '#splash-screen',
+            name: 'hidden'
         }
     },
     events: {
-        "click aside.closed": 'open',
-        "click aside.opened": 'close'
+        "click #splash-screen": 'notify',
+    },
+    notify: function (evt) {
+        this.model.open();
     },
 });
 
@@ -42,23 +58,23 @@ var view = View.extend({
 
 module.exports = app.extend({
     init: function(){
-        var self = this;
-        window.level = self;
+        var app = this;
+        window.level = app;
 
-        self.model = new Model();
-        // self.router = new Router({pushState: true});
+        app.model = new Model();
+        // app.router = new Router({pushState: true});
 
         var domready = require('domready');
         domready(function () {
-        //     self.view = new PageView({
-        //         el: document.body,
-        //         model: self.page
-        //     });
-        //     // self.view.render();
-        //     self.router.on('openMenu', self.page.openMenu, self.page);
-        //     self.router.on('closeMenu', self.page.closeMenu, self.page);
-        //     self.router.history.start();
-            self.ready();
+            app.view = new View({
+                el: document.body,
+                model: app.model
+            });
+        //     // app.view.render();
+        //     app.router.on('openMenu', app.page.openMenu, app.page);
+        //     app.router.on('closeMenu', app.page.closeMenu, app.page);
+        //     app.router.history.start();
+            app.ready();
         });
     },
     ready: function () {

@@ -28,6 +28,11 @@ html {
 
   background-color: $apple-green;
   background: linear-gradient(left, $apple-green, $lime-green);
+  transform: translateX(0);
+  transition: transform 1s ease-in-out;
+  &.hidden {
+    transform: translateX(-100%);
+  }
 
   section {
     @include scut-center-transform;
