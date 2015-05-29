@@ -62,6 +62,6 @@ gulp.task('serve', ['public', 'styles', 'scripts'], function(){
         open: false
     });
     gulp.watch('app/index.html', ['public']);
-    gulp.watch('app/scss/**/*', ['styles']);
-    gulp.watch('app/js/**/*', ['scripts']);
+    gulp.watch('app/styles/**/*', ['styles']);
+    gulp.watch('app/scripts/**/*', ['scripts']);
 });
