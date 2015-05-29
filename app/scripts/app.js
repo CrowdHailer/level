@@ -5,7 +5,7 @@ var app = require('ampersand-app');
 // BELONGS IN MODEL
 var State = require('ampersand-state');
 
-var Model = State.extend({
+var Main = State.extend({
     session: {
         ready: {
             type: 'boolean',
@@ -34,7 +34,7 @@ var Model = State.extend({
 
 // BELONGS IN VIEW
 var View = require('ampersand-view');
-var View = View.extend({
+var MainView = View.extend({
     bindings: {
         'model.loadStatus': {
             type: 'text',
@@ -66,12 +66,12 @@ module.exports = app.extend({
         var app = this;
         window.level = app;
 
-        app.model = new Model();
+        app.model = new Main();
         // app.router = new Router({pushState: true});
 
         var domready = require('domready');
         domready(function () {
-            app.view = new View({
+            app.view = new MainView({
                 el: document.body,
                 model: app.model
             });
