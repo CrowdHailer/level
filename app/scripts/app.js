@@ -48,6 +48,7 @@ var MainView = View.extend({
     },
     events: {
         "click #splash-screen": 'notify',
+        "click a": 'handleLinkClick'
     },
     notify: function (evt) {
         var screenfull = require('screenfull');
@@ -57,9 +58,21 @@ var MainView = View.extend({
         }
         this.model.open();
     },
+    handleLinkClick: function (evt) {
+        evt.preventDefault();
+        var link = evt.target;
+        var local = window.location.host === link.host;
+        var path = link.pathname.slice(1);
+        if (local) {
+            evt.preventDefault();
+            level.router.navigate(path);
+        }
+    },
 });
 
 // END
+
+var Router = require('./router');
 
 module.exports = app.extend({
     init: function(){
@@ -67,7 +80,7 @@ module.exports = app.extend({
         window.level = app;
 
         app.model = new Main();
-        // app.router = new Router({pushState: true});
+        app.router = new Router({pushState: true});
 
         var domready = require('domready');
         domready(function () {
@@ -78,7 +91,7 @@ module.exports = app.extend({
         //     // app.view.render();
         //     app.router.on('openMenu', app.page.openMenu, app.page);
         //     app.router.on('closeMenu', app.page.closeMenu, app.page);
-        //     app.router.history.start();
+            app.router.history.start();
             app.ready();
         });
     },
