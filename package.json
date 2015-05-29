@@ -1,0 +1,32 @@
+{
+  "name": "level",
+  "version": "0.0.0",
+  "description": "'Spirit level web app'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'no test' && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CrowdHailer/level.git"
+  },
+  "keywords": [
+    "webapp",
+    "offline",
+    "level"
+  ],
+  "author": "Peter Saxton",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/CrowdHailer/level/issues"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.10",
+    "vinyl-source-stream": "~1.0.0",
+    "gulp-uglify": "~1.1.0",
+    "browserify": "~8.1.1",
+    "gulp-sourcemaps": "~1.5.2",
+    "superstatic": "~2.2.0",
+    "gulp-sass": "~2.0.1"
+  }
+}
