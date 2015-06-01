@@ -82,7 +82,7 @@ $charcol: #26353F;
     width: 100%;
     height: 100%;
     &.default {
-      background-color: $apple-green;
+      background-color: $charcol;
       background: linear-gradient(left, $apple-green, $lime-green);
     }
     &.pinky {
@@ -133,5 +133,31 @@ footer.page {
   padding: 0.5em;
   .right {
     float: right
+  }
+}
+
+svg {
+  circle.dashed {
+    fill: none;
+    stroke: black;
+    stroke-dasharray: 2;
+    stroke-width: 0.4;
+  }
+  circle.solid {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.6;
+  }
+  circle.background {
+    stroke: black;
+    stroke-width: 0.6;
+  }
+  circle.background {
+    fill: url(#g871);
+    fill: none;
+  }
+  line {
+    stroke: black;
+    stroke-width: 0.6;
   }
 }
