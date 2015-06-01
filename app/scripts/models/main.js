@@ -20,11 +20,11 @@ module.exports = State.extend({
         },
         angleX: {
             type: 'float',
-            default: 12.5
+            default: 10
         },
         angleY: {
             type: 'float',
-            default: -10
+            default: 0
         }
     },
     derived: {

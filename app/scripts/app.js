@@ -22,8 +22,8 @@ module.exports = app.extend({
                 el: document.body,
                 model: app.model
             });
+            window.requestAnimationFrame(setModelOrienation)
             app.router.history.start();
-            timeout();
             app.ready();
         });
     },
@@ -107,12 +107,13 @@ function matrixMultiply( a, b ) {
 }
 
 var deviceOrientationData, currentScreenOrientation;
+currentScreenOrientation = 0
 
 window.addEventListener('orientationchange', function() {
 	currentScreenOrientation = window.orientation;
 }, false);
 
-// var deviceOrientationData = null;
+var deviceOrientationData = {};
 
 window.addEventListener('deviceorientation', function( event ) {
 	deviceOrientationData = event;
@@ -136,14 +137,14 @@ function computeMatrix() {
 	return screenAdjustedMatrix; // [ m11, m12, m13, m21, m22, m23, m31, m32, m33 ]
 }
 
-
-function timeout() {
-    setTimeout(function () {
-        var m = computeMatrix()
-        level.model.angleX = 90 * m[1]
-        console.log(level.model.angleX)
-        timeout()
-    }, 1000);
+function setModelOrienation() {
+  var m = computeMatrix()
+  var z = - 1 * m[8]
+  var y = - 1 * m[5]
+  var x = - 1 * m[2]
+  var angleX = Math.atan(x/z)
+  var angleY = Math.atan(y/z)
+  window.level.angleX = angleX;
+  window.level.angleY = angleY;
+  window.requestAnimationFrame(setModelOrienation)
 }
-
-window.timeout = timeout
