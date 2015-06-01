@@ -11,7 +11,7 @@ var Main = State.extend({
             type: 'boolean',
             default: false
         },
-        opened: {
+        started: {
             type: 'boolean',
             default: false
         },
@@ -33,7 +33,7 @@ var Main = State.extend({
         }
     },
     open: function (attribute) {
-        this.opened = true;
+        this.started = true;
     },
     showMenu: function () {
         this.menuShown = true;
@@ -80,7 +80,7 @@ var MainView = View.extend({
             type: 'text',
             hook: 'load-status'
         },
-        'model.opened': {
+        'model.started': {
             type: 'booleanClass',
             selector: '#splash-screen',
             name: 'hidden'
