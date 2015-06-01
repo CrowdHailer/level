@@ -7,6 +7,8 @@
     "test": "echo 'no test' && exit 1",
     "prestart": "gulp clean",
     "start": "gulp serve",
+    "prefetch": "mkdir app/styles/vendor",
+    "fetch": "npm run fetch:scut -s",
     "fetch:scut": "curl https://raw.githubusercontent.com/davidtheclark/scut/master/dist/_scut.scss > ./app/styles/vendor/_scut.scss"
   },
   "repository": {
@@ -40,6 +42,7 @@
     "ampersand-router": "~3.0.2",
     "ampersand-app": "~1.0.4",
     "ampersand-state": "~4.5.6",
-    "ampersand-view": "~7.4.2"
+    "ampersand-view": "~7.4.2",
+    "screenfull": "~2.0.0"
   }
 }
