@@ -70,9 +70,11 @@ module.exports = View.extend({
         this.model.open();
     },
     handleLinkClick: function (evt) {
+        var link = getClosest(evt.target, 'a');
+        if (link.pathname == '/about') {
+            return
+        }
         evt.preventDefault();
-        var link = evt.target;
-        link = getClosest(link, 'a');
         var local = window.location.host === link.host;
         var path = link.pathname.slice(1);
         if (local) {

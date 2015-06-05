@@ -38,13 +38,21 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
     <link rel="stylesheet" href="/styles/app.css" media="screen" title="no title">
+    <noscript>
+        <style> .js-only { display: none } </style>
+    </noscript>
 </head>
 <body>
     <div id="splash-screen">
         <section>
             <h1>Level</h1>
             <span class="subheading">A spirit level for the web</span>
-            <footer data-hook="load-status">loading...</footer>
+            <footer data-hook="load-status" class="js-only">loading...</footer>
+            <noscript>
+                <footer>
+                    Failed! <a href="#" style="text-decoration:underline">About level</a>
+                </footer>
+            </noscript>
         </section>
     </div>
     <main>
