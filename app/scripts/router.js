@@ -21,7 +21,12 @@ module.exports = Router.extend({
         this.trigger('menu');
     },
     catchAll: function (path) {
-        window.console.warn(path);
-        this.trigger('colorSelect', path);
+        var array = ['blueberry', 'cherry', 'peach'];
+        var index = array.indexOf(path);
+        if (index == -1) {
+            this.redirectTo('/');
+        } else {
+            this.trigger('colorSelect', path);
+        }
     }
 });
