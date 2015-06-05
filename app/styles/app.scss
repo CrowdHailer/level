@@ -4,6 +4,8 @@
 $apple-green: #00b800;
 $lime-green: #91FF00;
 $charcol: #26353F;
+$apple-primary: $apple-green;
+$apple-secondary: $lime-green;
 
 
 @import 'about';
@@ -74,6 +76,12 @@ a {
   }
   z-index: 10;
 }
+$blueberry-primary: #04235A;
+$blueberry-secondary: #68CAFB;
+$cherry-primary: #8A0C0D;
+$cherry-secondary: #CE6370;
+$peach-primary: #F36321;
+$peach-secondary: #F89924;
 #spirit-level {
   @include scut-fill;
   z-index: 8;
@@ -108,18 +116,42 @@ a {
       background: linear-gradient(40deg, $apple-green 15%, $lime-green 90%);
     }
     &.blueberry {
-      background: #04235A;
-      background: linear-gradient(-30deg, #04235A 30%, #68CAFB);
+      background: $blueberry-primary;
+      background: linear-gradient(-30deg, $blueberry-primary 30%, $blueberry-secondary);
     }
     &.cherry {
-      background: #8A0C0D;
-      background: linear-gradient(-10deg, #8A0C0D 20%, #CE6370 90%);
+      background: cherry-primary;
+      background: linear-gradient(-10deg, $cherry-primary 20%, $cherry-secondary 90%);
     }
     &.peach {
-      background-color: #111;
-      background: linear-gradient(20deg, #F36321 28%, #F89924 61%);
+      background: $peach-primary;
+      background: linear-gradient(20deg, $peach-primary 28%, $peach-secondary 61%);
     }
   }
+}
+span.apple.primary {
+  background: $apple-primary;
+}
+span.apple.secondary {
+  background: $apple-secondary;
+}
+span.blueberry.primary {
+  background: $blueberry-primary;
+}
+span.blueberry.secondary {
+  background: $blueberry-secondary;
+}
+span.cherry.primary {
+  background: $cherry-primary;
+}
+span.cherry.secondary {
+  background: $cherry-secondary;
+}
+span.peach.primary {
+  background: $peach-primary;
+}
+span.peach.secondary {
+  background: $peach-secondary;
 }
 #menu {
   @include scut-fill;
@@ -136,11 +168,10 @@ a {
   }
   li {
     list-style: none;
-    border-bottom: 1px solid black;
+    // border-bottom: 1px solid black;
     margin-bottom: 1em;
     // line-height: 1.6;
     span {
-      background-color: red;
       width: 0.8em;
       height: 0.8em;
       display: inline-block;
