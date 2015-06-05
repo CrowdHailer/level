@@ -1,3 +1,5 @@
+'use strict';
+
 var View = require('ampersand-view');
 var app = require('ampersand-app');
 
