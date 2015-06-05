@@ -60,6 +60,15 @@ window.addEventListener('orientationchange', function() {
        currentScreenOrientation = window.orientation;
 }, false);
 
+function round (dp){
+    dp = dp || 0;
+    var factor = Math.pow(10, dp);
+    var bump = Math.pow(0.1, dp + 1); // needed for case 2 d.p on 1.005
+    return function(num){
+        return Math.round(num * factor + bump) / factor;
+    };
+}
+var r = round(1);
 
 function deviceMotionHandler(deviceMotionEvent) {
     var vector = deviceMotionEvent.accelerationIncludingGravity;
@@ -76,6 +85,6 @@ function deviceMotionHandler(deviceMotionEvent) {
     }
     var angleFactor = theta / magnitude(orientation);
     var position = scale(angleFactor, orientation);
-    module.exports.model.angleX = -1 * position.x;
-    module.exports.model.angleY = position.y;
+    module.exports.model.angleX = r(-1 * position.x);
+    module.exports.model.angleY = r(-1 * position.y);
 }

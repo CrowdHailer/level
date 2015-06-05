@@ -46,16 +46,22 @@ module.exports = View.extend({
             type: 'class',
             selector: '#spirit-level > svg'
         },
-        'model.angleX': {
+        'model.angleX': [{
             type: 'attribute',
             selector: '#bubble', // or hook
             name: 'cx'
-        },
-        'model.angleY': {
+        },{
+            type: 'text',
+            hook: 'angleX'
+        }],
+        'model.angleY': [{
             type: 'attribute',
             selector: '#bubble', // or hook
             name: 'cy'
-        }
+        },{
+            type: 'text',
+            hook: 'angleY'
+        }]
     },
     events: {
         "click #splash-screen": 'notify',
