@@ -94,16 +94,19 @@ a {
     background: $charcol;
     &.default {
       background: $apple-green;
-      background: linear-gradient(40deg, $apple-green, $lime-green);
+      background: linear-gradient(40deg, $apple-green 15%, $lime-green 90%);
     }
-    &.pinky {
-      background: #FF08A4;
-      background: linear-gradient(60deg, #0B7EE3, #FF08A4);
+    &.blueberry {
+      background: #04235A;
+      background: linear-gradient(-30deg, #04235A 30%, #68CAFB);
     }
-    &.red {
+    &.cherry {
+      background: #8A0C0D;
+      background: linear-gradient(-10deg, #8A0C0D 20%, #CE6370 90%);
+    }
+    &.peach {
       background-color: #111;
-      background: linear-gradient(20deg, #FE1C4A 22%, #AB244A 61%);
-      // background: linear-gradient(20deg, #112, #347);
+      background: linear-gradient(20deg, #F36321 28%, #F89924 61%);
     }
   }
 }
