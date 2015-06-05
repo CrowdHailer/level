@@ -1,14 +1,18 @@
 @import 'vendor/scut';
 
+// CONSTANTS
+$apple-green: #00b800;
+$lime-green: #91FF00;
+$charcol: #26353F;
+
+
+@import 'about';
+
 // RESETS
 // Preferred behaviour
 @include scut-reset-border-box;
 @include scut-reset-button;
 @include scut-reset-semanticize;
-
-// CONSTANTS
-$apple-green: #00b800;
-$lime-green: #91FF00;
 
 // BASE
 html, body {
@@ -70,7 +74,6 @@ a {
   }
   z-index: 10;
 }
-$charcol: #26353F;
 #spirit-level {
   @include scut-fill;
   z-index: 8;
