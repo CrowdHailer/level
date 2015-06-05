@@ -5,7 +5,7 @@ var Router = require('ampersand-router');
 module.exports = Router.extend({
     routes: {
         '': 'home',
-        'about': 'about',
+        'calibrate': 'calibrate',
         'menu': 'menu',
         '(*path)': 'catchAll'
     },
@@ -14,8 +14,15 @@ module.exports = Router.extend({
     home: function () {
         this.trigger('home');
     },
-    about: function () {
-        window.console.log('about');
+    calibrate: function () {
+        var r = window.confirm("Is your device on a level surface");
+        if (r === true) {
+            var vector = window.lastDeviceMotionEvent;
+            var m = window.magnitude(vector);
+            var n = window.scale(1/m, vector);
+            window.down = n;
+        }
+        this.redirectTo('/menu');
     },
     menu: function (attribute) {
         this.trigger('menu');

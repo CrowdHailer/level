@@ -52,7 +52,10 @@ function scale(a, v) {
     return {x: a * v.x, y: a * v.y, z: a * v.z};
 }
 
-var down = {x: 0, y: 0, z: -1};
+window.magnitude = magnitude;
+window.scale = scale;
+
+window.down = {x: 0, y: 0, z: -1};
 
 var currentScreenOrientation = 0;
 
@@ -71,8 +74,9 @@ function round (dp){
 var r = round(1);
 
 function deviceMotionHandler(deviceMotionEvent) {
+    window.lastDeviceMotionEvent = deviceMotionEvent.accelerationIncludingGravity;
     var vector = deviceMotionEvent.accelerationIncludingGravity;
-    var cosTheta = dotProduct(down, vector) / magnitude(vector);
+    var cosTheta = dotProduct(window.down, vector) / magnitude(vector);
     var thetaRad = Math.acos(cosTheta);
     var theta = 180 * thetaRad / Math.PI;
     var orientation;
