@@ -1,3 +1,5 @@
+'use strict';
+
 var State = require('ampersand-state');
 
 module.exports = State.extend({
@@ -20,7 +22,7 @@ module.exports = State.extend({
         },
         angleX: {
             type: 'float',
-            default: 10
+            default: 0
         },
         angleY: {
             type: 'float',
