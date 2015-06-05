@@ -12,7 +12,7 @@ gulp.task('clean', function () {
 
 // Copy static items to the publishable folder
 gulp.task('public', function () {
-    return gulp.src(['app/index.html', 'app/robots.txt'], {base: 'app/'})
+    return gulp.src(['app/index.html', 'app/robots.txt', 'app/favicon.ico'], {base: 'app/'})
     .pipe(gulp.dest('www'))
     .pipe(browserSync.stream());
 });
