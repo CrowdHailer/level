@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 
@@ -10,7 +12,7 @@ gulp.task('clean', function () {
 
 // Copy static items to the publishable folder
 gulp.task('public', function () {
-    return gulp.src(['app/index.html'], {base: 'app/'})
+    return gulp.src(['app/index.html', 'app/robots.txt'], {base: 'app/'})
     .pipe(gulp.dest('www'))
     .pipe(browserSync.stream());
 });
