@@ -9,19 +9,23 @@
     <meta name="author" content="Workshop 14 Limited">
     <link rel="canonical" href="http://level.workshop14.io" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="/styles/app.css" media="screen" title="no title" charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="/styles/app.css" media="screen" title="no title">
 </head>
 <body>
-    <header id="splash-screen">
+    <div id="splash-screen">
         <section>
             <h1>Level</h1>
             <span class="subheading">A spirit level for the web</span>
             <footer data-hook="load-status">loading...</footer>
         </section>
-    </header>
+    </div>
     <main>
         <section id="spirit-level">
+            <h1>Level</h1>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
                 <linearGradient id="g871" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop stop-color="#FF08A4" offset="0"/><stop stop-color="#0B7EE3" offset="1"/>
@@ -41,15 +45,21 @@
         <section id="menu">
             <h1>Menu</h1>
             <ul>
-                <a href="/">
-                    <li><span></span> <span></span> Default</li>
-                </a>
-                <a href="/pinky">
-                    <li><span></span> <span></span> pinky</li>
-                </a>
-                <a href="/grey">
-                    <li><span></span> <span></span> grey</li>
-                </a>
+                <li>
+                    <a href="/">
+                        <span></span> <span></span> Default
+                    </a>
+                </li>
+                <li>
+                    <a href="/pinky">
+                        <span></span> <span></span> pinky
+                    </a>
+                </li>
+                <li>
+                    <a href="/grey">
+                        <span></span> <span></span> grey
+                    </a>
+                </li>
             </ul>
         </section>
     </main>

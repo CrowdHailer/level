@@ -16,6 +16,10 @@ html, body {
   @include scut-fill;
   padding: 0;
   margin: 0;
+  overflow: hidden;
+  position: fixed;
+  -ms-touch-action:none;
+  touch-action: none;
 }
 
 html {
@@ -23,6 +27,9 @@ html {
     font-size: 160%;
   }
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+}
+
+body {
 }
 
 // Core components
