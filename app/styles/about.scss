@@ -1,22 +1,33 @@
 #about {
-  background-color: $apple-green;
+  @include scut-fill;
+  background: $apple-green;
   background: linear-gradient(140deg, $apple-green, $lime-green);
+  // background-image: -moz-linear-gradient(bottom, #FE1C4A 22%, #AB244A 61%);
   color: $charcol;
   padding: 1em;
-  max-width: 600px;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
   font-family: monospace;
   h1 {
     font-size: 250%;
+    max-width: 600px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   h2 {
     font-size: 120%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: right;
     border-bottom: 2px solid $charcol;
     color: lighten($charcol, 50);
     color: white;
+  }
+  p {
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
   a {
     text-decoration: underline;
