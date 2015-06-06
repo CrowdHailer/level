@@ -97,6 +97,10 @@ $peach-secondary: #F89924;
       display: inline-block;
     }
     padding: 0.5em;
+    @media (min-width: 700px) {
+      padding: 0.5em 2em;
+      // font-size: 200%;
+    }
     .right {
       float: right
     }
@@ -158,20 +162,21 @@ span.peach.secondary {
   @include scut-fill;
   background-color: lighten($charcol, 50);
   padding: 1em;
+  @media (min-width: 700px) {
+    padding: 2em 2em;
+  }
   text-align: right;
   h1 {
     font-size: 200%;
     // color: white;
   }
   ul {
-
+    margin: 0;
     padding: 0;
   }
   li {
     list-style: none;
-    // border-bottom: 1px solid black;
-    margin-bottom: 1em;
-    // line-height: 1.6;
+    line-height: 1.6;
     span {
       width: 0.8em;
       height: 0.8em;
@@ -189,6 +194,9 @@ footer.page {
   right: 0;
   z-index: 9;
   padding: 0.5em;
+  @media (min-width: 700px) {
+    padding: 0.5em 2em;
+  }
   .right {
     float: right
   }
