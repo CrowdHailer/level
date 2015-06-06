@@ -26,8 +26,13 @@ module.exports = app.extend({
             app.router.history.start();
             if (window.DeviceMotionEvent) {
                 window.addEventListener("devicemotion", deviceMotionHandler);
+                setTimeout(function () {
+                    app.model.checkLive();
+                }, 600);
+            } else {
+                app.model.sensorFail();
             }
-            app.ready();
+            // app.ready();
         });
     },
     ready: function () {
