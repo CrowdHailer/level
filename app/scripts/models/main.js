@@ -1,4 +1,31 @@
 'use strict';
+function formatNumber(number){
+    number = number || 0;
+    var string = '';
+    var array = (number + '').split('.');
+    var digits = array[0];
+    var tmp;
+    if (digits.indexOf('-') != -1){
+        string += '-';
+        tmp = digits.split('-')[1];
+        if (tmp.length == 1){
+            string += '0';
+        }
+        string += tmp;
+    } else {
+        string += '+';
+        if (digits.length == 1) {
+            string += '0';
+        }
+        string += digits;
+    }
+    var decimals = array[1] || '0';
+    if (decimals.length == 1) {
+        decimals += '0';
+    }
+    string = string + '.' + decimals;
+    return string;
+}
 
 var State = require('ampersand-state');
 
@@ -45,6 +72,18 @@ module.exports = State.extend({
                     return 'Loading...';
                 }
             },
+        },
+        angleXformated: {
+            deps: ['angleX'],
+            fn: function () {
+                return formatNumber(this.angleX);
+            }
+        },
+        angleYformated: {
+            deps: ['angleY'],
+            fn: function () {
+                return formatNumber(this.angleY);
+            }
         }
     },
     open: function (attribute) {

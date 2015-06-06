@@ -51,22 +51,24 @@ module.exports = View.extend({
             type: 'class',
             selector: '#spirit-level'
         },
-        'model.angleX': [{
+        'model.angleX': {
             type: 'attribute',
             selector: '#bubble', // or hook
             name: 'cx'
-        },{
+        },
+        'model.angleXformated' :{
             type: 'text',
             hook: 'angleX'
-        }],
-        'model.angleY': [{
+        },
+        'model.angleY': {
             type: 'attribute',
             selector: '#bubble', // or hook
             name: 'cy'
-        },{
+        },
+        'model.angleYformated' :{
             type: 'text',
             hook: 'angleY'
-        }]
+        }
     },
     events: {
         "click #splash-screen.ready": 'notify',
