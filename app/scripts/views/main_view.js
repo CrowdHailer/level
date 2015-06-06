@@ -37,6 +37,11 @@ module.exports = View.extend({
             selector: '#splash-screen',
             name: 'hidden'
         },
+        'model.ready': {
+            type: 'booleanClass',
+            selector: '#splash-screen',
+            name: 'ready'
+        },
         'model.menuShown': {
             type: 'booleanClass',
             selector: '#spirit-level',
@@ -64,7 +69,7 @@ module.exports = View.extend({
         }]
     },
     events: {
-        "click #splash-screen": 'notify',
+        "click #splash-screen.ready": 'notify',
         "click a": 'handleLinkClick'
     },
     notify: function (evt) {

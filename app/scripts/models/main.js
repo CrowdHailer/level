@@ -37,7 +37,7 @@ module.exports = State.extend({
         loadStatus: {
             deps: ['ready', 'sensorError'],
             fn: function () {
-                if (this.ready) {
+                if (this.ready && !this.sensorError) {
                     return 'Ready! Click to begin';
                 } else if (this.sensorError) {
                     return 'No Sensor Detected! Click to continue';
@@ -65,6 +65,7 @@ module.exports = State.extend({
         var v = window.lastDeviceMotionEvent || {x: 0, y: 0, z:0};
         if (v.x === 0 && v.y === 0 && v.z === 0) {
             this.sensorFail();
+            this.ready = true;
         } else {
             // eurgh
             window.level.ready();
