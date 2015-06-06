@@ -12,7 +12,7 @@ gulp.task('clean', function () {
 
 // Copy static items to the publishable folder
 gulp.task('public', function () {
-    return gulp.src(['app/*.html', 'app/robots.txt', 'app/favicon.ico', 'app/favicon.png', 'app/images/*'], {base: 'app/'})
+    return gulp.src(['app/*.html', 'app/robots.txt', 'app/favicon.ico', 'app/favicon.png', 'app/images/*', 'app/offline.appcache'], {base: 'app/'})
     .pipe(gulp.dest('www'))
     .pipe(browserSync.stream());
 });
@@ -63,7 +63,7 @@ gulp.task('serve', ['public', 'styles', 'scripts'], function(){
         proxy: 'localhost:' + port,
         open: false
     });
-    gulp.watch(['app/*.html', 'app/robots.txt', 'app/favicon.ico', 'app/favicon.png', 'app/images/*'], ['public']);
+    gulp.watch(['app/*.html', 'app/robots.txt', 'app/favicon.ico', 'app/favicon.png', 'app/images/*', 'app/offline.appcache'], ['public']);
     gulp.watch('app/styles/**/*', ['styles']);
     gulp.watch('app/scripts/**/*', ['scripts']);
 });
