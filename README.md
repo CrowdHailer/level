@@ -18,6 +18,11 @@ npm start
 
 *Use host declaration to make available on the network*
 
+## Options
+
+Radial angles. Line of greatest slope and total angle.
+Sensitivity select.
+
 ## Resources
 
 Fruity color schemes
