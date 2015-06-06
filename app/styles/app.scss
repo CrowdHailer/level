@@ -110,7 +110,8 @@ $peach-secondary: #F89924;
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: $charcol;
+    background: $apple-green;
+    background: linear-gradient(40deg, $apple-green 15%, $lime-green 90%);
     &.default {
       background: $apple-green;
       background: linear-gradient(40deg, $apple-green 15%, $lime-green 90%);
