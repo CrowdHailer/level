@@ -55,7 +55,7 @@ function scale(a, v) {
 window.magnitude = magnitude;
 window.scale = scale;
 
-window.down = {x: 0, y: 0, z: -1};
+window.down = {x: 0, y: 0, z: 1};
 
 var currentScreenOrientation = 0;
 
@@ -74,8 +74,23 @@ function round (dp){
 var r = round(1);
 
 function deviceMotionHandler(deviceMotionEvent) {
-    window.lastDeviceMotionEvent = deviceMotionEvent.accelerationIncludingGravity;
-    var vector = deviceMotionEvent.accelerationIncludingGravity;
+    var vector;
+    if (navigator.userAgent.match(/Windows/i)) {
+        vector = {
+            x: -1 * deviceMotionEvent.accelerationIncludingGravity.x,
+            y: -1 * deviceMotionEvent.accelerationIncludingGravity.y,
+            z: -1 * deviceMotionEvent.accelerationIncludingGravity.z
+        };
+    } else if (navigator.userAgent.match(/Android/i)) {
+        vector = deviceMotionEvent.accelerationIncludingGravity;
+    } else {
+        vector = {
+            x: -1 * deviceMotionEvent.accelerationIncludingGravity.x,
+            y: -1 * deviceMotionEvent.accelerationIncludingGravity.y,
+            z: -1 * deviceMotionEvent.accelerationIncludingGravity.z
+        };
+    }
+    window.lastDeviceMotionEvent = vector;
     var cosTheta = dotProduct(window.down, vector) / magnitude(vector);
     var thetaRad = Math.acos(cosTheta);
     var theta = 180 * thetaRad / Math.PI;
@@ -89,6 +104,6 @@ function deviceMotionHandler(deviceMotionEvent) {
     }
     var angleFactor = theta / magnitude(orientation);
     var position = scale(angleFactor, orientation);
-    module.exports.model.angleX = r(-1 * position.x);
-    module.exports.model.angleY = r(-1 * position.y);
+    module.exports.model.angleX = r(position.x);
+    module.exports.model.angleY = r(position.y);
 }
