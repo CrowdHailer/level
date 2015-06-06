@@ -79,6 +79,7 @@ function round (dp){
 var r = round(1);
 
 function deviceMotionHandler(deviceMotionEvent) {
+    // Fix vector to handle the fact iOS and Windows define it backwards
     var vector;
     if (navigator.userAgent.match(/Windows/i)) {
         vector = {
@@ -95,20 +96,33 @@ function deviceMotionHandler(deviceMotionEvent) {
             z: -1 * deviceMotionEvent.accelerationIncludingGravity.z
         };
     }
+    // Record last device motion for down setting
     window.lastDeviceMotionEvent = vector;
+    // Magnitude of down vector always one
     var cosTheta = dotProduct(window.down, vector) / magnitude(vector);
     var thetaRad = Math.acos(cosTheta);
     var theta = 180 * thetaRad / Math.PI;
     var orientation;
+    // plane factor for intersection
+    var planeFactor = down.x * vector.y + down.y * vector.x + down.z * vector.z
+    var intersectionPoint = scale(1/planeFactor, vector);
+    var x = intersectionPoint.x - down.x;
+    var y = intersectionPoint.y - down.y;
+    // To calculate the calibrated version we need to fine the plane perpendicular to the current down vector
+    // assuming down vector has magnitude 1 then this is
+    // di *x + dj * y + dk * z = 1
+    // the plane factor is a multiplication factor on the current vector to find point of intersection
+    
     if (currentScreenOrientation == 90) {
-        orientation = {x: -1 * vector.y, y: vector.x, z: 0};
+        orientation = {x: -1 * y, y: x, z: 0};
     } else if (currentScreenOrientation == -90) {
-        orientation = {x: vector.y, y: -1 * vector.x, z: 0};
+        orientation = {x: y, y: -1 * x, z: 0};
     } else {
-        orientation = {x: vector.x, y: vector.y, z: 0};
+        orientation = {x: x, y: y, z: 0};
     }
     var angleFactor = theta / magnitude(orientation);
     var position = scale(angleFactor, orientation);
     module.exports.model.angleX = r(position.x);
     module.exports.model.angleY = r(position.y);
 }
+alert('boom')
