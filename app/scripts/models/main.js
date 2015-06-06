@@ -17,7 +17,7 @@ module.exports = State.extend({
             default: false
         },
         colorScheme: {
-            type: 'text',
+            type: 'string',
             default: 'default'
         },
         angleX: {

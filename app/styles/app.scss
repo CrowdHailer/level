@@ -112,22 +112,22 @@ $peach-secondary: #F89924;
     z-index: -1;
     background: $apple-green;
     background: linear-gradient(40deg, $apple-green 15%, $lime-green 90%);
-    &.default {
-      background: $apple-green;
-      background: linear-gradient(40deg, $apple-green 15%, $lime-green 90%);
-    }
-    &.blueberry {
-      background: $blueberry-primary;
-      background: linear-gradient(-30deg, $blueberry-primary 30%, $blueberry-secondary);
-    }
-    &.cherry {
-      background: cherry-primary;
-      background: linear-gradient(-10deg, $cherry-primary 20%, $cherry-secondary 90%);
-    }
-    &.peach {
-      background: $peach-primary;
-      background: linear-gradient(20deg, $peach-primary 28%, $peach-secondary 61%);
-    }
+  }
+  &.default svg {
+    background: $apple-green;
+    background: linear-gradient(40deg, $apple-green 15%, $lime-green 90%);
+  }
+  &.blueberry svg {
+    background: $blueberry-primary;
+    background: linear-gradient(-30deg, $blueberry-primary 30%, $blueberry-secondary);
+  }
+  &.cherry svg {
+    background: cherry-primary;
+    background: linear-gradient(-10deg, $cherry-primary 20%, $cherry-secondary 90%);
+  }
+  &.peach svg {
+    background: $peach-primary;
+    background: linear-gradient(20deg, $peach-primary 28%, $peach-secondary 61%);
   }
 }
 span.apple.primary {

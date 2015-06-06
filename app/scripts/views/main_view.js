@@ -44,7 +44,7 @@ module.exports = View.extend({
         },
         'model.colorScheme': {
             type: 'class',
-            selector: '#spirit-level > svg'
+            selector: '#spirit-level'
         },
         'model.angleX': [{
             type: 'attribute',
@@ -78,7 +78,7 @@ module.exports = View.extend({
     handleLinkClick: function (evt) {
         var link = getClosest(evt.target, 'a');
         if (link.pathname == '/about') {
-            return
+            return;
         }
         evt.preventDefault();
         var local = window.location.host === link.host;
