@@ -1,3 +1,9 @@
+@include scut-sticky-footer-fluid();
+#about-body {
+  overflow-y: auto;
+  -ms-touch-action: auto;
+  touch-action: auto;
+}
 #about {
   @include scut-fill;
   background: $apple-green;
