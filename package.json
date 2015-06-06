@@ -7,6 +7,8 @@
     "test": "echo 'no test' && exit 1",
     "prestart": "gulp clean",
     "start": "gulp serve",
+    "prebuild": "gulp clean",
+    "build": "gulp build",
     "prefetch": "mkdir app/styles/vendor",
     "fetch": "npm run fetch:scut -s",
     "fetch:scut": "curl https://raw.githubusercontent.com/davidtheclark/scut/master/dist/_scut.scss > ./app/styles/vendor/_scut.scss"

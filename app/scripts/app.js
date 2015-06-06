@@ -112,7 +112,7 @@ function deviceMotionHandler(deviceMotionEvent) {
     // assuming down vector has magnitude 1 then this is
     // di *x + dj * y + dk * z = 1
     // the plane factor is a multiplication factor on the current vector to find point of intersection
-    
+
     if (currentScreenOrientation == 90) {
         orientation = {x: -1 * y, y: x, z: 0};
     } else if (currentScreenOrientation == -90) {
@@ -125,4 +125,3 @@ function deviceMotionHandler(deviceMotionEvent) {
     module.exports.model.angleX = r(position.x);
     module.exports.model.angleY = r(position.y);
 }
-alert('boom')

@@ -12,9 +12,15 @@ gulp.task('clean', function () {
 
 // Copy static items to the publishable folder
 gulp.task('public', function () {
-    return gulp.src(['app/*.html', 'app/robots.txt', 'app/favicon.ico', 'app/favicon.png', 'app/images/*', 'app/offline.appcache'], {base: 'app/'})
+    return gulp.src(['app/*.html', 'app/robots.txt', 'app/favicon.ico', 'app/favicon.png', 'app/images/*'], {base: 'app/'})
     .pipe(gulp.dest('www'))
     .pipe(browserSync.stream());
+});
+
+// Don't want a cache file in development
+gulp.task('manifest', function () {
+    return gulp.src(['app/offline.appcache'], {base: 'app/'})
+    .pipe(gulp.dest('www'));
 });
 
 // Use sass to compile all styles from source
@@ -44,7 +50,7 @@ gulp.task('scripts', function() {
 });
 
 // Create a version to publish
-gulp.task('build', ['clean', 'public', 'styles', 'scripts']);
+gulp.task('build', ['clean', 'public', 'styles', 'scripts', 'manifest']);
 
 gulp.task('serve', ['public', 'styles', 'scripts'], function(){
     var superstatic = require('superstatic').server;
@@ -63,7 +69,7 @@ gulp.task('serve', ['public', 'styles', 'scripts'], function(){
         proxy: 'localhost:' + port,
         open: false
     });
-    gulp.watch(['app/*.html', 'app/robots.txt', 'app/favicon.ico', 'app/favicon.png', 'app/images/*', 'app/offline.appcache'], ['public']);
+    gulp.watch(['app/*.html', 'app/robots.txt', 'app/favicon.ico', 'app/favicon.png', 'app/images/*'], ['public']);
     gulp.watch('app/styles/**/*', ['styles']);
     gulp.watch('app/scripts/**/*', ['scripts']);
 });
