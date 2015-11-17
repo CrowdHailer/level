@@ -1,3 +1,6 @@
+/*jshint jasmine: true, esnext: true */
+"use strict";
+
 var VectorPrototype = {
   toString: function () {
     return "<Vector x: " + this.x + ", y: " + this.y + ", z: " + this.z + ">";
@@ -80,14 +83,6 @@ describe("3D vector", function() {
   it("should print an inspectable string version", function () {
     var vector = Vector({x: 3, y: 4, z: 5});
     expect(vector.toString()).toEqual("<Vector x: 3, y: 4, z: 5>");
-  });
-
-});
-
-describe("Level Application; ", function() {
-
-  it("it should have a working test", function() {
-    expect(true).toEqual(true);
   });
 
 });

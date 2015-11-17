@@ -1,5 +1,7 @@
-/*jshint jasmine: true */
+/*jshint jasmine: true, esnext: true */
 "use strict";
+
+import * as vector from "./vector_test";
 
 describe("Level Application; ", function() {
 
