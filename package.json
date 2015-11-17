@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "rm -rf www && mkdir www",
-    "build": "cp -p app/index.html www/ && rollup --name level --format iife app/scripts/boot.js > www/app.js",
+    "build": "npm run -s build:markup && npm run -s build:scripts && npm run -s build:styles",
+    "build:markup": "cp app/index.html www/",
+    "build:scripts": "rollup --name level --format iife app/scripts/boot.js > www/app.js",
+    "build:styles": "node-sass app/styles/app.scss > www/app.css",
     "pretest:bundle": "rm -rf tmp && mkdir tmp",
     "test": "npm run -s test:bundle && npm run -s test:run",
     "test:watch": "chokidar '**/*.js' -i '**/bundle.js' -c 'npm -s test'",
     "test:bundle": "rollup ./test/level_test.js > tmp/test_bundle.js",
     "test:run": "karma start",
+    "prefetch": "rm -rf app/styles/vendor && mkdir app/styles/vendor",
     "fetch": "npm run fetch:scut -s",
     "fetch:scut": "curl https://raw.githubusercontent.com/davidtheclark/scut/master/dist/_scut.scss > ./app/styles/vendor/_scut.scss"
   },
@@ -36,7 +40,8 @@
     "rollup": "~0.21.0",
     "phantomjs": "~1.9.18",
     "karma": "~0.13.15",
-    "superstatic": "~3.0.0"
+    "superstatic": "~3.0.0",
+    "node-sass": "~3.4.2"
   },
   "dependencies": {}
 }
