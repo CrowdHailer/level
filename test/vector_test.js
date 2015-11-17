@@ -1,4 +1,4 @@
-/*jshint jasmine: true, esnext: true */
+/*jshint jasmine: true */
 "use strict";
 
 var VectorPrototype = {

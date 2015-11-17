@@ -111,4 +111,17 @@ describe("Level Application; ", function() {
     expect(true).toEqual(true);
   });
 
+  it("hash an experiment test", function () {
+    var testObject = Object.create({}, {
+      start: {
+        get: function () {
+          return function (arg) {
+            window.console.log(arg);
+          };
+        }
+      }
+    });
+    testObject.start(4);
+  });
+
 });
