@@ -1,3 +1,4 @@
 /*jshint esnext: true */
 
 export var ACCELEROMETER_READING = "ACCELEROMETER_READING";
+export var ACKNOWLEDGE_SPLASH = "ACKNOWLEDGE_SPLASH";

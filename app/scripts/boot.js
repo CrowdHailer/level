@@ -3,6 +3,8 @@
 
 import * as ACTIONS from "./actions";
 import OrientationStore from "./orientation-store";
+import SplashComponent from "./splash-component";
+
 
 var store = OrientationStore();
 
@@ -15,6 +17,12 @@ function Actions() {
         vector: vector
       });
     },
+    acknowledgeSplash: function (vector) {
+      store.dispatch({
+        type: ACTIONS.ACKNOWLEDGE_SPLASH,
+        vector: vector
+      });
+    },
     stores: [
       store
     ]
@@ -22,5 +30,8 @@ function Actions() {
 }
 
 var app = Actions();
+
+var $splashComponent = window.document.querySelector("[data-component~=splash-component]");
+var splashComponent = SplashComponent($splashComponent, app);
 
 export default app;
