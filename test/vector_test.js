@@ -17,15 +17,15 @@ function Vector(raw) {
   return Object.create(VectorPrototype, {
     x: {
       get: function () { return x; },
-      set: function () {  }
+      set: function () { /* DEBT should return new vector or throw error */ }
     },
     y: {
       get: function () { return y; },
-      set: function () {  }
+      set: function () { /* DEBT should return new vector or throw error */ }
     },
     z: {
       get: function () { return z; },
-      set: function () {  }
+      set: function () { /* DEBT should return new vector or throw error */ }
     }
   });
 }
