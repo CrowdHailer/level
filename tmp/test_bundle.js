@@ -103,6 +103,12 @@ describe("3D vector", function() {
     expect(new_vector.z).toEqual(0);
   });
 
+  it("should be equal to same vector", function () {
+    var vector1 = Vector({x: 1, y: 2, z: 0});
+    var vector2 = Vector({x: 1, y: 2, z: 0});
+    expect(vector1).toEqual(vector2);
+  });
+
 });
 
 describe("Level Application; ", function() {
