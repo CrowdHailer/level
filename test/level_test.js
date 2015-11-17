@@ -2,6 +2,7 @@
 "use strict";
 
 import * as vector from "./vector_test";
+import * as orientationStoreTest from "./orientation_store_test";
 
 describe("Level Application; ", function() {
 

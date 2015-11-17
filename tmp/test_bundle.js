@@ -66,7 +66,6 @@ describe("3D vector", function() {
 
     it("it should have an immutable z value", function() {
     var vector = Vector({z: 5});
-    console.log(vector)
     vector.z = 3;
     expect(vector.z).toEqual(5);
   });
@@ -108,6 +107,22 @@ describe("3D vector", function() {
     var vector1 = Vector({x: 1, y: 2, z: 0});
     var vector2 = Vector({x: 1, y: 2, z: 0});
     expect(vector1).toEqual(vector2);
+  });
+
+});
+
+describe("Orientation Store", function() {
+
+  it("it should start off with angleX = 0", function() {
+    // Probably going to view model this to be "0.00"
+    var store = {angleX: 0};
+    expect(store.angleX).toEqual(0);
+  });
+
+  it("it should start off with angleY = 0", function() {
+    // Probably going to view model this to be "0.00"
+    var store = {angleY: 0};
+    expect(store.angleY).toEqual(0);
   });
 
 });
