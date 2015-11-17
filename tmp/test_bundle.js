@@ -1,3 +1,5 @@
+var prescision = 6;
+
 var VectorPrototype = {
   toString: function () {
     return "<Vector x: " + this.x + ", y: " + this.y + ", z: " + this.z + ">";
@@ -32,7 +34,16 @@ Vector.magnitude = function (v) {
 };
 
 Vector.scale = function (a, v) {
-    return {x: a * v.x, y: a * v.y, z: a * v.z};
+    var x = parseFloat((a * v.x).toPrecision(prescision));
+    var y = parseFloat((a * v.y).toPrecision(prescision));
+    var z = parseFloat((a * v.z).toPrecision(prescision));
+
+    return Vector({x: x, y: y, z: z});
+};
+
+Vector.normalize = function (v) {
+  var magnitude = Vector.magnitude(v);
+  return Vector.scale(1/magnitude, v);
 };
 
 describe("3D vector", function() {
@@ -109,20 +120,54 @@ describe("3D vector", function() {
     expect(vector1).toEqual(vector2);
   });
 
+  it("should be able to normalize a vector", function () {
+    var vector = Vector({x: 0, y: 3, z: 4});
+    var normalizedVector = Vector({x: 0, y: 3/5, z: 4/5});
+    expect(Vector.normalize(vector)).toEqual(normalizedVector);
+  });
+
 });
+
+function Store(argument) {
+  var accelerometerReading;
+
+  return Object.create({
+    accelerometerReading: function (reading) {
+      accelerometerReading = reading;
+    }
+  }, {
+    angleX: {
+      get: function () {
+        return 0;
+      }
+    },
+    angleY: {
+      get: function () {
+        return 0;
+      }
+    }
+  });
+}
 
 describe("Orientation Store", function() {
 
   it("it should start off with angleX = 0", function() {
     // Probably going to view model this to be "0.00"
-    var store = {angleX: 0};
+    var store = Store();
     expect(store.angleX).toEqual(0);
   });
 
   it("it should start off with angleY = 0", function() {
     // Probably going to view model this to be "0.00"
-    var store = {angleY: 0};
+    var store = Store();
     expect(store.angleY).toEqual(0);
+  });
+
+  xit("it should calculate angleX for shift", function () {
+    var store = Store();
+    var vector = {x: 1, y: 0, z: 1};
+    store.accelerometerReading(vector);
+    expect(store.angleX).toEqual(45);
   });
 
 });

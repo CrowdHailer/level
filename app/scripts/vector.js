@@ -1,6 +1,8 @@
 /*jshint esnext: true */
 "use strict";
 
+var prescision = 6;
+
 var VectorPrototype = {
   toString: function () {
     return "<Vector x: " + this.x + ", y: " + this.y + ", z: " + this.z + ">";
@@ -35,7 +37,16 @@ Vector.magnitude = function (v) {
 };
 
 Vector.scale = function (a, v) {
-    return {x: a * v.x, y: a * v.y, z: a * v.z};
+    var x = parseFloat((a * v.x).toPrecision(prescision));
+    var y = parseFloat((a * v.y).toPrecision(prescision));
+    var z = parseFloat((a * v.z).toPrecision(prescision));
+
+    return Vector({x: x, y: y, z: z});
+};
+
+Vector.normalize = function (v) {
+  var magnitude = Vector.magnitude(v);
+  return Vector.scale(1/magnitude, v);
 };
 
 export default Vector;

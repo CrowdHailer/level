@@ -77,4 +77,10 @@ describe("3D vector", function() {
     expect(vector1).toEqual(vector2);
   });
 
+  it("should be able to normalize a vector", function () {
+    var vector = Vector({x: 0, y: 3, z: 4});
+    var normalizedVector = Vector({x: 0, y: 3/5, z: 4/5});
+    expect(Vector.normalize(vector)).toEqual(normalizedVector);
+  });
+
 });
