@@ -1,35 +1,13 @@
 /*jshint esnext: true */
 "use strict";
 
+import OrientationStore from "./orientation-store";
+
 var ACTIONS = {
   ACCELEROMETER_READING: "ACCELEROMETER_READING"
 };
-function Store(argument) {
-  var neutral = {x: 0, y: 0, z: 0};
-  var down = {x: 0, y: 0, z: 0};
 
-  return Object.create({
-    dispatch: function dispatch(action) {
-      switch (action.type) {
-        case ACTIONS.ACCELEROMETER_READING:
-            window.console.log("update down");
-            window.console.log(action.vector);
-
-          break;
-        default:
-
-      }
-    }
-  }, {
-    x: {
-      get: function () {
-        return down.x;
-      }
-    }
-  });
-}
-
-var store = Store();
+var store = OrientationStore();
 
 function Actions() {
   window.console.log("Booting....");
@@ -39,7 +17,10 @@ function Actions() {
         type: ACTIONS.ACCELEROMETER_READING,
         vector: vector
       });
-    }
+    },
+    stores: [
+      store
+    ]
   };
 }
 

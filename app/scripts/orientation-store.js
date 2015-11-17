@@ -1,6 +1,9 @@
 /*jshint esnext: true */
 "use strict";
 
+var ACTIONS = {
+  ACCELEROMETER_READING: "ACCELEROMETER_READING"
+};
 import Vector from "./vector";
 
 export default function OrientationStore(argument) {
@@ -14,6 +17,17 @@ export default function OrientationStore(argument) {
   return Object.create({
     accelerometerReading: function (reading) {
       accelerometerReading = reading;
+    },
+    // DEBT dispatch method here is untested. It should move up to a store prototype
+    dispatch: function dispatch(action) {
+      switch (action.type) {
+        case ACTIONS.ACCELEROMETER_READING:
+          this.accelerometerReading(action.vector);
+
+          break;
+        default:
+
+      }
     }
   }, {
     angleX: {

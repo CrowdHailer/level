@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "rm -rf www && mkdir www",
-    "build": "cp -p app/index.html www/ && rollup --name lob --format iife app/scripts/boot.js > www/app.js",
+    "build": "cp -p app/index.html www/ && rollup --name level --format iife app/scripts/boot.js > www/app.js",
     "pretest:bundle": "rm -rf tmp && mkdir tmp",
     "test": "npm run -s test:bundle && npm run -s test:run",
     "test:watch": "chokidar '**/*.js' -i '**/bundle.js' -c 'npm -s test'",

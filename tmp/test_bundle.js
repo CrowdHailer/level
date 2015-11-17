@@ -139,6 +139,9 @@ describe("3D vector", function() {
 
 });
 
+var ACTIONS = {
+  ACCELEROMETER_READING: "ACCELEROMETER_READING"
+};
 function OrientationStore(argument) {
   var accelerometerReading = Vector({x: 0, y: 0, z: 1});
   var neutralAcceleration = Vector({x: 0, y: 0, z: 1});
@@ -150,6 +153,18 @@ function OrientationStore(argument) {
   return Object.create({
     accelerometerReading: function (reading) {
       accelerometerReading = reading;
+    },
+    // DEBT dispatch method here is untested. It should move up to a store prototype
+    dispatch: function dispatch(action) {
+      switch (action.type) {
+        case ACTIONS.ACCELEROMETER_READING:
+            window.console.log("update down");
+            window.console.log(action.vector);
+
+          break;
+        default:
+
+      }
     }
   }, {
     angleX: {
