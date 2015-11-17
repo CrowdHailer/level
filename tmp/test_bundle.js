@@ -66,6 +66,7 @@ describe("3D vector", function() {
 
     it("it should have an immutable z value", function() {
     var vector = Vector({z: 5});
+    console.log(vector)
     vector.z = 3;
     expect(vector.z).toEqual(5);
   });
