@@ -8,9 +8,40 @@ import SplashComponent from "./splash-component";
 var store = OrientationStore();
 
 function SplashStore() {
+  var element;
+  var ready = false;
+  var acknowledged = false;
+
   return Object.create({
-    dispatch: function () {
-      console.log("splash store dispatching");
+    dispatch: function (action) {
+      switch (action.type) {
+        case ACTIONS.ACCELEROMETER_ONLINE:
+        this.accelerometerOnline();
+
+        break;
+
+        case ACTIONS.ACKNOWLEDGE_SPLASH:
+        this.acknowledgeSplash();
+
+        break;
+
+        default:
+      }
+    },
+    accelerometerOnline: function () {
+      if (!ready) {
+        element.update({ready: true});
+        ready = true;
+      }
+    },
+    acknowledgeSplash: function () {
+      if (!acknowledged) {
+        element.update({acknowledged: true});
+        acknowledged = true;
+      }
+    },
+    register: function (e) {
+      element = e;
     }
   });
 }
@@ -45,7 +76,11 @@ function Actions(dispatcher) {
     acknowledgeSplash: function (vector) {
       dispatcher.dispatch({
         type: ACTIONS.ACKNOWLEDGE_SPLASH,
-        vector: vector
+      });
+    },
+    accelerometerOnline: function () {
+      dispatcher.dispatch({
+        type: ACTIONS.ACCELEROMETER_ONLINE,
       });
     }
   };
@@ -55,5 +90,6 @@ var app = Actions(dispatcher);
 
 var $splashComponent = window.document.querySelector("[data-component~=splash-component]");
 var splashComponent = SplashComponent($splashComponent, app);
+splashStore.register(splashComponent);
 
 export default app;
