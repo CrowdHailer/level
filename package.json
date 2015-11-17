@@ -4,6 +4,8 @@
   "description": "'Spirit level web app'",
   "main": "index.js",
   "scripts": {
+    "prebuild": "rm -rf www && mkdir www",
+    "build": "cp -p app/index.html www/ && rollup --name lob --format iife app/scripts/boot.js > www/app.js",
     "pretest:bundle": "rm -rf tmp && mkdir tmp",
     "test": "npm run -s test:bundle && npm run -s test:run",
     "test:watch": "chokidar '**/*.js' -i '**/bundle.js' -c 'npm -s test'",
@@ -33,7 +35,8 @@
     "jasmine": "~2.3.2",
     "rollup": "~0.21.0",
     "phantomjs": "~1.9.18",
-    "karma": "~0.13.15"
+    "karma": "~0.13.15",
+    "superstatic": "~3.0.0"
   },
   "dependencies": {}
 }
