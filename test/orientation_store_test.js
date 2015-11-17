@@ -1,8 +1,15 @@
 /*jshint jasmine: true, esnext: true */
 "use strict";
 
+import Vector from "../app/scripts/vector";
+
 function Store(argument) {
-  var accelerometerReading;
+  var accelerometerReading = Vector({x: 0, y: 0, z: 1});
+  var neutralAcceleration = Vector({x: 0, y: 0, z: 1});
+
+  function angleFromNeutral() {
+    return parseFloat((Math.acos(Vector.dotProduct(Vector.normalize(accelerometerReading), neutralAcceleration)) * 180/ Math.PI).toPrecision(6));
+  }
 
   return Object.create({
     accelerometerReading: function (reading) {
@@ -11,12 +18,12 @@ function Store(argument) {
   }, {
     angleX: {
       get: function () {
-        return 0;
+        return angleFromNeutral();
       }
     },
     angleY: {
       get: function () {
-        return 0;
+        return angleFromNeutral();
       }
     }
   });
@@ -36,11 +43,18 @@ describe("Orientation Store", function() {
     expect(store.angleY).toEqual(0);
   });
 
-  xit("it should calculate angleX for shift", function () {
+  it("it should calculate angleX for shift", function () {
     var store = Store();
     var vector = {x: 1, y: 0, z: 1};
     store.accelerometerReading(vector);
     expect(store.angleX).toEqual(45);
+  });
+
+  it("it should calculate angleY for shift", function () {
+    var store = Store();
+    var vector = {x: 0, y: 1, z: 1};
+    store.accelerometerReading(vector);
+    expect(store.angleY).toEqual(45);
   });
 
 });

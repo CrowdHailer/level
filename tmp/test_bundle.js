@@ -46,6 +46,10 @@ Vector.normalize = function (v) {
   return Vector.scale(1/magnitude, v);
 };
 
+Vector.dotProduct = function (v1, v2) {
+    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+};
+
 describe("3D vector", function() {
 
   it("it should have a x value", function() {
@@ -126,10 +130,22 @@ describe("3D vector", function() {
     expect(Vector.normalize(vector)).toEqual(normalizedVector);
   });
 
+  it("can calculate the dot product of two vectors", function () {
+    var vector1 = Vector({x: 1, y: 2, z: 0});
+    var vector2 = Vector({x: 0, y: 3, z: 4});
+    expect(Vector.dotProduct(vector1, vector2)).toEqual(6);
+
+  });
+
 });
 
 function Store(argument) {
-  var accelerometerReading;
+  var accelerometerReading = Vector({x: 0, y: 0, z: 1});
+  var neutralAcceleration = Vector({x: 0, y: 0, z: 1});
+
+  function angleFromNeutral() {
+    return parseFloat((Math.acos(Vector.dotProduct(Vector.normalize(accelerometerReading), neutralAcceleration)) * 180/ Math.PI).toPrecision(6));
+  }
 
   return Object.create({
     accelerometerReading: function (reading) {
@@ -138,12 +154,12 @@ function Store(argument) {
   }, {
     angleX: {
       get: function () {
-        return 0;
+        return angleFromNeutral();
       }
     },
     angleY: {
       get: function () {
-        return 0;
+        return angleFromNeutral();
       }
     }
   });
@@ -163,11 +179,18 @@ describe("Orientation Store", function() {
     expect(store.angleY).toEqual(0);
   });
 
-  xit("it should calculate angleX for shift", function () {
+  it("it should calculate angleX for shift", function () {
     var store = Store();
     var vector = {x: 1, y: 0, z: 1};
     store.accelerometerReading(vector);
     expect(store.angleX).toEqual(45);
+  });
+
+  it("it should calculate angleY for shift", function () {
+    var store = Store();
+    var vector = {x: 0, y: 1, z: 1};
+    store.accelerometerReading(vector);
+    expect(store.angleY).toEqual(45);
   });
 
 });

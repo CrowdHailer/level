@@ -83,4 +83,11 @@ describe("3D vector", function() {
     expect(Vector.normalize(vector)).toEqual(normalizedVector);
   });
 
+  it("can calculate the dot product of two vectors", function () {
+    var vector1 = Vector({x: 1, y: 2, z: 0});
+    var vector2 = Vector({x: 0, y: 3, z: 4});
+    expect(Vector.dotProduct(vector1, vector2)).toEqual(6);
+
+  });
+
 });

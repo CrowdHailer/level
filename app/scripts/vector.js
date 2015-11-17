@@ -49,4 +49,8 @@ Vector.normalize = function (v) {
   return Vector.scale(1/magnitude, v);
 };
 
+Vector.dotProduct = function (v1, v2) {
+    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+};
+
 export default Vector;
