@@ -158,8 +158,7 @@ function OrientationStore(argument) {
     dispatch: function dispatch(action) {
       switch (action.type) {
         case ACTIONS.ACCELEROMETER_READING:
-            window.console.log("update down");
-            window.console.log(action.vector);
+          this.accelerometerReading(action.vector);
 
           break;
         default:

@@ -1,9 +1,7 @@
 /*jshint esnext: true */
 "use strict";
 
-var ACTIONS = {
-  ACCELEROMETER_READING: "ACCELEROMETER_READING"
-};
+import * as ACTIONS from "./actions";
 import Vector from "./vector";
 
 export default function OrientationStore(argument) {

@@ -1,11 +1,8 @@
 /*jshint esnext: true */
 "use strict";
 
+import * as ACTIONS from "./actions";
 import OrientationStore from "./orientation-store";
-
-var ACTIONS = {
-  ACCELEROMETER_READING: "ACCELEROMETER_READING"
-};
 
 var store = OrientationStore();
 
