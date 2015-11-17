@@ -14,18 +14,26 @@ function Vector(raw) {
   return Object.create(VectorPrototype, {
     x: {
       get: function () { return x; },
-      set: function () {  }
+      set: function () { /* DEBT should return new vector or throw error */ }
     },
     y: {
       get: function () { return y; },
-      set: function () {  }
+      set: function () { /* DEBT should return new vector or throw error */ }
     },
     z: {
       get: function () { return z; },
-      set: function () {  }
+      set: function () { /* DEBT should return new vector or throw error */ }
     }
   });
 }
+
+Vector.magnitude = function (v) {
+  return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+};
+
+Vector.scale = function (a, v) {
+    return {x: a * v.x, y: a * v.y, z: a * v.z};
+};
 
 describe("3D vector", function() {
 
@@ -80,6 +88,19 @@ describe("3D vector", function() {
   it("should print an inspectable string version", function () {
     var vector = Vector({x: 3, y: 4, z: 5});
     expect(vector.toString()).toEqual("<Vector x: 3, y: 4, z: 5>");
+  });
+
+  it("should be able to calculate the magnitude of a vector", function () {
+    var vector = Vector({x: 3, y: 4, z: 0});
+    expect(Vector.magnitude(vector)).toBe(5);
+  });
+
+  it("should be able to scale a vector", function () {
+    var vector = Vector({x: 1, y: 2, z: 0});
+    var new_vector = Vector.scale(2, vector);
+    expect(new_vector.x).toEqual(2);
+    expect(new_vector.y).toEqual(4);
+    expect(new_vector.z).toEqual(0);
   });
 
 });
