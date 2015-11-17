@@ -7,6 +7,7 @@ import Vector from "./vector";
 export default function OrientationStore(argument) {
   var accelerometerReading = Vector({x: 0, y: 0, z: 1});
   var neutralAcceleration = Vector({x: 0, y: 0, z: 1});
+  var element;
 
   function angleFromNeutral() {
     return parseFloat((Math.acos(Vector.dotProduct(Vector.normalize(accelerometerReading), neutralAcceleration)) * 180/ Math.PI).toPrecision(6));
@@ -21,11 +22,15 @@ export default function OrientationStore(argument) {
       switch (action.type) {
         case ACTIONS.ACCELEROMETER_READING:
           this.accelerometerReading(action.vector);
+          element.update({x: this.angleX, y: this.angleY, a: this});
 
           break;
         default:
 
       }
+    },
+    register: function (e) {
+      element = e;
     }
   }, {
     angleX: {

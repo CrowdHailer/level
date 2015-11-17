@@ -3,6 +3,7 @@
 
 import * as ACTIONS from "./actions";
 import OrientationStore from "./orientation-store";
+import OrientationComponent from "./orientation-component";
 import SplashComponent from "./splash-component";
 
 var orientationStore = OrientationStore();
@@ -91,5 +92,9 @@ var app = Actions(dispatcher);
 var $splashComponent = window.document.querySelector("[data-component~=splash-component]");
 var splashComponent = SplashComponent($splashComponent, app);
 splashStore.register(splashComponent);
+
+var $orientationComponent = window.document.querySelector("[data-component~=orientation]");
+var orientationComponent = OrientationComponent($orientationComponent);
+orientationStore.register(orientationComponent);
 
 export default app;
