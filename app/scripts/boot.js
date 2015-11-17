@@ -5,7 +5,7 @@ import * as ACTIONS from "./actions";
 import OrientationStore from "./orientation-store";
 import SplashComponent from "./splash-component";
 
-var store = OrientationStore();
+var orientationStore = OrientationStore();
 
 function SplashStore() {
   var element;
@@ -62,7 +62,7 @@ function Dispatcher(stores) {
   });
 }
 
-var dispatcher = Dispatcher([store, splashStore]);
+var dispatcher = Dispatcher([orientationStore, splashStore]);
 
 function Actions(dispatcher) {
   window.console.log("Booting....");
