@@ -1,29 +1,45 @@
 console.log("starting");
 
 import * as Vector from "./vector.ts";
+import * as Action from "./actions.ts";
 
 class SpiritLevelState {
   xOffset = 0;
   yOffset = 0;
+  minimised = false;
+  colorScheme = "apple";
   static newReading(state: SpiritLevelState, payload: Vector.Vector, context: Console){
     state.xOffset = payload.x;
     state.yOffset = payload.y;
     return state;
   }
-}
-interface Action {
-  type: string;
-  payload: any;
+  static minimise(state: SpiritLevelState, payload: any, context: Console){
+    state.minimised = true;
+    return state;
+  }
+  static selectColorScheme(state: SpiritLevelState, payload: string, context: Console){
+    state.colorScheme = payload;
+    state.minimised = false;
+    return state;
+  }
 }
 
 class SpiritLevel {
   private state = new SpiritLevelState();
   private context = console;
   callbacks: ((state: SpiritLevelState) => void)[] = []; ;
-  dispatch(action: Action) {
-    if(action.type == "ACCELEROMETER_READING") {
+  dispatch(action: Action.Action) {
+    if(action.type == function(){ 5; }) {
       this.state = SpiritLevelState.newReading(this.state, action.payload, this.context);
     }
+    if(action.type == Action.OpenMenu) {
+      this.state = SpiritLevelState.minimise(this.state, action.payload, this.context);
+    }
+    if(action.type == Action.SelectColorScheme) {
+      this.state = SpiritLevelState.selectColorScheme(this.state, action.payload, this.context);
+    }
+
+
     var state = this.state;
     if (this.callbacks.length === 0) {
       console.warn(state);
@@ -60,6 +76,13 @@ function SpiritLevelDisplay($root: Element) {
       $bubble.setAttribute("cy", y);
       $xReadout.textContent = x;
       $yReadout.textContent = y;
+      if (spiritLevelState.minimised) {
+        $root.classList.add("minimised");
+      } else {
+        $root.classList.remove("minimised");
+      }
+      $root.classList.remove("apple", "blueberry", "cherry", "peach");
+      $root.classList.add(spiritLevelState.colorScheme);
     }
   };
 }
@@ -80,14 +103,22 @@ function closest(selector: string, element: any) {
 
 ready(function(){
   spiritLevel.callbacks.push(spiritLevelDisplay.update);
-  spiritLevel.dispatch({type: "ACCELEROMETER_READING", payload: Vector.create({x: 5, y: 11})});
+  // spiritLevel.dispatch({type: "ACCELEROMETER_READING", payload: Vector.create({x: 5, y: 11})});
   window.addEventListener("click", function _(event) {
     event.preventDefault();
     var t = event.target;
     console.log(t);
     var c = closest("[data-hook~=open-menu]", t);
-    console.log(c);
-    $spiritLevel.classList.add("minimised");
+    if (c) {
+      var action = new Action.OpenMenu();
+      spiritLevel.dispatch(action);
+    }
+    var c2 = closest("[data-hook~=select-color-scheme]", t);
+    if (c2) {
+
+      var action2 = new Action.SelectColorScheme("blueberry");
+      spiritLevel.dispatch(action2);
+    }
   });
 });
 

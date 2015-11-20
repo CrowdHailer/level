@@ -16,4 +16,6 @@ rollup.rollup({
     moduleName: "level",
     dest: "www/app.js"
   });
+}).catch(function(x){
+  console.error(x);
 });
