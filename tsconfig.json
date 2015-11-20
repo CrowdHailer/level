@@ -21,6 +21,7 @@
         "!node_modules/**"
     ],
     "files": [
+        "app/scripts/boot.ts",
         "app/scripts/vector.ts",
         "test/accelerometer_test.ts",
         "test/dispatcher_test.ts",
