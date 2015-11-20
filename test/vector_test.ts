@@ -91,5 +91,7 @@ describe("3D vector", function() {
     var vector2 = Vector.create({x: 1, y: 1, z: 0});
     var vector3 = Vector.create({x: 0, y: 0, z: 1});
     expect(Vector.angle(vector1, vector1)).toEqual(0);
+    expect(Vector.angle(vector1, vector2)).toEqual(45);
+    expect(Vector.angle(vector1, vector3)).toEqual(90);
   });
 });

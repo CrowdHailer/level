@@ -3,7 +3,7 @@
     var PRESCISION = 6;
     var round = function (precision) {
         return function (value) {
-            return parseInt(value.toPrecision(precision));
+            return parseFloat(value.toPrecision(precision));
         };
     }(PRESCISION);
     var VectorPrototype = {
@@ -45,7 +45,7 @@
     ;
     function normalize(v) {
         var m = magnitude(v);
-        return scale(1 / m, v);
+        return scale(1.0 / m, v);
     }
     ;
     function dotProduct(v1, v2) {
@@ -58,7 +58,7 @@
         var cosTheta = dotProduct(n1, n2);
         var thetaRad = Math.acos(cosTheta);
         var thetaDeg = (180 / Math.PI) * thetaRad;
-        return thetaDeg;
+        return round(thetaDeg);
     }
     ;
     var create = Vector;
@@ -138,6 +138,8 @@
             var vector2 = create({ x: 1, y: 1, z: 0 });
             var vector3 = create({ x: 0, y: 0, z: 1 });
             expect(angle(vector1, vector1)).toEqual(0);
+            expect(angle(vector1, vector2)).toEqual(45);
+            expect(angle(vector1, vector3)).toEqual(90);
         });
     });
 
@@ -178,8 +180,53 @@
         });
     });
 
+    var neutralAcceleration = create({ z: 1 });
+    var SpiritLevelState = (function () {
+        function SpiritLevelState() {
+            this.xOffset = 0;
+            this.yOffset = 0;
+            this.minimised = false;
+            this.colorScheme = "apple";
+        }
+        SpiritLevelState.newReading = function (state, acceleration, context) {
+            // The acceleration is the 3D vector representing the current acceleration of the phone.
+            // The neutral acceleration is the normalized reading if the phone was lying screen up on a level surface.
+            // angle is the deviation in degrees of the current acceleration from the neutral acceleration
+            var angle$$ = angle(neutralAcceleration, acceleration);
+            // console.log(acceleration.toString());
+            // console.log(neutralAcceleration.toString());
+            // console.log(angle);
+            // xOffset^2 + yOffset^2 = angle^2
+            // acceleration.x * f = xOffset
+            // acceleration.y * f = yOffset
+            // implies
+            // f^2 = angle^2/(acceleration.x^2 + acceleration.x^2)
+            var f = Math.sqrt((angle$$ * angle$$) / (acceleration.x * acceleration.x + acceleration.y * acceleration.y));
+            state.xOffset = acceleration.x * f;
+            state.yOffset = acceleration.y * f;
+            return state;
+        };
+        SpiritLevelState.minimise = function (state, payload, context) {
+            state.minimised = true;
+            return state;
+        };
+        SpiritLevelState.selectColorScheme = function (state, payload, context) {
+            state.colorScheme = payload;
+            state.minimised = false;
+            return state;
+        };
+        return SpiritLevelState;
+    })();
+
     describe("Spirit Level state", function () {
         it("should call all stores with the action", function () {
+            var state = new SpiritLevelState();
+            var vector = create({ x: 1, z: 1 });
+            var newState = SpiritLevelState.newReading(state, vector, console);
+            console.log(newState);
+            var vector = create({ x: 1, y: 1, z: 1 });
+            var newState = SpiritLevelState.newReading(state, vector, console);
+            console.log(newState);
         });
     });
 

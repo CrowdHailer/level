@@ -5,7 +5,7 @@ var PRESCISION = 6;
 
 var round = function (precision: number) {
   return function (value: number) {
-    return parseInt(value.toPrecision(precision));
+    return parseFloat(value.toPrecision(precision));
   };
 }(PRESCISION);
 
@@ -57,7 +57,7 @@ export function scale (a: number, v: Vector) {
 
 export function normalize (v: Vector) {
   var m = magnitude(v);
-  return scale(1/m, v);
+  return scale(1.0/m, v);
 };
 
 export function dotProduct (v1: Vector, v2: Vector) {
@@ -70,7 +70,7 @@ export function angle (v1: Vector, v2: Vector) {
     var cosTheta = dotProduct(n1, n2);
     var thetaRad = Math.acos(cosTheta);
     var thetaDeg = (180/Math.PI) * thetaRad;
-    return thetaDeg;
+    return round(thetaDeg);
 };
 
 export var create = Vector;

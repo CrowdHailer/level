@@ -16,4 +16,6 @@ rollup.rollup({
     moduleName: "test",
     dest: "tmp/test_bundle.js"
   });
+}).catch(function(x){
+  console.error(x);
 });
