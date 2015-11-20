@@ -7,22 +7,18 @@
         }
     };
     function Vector(raw) {
-        var x, y, z;
-        raw = raw || {};
-        x = raw.x || 0;
-        y = raw.y || 0;
-        z = raw.z || 0;
+        if (raw === void 0) { raw = { x: 0, y: 0, z: 0 }; }
         return Object.create(VectorPrototype, {
             x: {
-                get: function () { return x; },
+                get: function () { return raw.x; },
                 set: function () { }
             },
             y: {
-                get: function () { return y; },
+                get: function () { return raw.y; },
                 set: function () { }
             },
             z: {
-                get: function () { return z; },
+                get: function () { return raw.z; },
                 set: function () { }
             }
         });
