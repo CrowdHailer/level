@@ -1,6 +1,11 @@
 (function () { 'use strict';
 
-    var prescision = 6;
+    var PRESCISION = 6;
+    var round = function (precision) {
+        return function (value) {
+            return parseInt(value.toPrecision(precision));
+        };
+    }(PRESCISION);
     var VectorPrototype = {
         toString: function () {
             return "<Vector x: " + this.x + ", y: " + this.y + ", z: " + this.z + ">";
@@ -28,9 +33,9 @@
     }
     ;
     function scale(a, v) {
-        var x = parseFloat((a * v.x).toPrecision(prescision));
-        var y = parseFloat((a * v.y).toPrecision(prescision));
-        var z = parseFloat((a * v.z).toPrecision(prescision));
+        var x = round(a * v.x);
+        var y = round(a * v.y);
+        var z = round(a * v.z);
         return Vector({ x: x, y: y, z: z });
     }
     ;

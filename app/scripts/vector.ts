@@ -1,7 +1,13 @@
 /*jshint esnext: true */
 "use strict";
 
-var prescision = 6;
+var PRESCISION = 6;
+
+var round = function (precision: number) {
+  return function (value: number) {
+    return parseInt(value.toPrecision(precision))
+  }
+}(PRESCISION)
 
 var VectorPrototype = {
   toString: function () {
@@ -37,9 +43,9 @@ export function magnitude (v: Vector) {
 };
 
 export function scale (a: number, v: Vector) {
-    var x = parseFloat((a * v.x).toPrecision(prescision));
-    var y = parseFloat((a * v.y).toPrecision(prescision));
-    var z = parseFloat((a * v.z).toPrecision(prescision));
+    var x = round(a * v.x);
+    var y = round(a * v.y);
+    var z = round(a * v.z);
 
     return Vector({x: x, y: y, z: z});
 };
