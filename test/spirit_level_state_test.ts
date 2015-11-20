@@ -7,8 +7,8 @@ describe("Spirit Level state", function() {
     var state = new SpiritLevelState();
     var vector = Vector.create({x: 1, z: 1});
     var newState = SpiritLevelState.newReading(state, vector, console);
-    var vector = Vector.create({x: 1, y: 1, z: 1});
-    var newState = SpiritLevelState.newReading(state, vector, console);
+    var vector2 = Vector.create({x: 1, y: 1, z: 1});
+    var newState2 = SpiritLevelState.newReading(state, vector, console);
     // DEBT check works but not properly checking the maths
   });
 });
