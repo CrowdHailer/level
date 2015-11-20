@@ -16,16 +16,13 @@
         // DEBT Keeps a reference to raw so is mutable by proxy;
         return Object.create(VectorPrototype, {
             x: {
-                get: function () { return raw.x || 0; },
-                set: function () { }
+                get: function () { return raw.x || 0; }
             },
             y: {
-                get: function () { return raw.y || 0; },
-                set: function () { }
+                get: function () { return raw.y || 0; }
             },
             z: {
-                get: function () { return raw.z || 0; },
-                set: function () { }
+                get: function () { return raw.z || 0; }
             }
         });
     }
@@ -78,17 +75,23 @@
         });
         it("it should have an immutable x value", function () {
             var vector = create({ x: 5 });
-            vector.x = 3;
+            expect(function () {
+                vector.x = 3;
+            }).toThrowError(TypeError, "setting a property that has only a getter");
             expect(vector.x).toEqual(5);
         });
         it("it should have an immutable y value", function () {
             var vector = create({ y: 5 });
-            vector.y = 3;
+            expect(function () {
+                vector.y = 3;
+            }).toThrowError(TypeError, "setting a property that has only a getter");
             expect(vector.y).toEqual(5);
         });
         it("it should have an immutable z value", function () {
             var vector = create({ z: 5 });
-            vector.z = 3;
+            expect(function () {
+                vector.z = 3;
+            }).toThrowError(TypeError, "setting a property that has only a getter");
             expect(vector.z).toEqual(5);
         });
         it("origin should have 0 as a default x value", function () {
@@ -223,10 +226,9 @@
             var state = new SpiritLevelState();
             var vector = create({ x: 1, z: 1 });
             var newState = SpiritLevelState.newReading(state, vector, console);
-            console.log(newState);
             var vector = create({ x: 1, y: 1, z: 1 });
             var newState = SpiritLevelState.newReading(state, vector, console);
-            console.log(newState);
+            // DEBT check works but not properly checking the maths
         });
     });
 

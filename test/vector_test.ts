@@ -19,19 +19,25 @@ describe("3D vector", function() {
 
   it("it should have an immutable x value", function() {
     var vector = Vector.create({x: 5});
-    vector.x = 3;
+    expect(function () {
+      vector.x = 3;
+    }).toThrowError(TypeError, "setting a property that has only a getter");
     expect(vector.x).toEqual(5);
   });
 
   it("it should have an immutable y value", function() {
     var vector = Vector.create({y: 5});
-    vector.y = 3;
+    expect(function () {
+      vector.y = 3;
+    }).toThrowError(TypeError, "setting a property that has only a getter");
     expect(vector.y).toEqual(5);
   });
 
     it("it should have an immutable z value", function() {
     var vector = Vector.create({z: 5});
-    vector.z = 3;
+    expect(function () {
+      vector.z = 3;
+    }).toThrowError(TypeError, "setting a property that has only a getter");
     expect(vector.z).toEqual(5);
   });
 

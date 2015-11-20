@@ -26,16 +26,13 @@ function Vector(raw: {x?: number, y?: number, z?: number}): Vector {
   // DEBT Keeps a reference to raw so is mutable by proxy;
   return Object.create(VectorPrototype, {
     x: {
-      get: function () { return raw.x || 0; },
-      set: function () { /* DEBT should return new vector or throw error */ }
+      get: function () { return raw.x || 0; }
     },
     y: {
-      get: function () { return raw.y || 0; },
-      set: function () { /* DEBT should return new vector or throw error */ }
+      get: function () { return raw.y || 0; }
     },
     z: {
-      get: function () { return raw.z || 0; },
-      set: function () { /* DEBT should return new vector or throw error */ }
+      get: function () { return raw.z || 0; }
     }
   });
 }
