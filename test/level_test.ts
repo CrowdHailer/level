@@ -2,8 +2,8 @@
 "use strict";
 
 /// <reference path="./jasmine.d.ts" />
-import * as vector_test from "./vector_test.ts";
-vector_test
+import "./vector_test.ts";
+
 // import * as orientationStoreTest from "./orientation_store_test";
 
 describe("Level Application; ", function() {

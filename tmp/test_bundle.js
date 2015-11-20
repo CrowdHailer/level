@@ -126,11 +126,7 @@
         });
     });
 
-
-    var vector_test = Object.freeze({
-
-    });
-
+    console.log("hello");
     // import * as orientationStoreTest from "./orientation_store_test";
     describe("Level Application; ", function () {
         it("it should have a working test", function () {
