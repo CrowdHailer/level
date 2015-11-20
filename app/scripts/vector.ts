@@ -5,9 +5,9 @@ var PRESCISION = 6;
 
 var round = function (precision: number) {
   return function (value: number) {
-    return parseInt(value.toPrecision(precision))
-  }
-}(PRESCISION)
+    return parseInt(value.toPrecision(precision));
+  };
+}(PRESCISION);
 
 var VectorPrototype = {
   toString: function () {
@@ -16,26 +16,31 @@ var VectorPrototype = {
 };
 
 interface Vector {
-  x: number,
-  y: number,
-  z: number
+  x: number;
+  y: number;
+  z: number;
 }
 
-function Vector(raw={x: 0, y: 0, z: 0}): Vector {
+// create origin function for 0,0,0 fine as same length as create
+function Vector(raw: {x?: number, y?: number, z?: number}): Vector {
+  // DEBT Keeps a reference to raw so is mutable by proxy;
   return Object.create(VectorPrototype, {
     x: {
-      get: function () { return raw.x; },
+      get: function () { return raw.x || 0; },
       set: function () { /* DEBT should return new vector or throw error */ }
     },
     y: {
-      get: function () { return raw.y; },
+      get: function () { return raw.y || 0; },
       set: function () { /* DEBT should return new vector or throw error */ }
     },
     z: {
-      get: function () { return raw.z; },
+      get: function () { return raw.z || 0; },
       set: function () { /* DEBT should return new vector or throw error */ }
     }
   });
+}
+export function origin () {
+  return Vector({});
 }
 
 export function magnitude (v: Vector) {

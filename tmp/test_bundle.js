@@ -11,22 +11,26 @@
             return "<Vector x: " + this.x + ", y: " + this.y + ", z: " + this.z + ">";
         }
     };
+    // create origin function for 0,0,0 fine as same length as create
     function Vector(raw) {
-        if (raw === void 0) { raw = { x: 0, y: 0, z: 0 }; }
+        // DEBT Keeps a reference to raw so is mutable by proxy;
         return Object.create(VectorPrototype, {
             x: {
-                get: function () { return raw.x; },
+                get: function () { return raw.x || 0; },
                 set: function () { }
             },
             y: {
-                get: function () { return raw.y; },
+                get: function () { return raw.y || 0; },
                 set: function () { }
             },
             z: {
-                get: function () { return raw.z; },
+                get: function () { return raw.z || 0; },
                 set: function () { }
             }
         });
+    }
+    function origin() {
+        return Vector({});
     }
     function magnitude(v) {
         return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
@@ -78,16 +82,16 @@
             vector.z = 3;
             expect(vector.z).toEqual(5);
         });
-        it("should should have 0 as a default x value", function () {
-            var vector = create();
+        it("origin should have 0 as a default x value", function () {
+            var vector = origin();
             expect(vector.x).toEqual(0);
         });
-        it("should should have 0 as a default y value", function () {
-            var vector = create();
+        it("origin should have 0 as a default y value", function () {
+            var vector = origin();
             expect(vector.y).toEqual(0);
         });
-        it("should should have 0 as a default z value", function () {
-            var vector = create();
+        it("origin should have 0 as a default z value", function () {
+            var vector = origin();
             expect(vector.z).toEqual(0);
         });
         it("should print an inspectable string version", function () {

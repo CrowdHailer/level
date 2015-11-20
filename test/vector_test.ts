@@ -38,18 +38,18 @@ describe("3D vector", function() {
     expect(vector.z).toEqual(5);
   });
 
-  it("should should have 0 as a default x value", function() {
-    var vector = Vector.create();
+  it("origin should have 0 as a default x value", function() {
+    var vector = Vector.origin();
     expect(vector.x).toEqual(0);
   });
 
-  it("should should have 0 as a default y value", function() {
-    var vector = Vector.create();
+  it("origin should have 0 as a default y value", function() {
+    var vector = Vector.origin();
     expect(vector.y).toEqual(0);
   });
 
-  it("should should have 0 as a default z value", function() {
-    var vector = Vector.create();
+  it("origin should have 0 as a default z value", function() {
+    var vector = Vector.origin();
     expect(vector.z).toEqual(0);
   });
 
