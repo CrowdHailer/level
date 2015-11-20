@@ -66,9 +66,29 @@ function SpiritLevelDisplay($root: Element) {
 
 var spiritLevelDisplay = SpiritLevelDisplay($spiritLevel);
 
+function closest(selector: string, element: any) {
+
+  while (element) {
+    element.webkitMatchesSelector;
+    if (element.webkitMatchesSelector(selector)) {
+      return element;
+    }
+    element = element.parentElement;
+  }
+};
+
+
 ready(function(){
   spiritLevel.callbacks.push(spiritLevelDisplay.update);
   spiritLevel.dispatch({type: "ACCELEROMETER_READING", payload: Vector.create({x: 5, y: 11})});
+  window.addEventListener("click", function _(event) {
+    event.preventDefault();
+    var t = event.target;
+    console.log(t);
+    var c = closest("[data-hook~=open-menu]", t);
+    console.log(c);
+    $spiritLevel.classList.add("minimised");
+  });
 });
 
 export { spiritLevel }
