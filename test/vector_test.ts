@@ -1,6 +1,3 @@
-/*jshint jasmine: true, esnext: true */
-"use strict";
-
 import * as Vector from "../app/scripts/vector.ts";
 
 describe("3D vector", function() {

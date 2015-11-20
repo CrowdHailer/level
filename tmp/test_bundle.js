@@ -126,7 +126,43 @@
         });
     });
 
-    console.log("hello");
+    describe("Dispatcher", function () {
+        var Dispatcher = (function () {
+            function Dispatcher() {
+                this.stores = {};
+            }
+            Dispatcher.new = function () {
+                return new Dispatcher();
+            };
+            Dispatcher.prototype.dispatch = function (action) {
+                var stores = this.stores;
+                Object.keys(stores).forEach(function (key) {
+                    var store = stores[key];
+                    store.dispatch(action);
+                });
+                return this;
+            };
+            Dispatcher.prototype.register_store = function (name, store) {
+                this.stores[name] = store;
+                return this;
+            };
+            return Dispatcher;
+        })();
+        var actions1 = [];
+        var actions2 = [];
+        var store1 = { dispatch: function (action) { return actions1.push(action); } };
+        var store2 = { dispatch: function (action) { return actions2.push(action); } };
+        it("should call all stores with the action", function () {
+            var dispatcher = Dispatcher.new();
+            dispatcher.register_store("store1", store1);
+            dispatcher.register_store("store2", store2);
+            var action = { type: "FAKE_ACTION" };
+            dispatcher.dispatch(action);
+            expect(actions1[0]).toBe(action);
+            expect(actions2[0]).toBe(action);
+        });
+    });
+
     // import * as orientationStoreTest from "./orientation_store_test";
     describe("Level Application; ", function () {
         it("it should have a working test", function () {

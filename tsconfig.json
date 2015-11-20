@@ -22,6 +22,7 @@
     ],
     "files": [
         "app/scripts/vector.ts",
+        "test/dispatcher_test.ts",
         "test/jasmine.d.ts",
         "test/level_test.ts",
         "test/vector_test.ts"
