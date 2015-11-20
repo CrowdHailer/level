@@ -64,5 +64,14 @@ export function dotProduct (v1: Vector, v2: Vector) {
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 };
 
+export function angle (v1: Vector, v2: Vector) {
+    var n1 = normalize(v1);
+    var n2 = normalize(v2);
+    var cosTheta = dotProduct(n1, n2);
+    var thetaRad = Math.acos(cosTheta);
+    var thetaDeg = (180/Math.PI) * thetaRad;
+    return thetaDeg;
+};
+
 export var create = Vector;
 export default Vector;

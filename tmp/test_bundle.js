@@ -52,6 +52,15 @@
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
     ;
+    function angle(v1, v2) {
+        var n1 = normalize(v1);
+        var n2 = normalize(v2);
+        var cosTheta = dotProduct(n1, n2);
+        var thetaRad = Math.acos(cosTheta);
+        var thetaDeg = (180 / Math.PI) * thetaRad;
+        return thetaDeg;
+    }
+    ;
     var create = Vector;
 
     describe("3D vector", function () {
@@ -123,6 +132,12 @@
             var vector1 = create({ x: 1, y: 2, z: 0 });
             var vector2 = create({ x: 0, y: 3, z: 4 });
             expect(dotProduct(vector1, vector2)).toEqual(6);
+        });
+        it("can calculate angle between two vectors", function () {
+            var vector1 = create({ x: 1, y: 0, z: 0 });
+            var vector2 = create({ x: 1, y: 1, z: 0 });
+            var vector3 = create({ x: 0, y: 0, z: 1 });
+            expect(angle(vector1, vector1)).toEqual(0);
         });
     });
 

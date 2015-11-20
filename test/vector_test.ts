@@ -84,6 +84,12 @@ describe("3D vector", function() {
     var vector1 = Vector.create({x: 1, y: 2, z: 0});
     var vector2 = Vector.create({x: 0, y: 3, z: 4});
     expect(Vector.dotProduct(vector1, vector2)).toEqual(6);
+  });
 
+  it("can calculate angle between two vectors", function () {
+    var vector1 = Vector.create({x: 1, y: 0, z: 0});
+    var vector2 = Vector.create({x: 1, y: 1, z: 0});
+    var vector3 = Vector.create({x: 0, y: 0, z: 1});
+    expect(Vector.angle(vector1, vector1)).toEqual(0);
   });
 });
