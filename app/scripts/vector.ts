@@ -9,7 +9,13 @@ var VectorPrototype = {
   }
 };
 
-function Vector(raw) {
+interface Vector {
+  x: number,
+  y: number,
+  z: number
+}
+
+export function Vector(raw): Vector {
   var x, y, z;
   raw = raw || {};
   x = raw.x || 0;
@@ -32,11 +38,11 @@ function Vector(raw) {
   });
 }
 
-Vector.magnitude = function (v) {
+export function magnitude (v: Vector) {
   return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 };
 
-Vector.scale = function (a, v) {
+export function scale (a, v) {
     var x = parseFloat((a * v.x).toPrecision(prescision));
     var y = parseFloat((a * v.y).toPrecision(prescision));
     var z = parseFloat((a * v.z).toPrecision(prescision));
@@ -44,12 +50,12 @@ Vector.scale = function (a, v) {
     return Vector({x: x, y: y, z: z});
 };
 
-Vector.normalize = function (v) {
-  var magnitude = Vector.magnitude(v);
-  return Vector.scale(1/magnitude, v);
+export function normalize (v) {
+  var magnitude = magnitude(v);
+  return scale(1/magnitude, v);
 };
 
-Vector.dotProduct = function (v1, v2) {
+export function dotProduct (v1, v2) {
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 };
 

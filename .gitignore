@@ -3,3 +3,4 @@ www
 .divshot-cache
 vendor
 tmp
+*.log
