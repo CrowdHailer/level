@@ -56,7 +56,7 @@
             </symbol>
         </defs>
     </svg>
-    <div id="splash-screen" data-component="splash-component">
+    <div id="splash-screen" data-component="splash-component" hidden>
         <section>
             <h1>Level</h1>
             <span class="subheading">A spirit level for the web</span>
@@ -69,10 +69,10 @@
         </section>
     </div>
     <main>
-        <section id="spirit-level" data-component="orientation">
+        <section id="spirit-level" data-component="spirit-level">
             <header>
                 <h1>Spirit Level</h1>
-                <div class="right">x:<span data-hook="angleX"></span>° y:<span data-hook="angleY"></span>°</div>
+                <div class="right">x:<span data-hook="xOffset"></span>° y:<span data-hook="yOffset"></span>°</div>
             </header>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
 
