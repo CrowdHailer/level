@@ -23,11 +23,13 @@
     "files": [
         "app/scripts/actions.ts",
         "app/scripts/boot.ts",
+        "app/scripts/spirit_level_state.ts",
         "app/scripts/vector.ts",
         "test/accelerometer_test.ts",
         "test/dispatcher_test.ts",
         "test/jasmine.d.ts",
         "test/level_test.ts",
+        "test/spirit_level_state_test.ts",
         "test/vector_test.ts"
     ],
     "atom": {

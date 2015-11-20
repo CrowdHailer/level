@@ -1,6 +1,7 @@
 /// <reference path="./jasmine.d.ts" />
 import "./vector_test.ts";
 import "./dispatcher_test.ts";
+import "./spirit_level_state_test.ts";
 
 // import * as orientationStoreTest from "./orientation_store_test";
 
