@@ -15,7 +15,7 @@ interface Vector {
   z: number
 }
 
-export function Vector(raw): Vector {
+function Vector(raw?): Vector {
   var x, y, z;
   raw = raw || {};
   x = raw.x || 0;
@@ -51,12 +51,13 @@ export function scale (a, v) {
 };
 
 export function normalize (v) {
-  var magnitude = magnitude(v);
-  return scale(1/magnitude, v);
+  var m = magnitude(v);
+  return scale(1/m, v);
 };
 
 export function dotProduct (v1, v2) {
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 };
 
+export var create = Vector;
 export default Vector;
