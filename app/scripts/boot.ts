@@ -12,6 +12,16 @@ import SpiritLevelDisplay from "./spirit_level_display.ts";
 
 import UserInput from "./user_input.ts";
 
+window.addEventListener("devicemotion", function (deviceMotionEvent) {
+  var raw = deviceMotionEvent.accelerationIncludingGravity;
+  if (typeof raw.x === "number") {
+    spiritLevel.accelerometerReading({x: raw.x, y: raw.y, z: raw.z});
+  }
+  else {
+    console.warn("Device accelerometer returns null data");
+  }
+});
+
 ready(function(){
   // Create all the presenters once dom elements are available
   var $spiritLevel = document.querySelector("[data-component~=spirit-level]");
