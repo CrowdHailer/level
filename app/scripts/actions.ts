@@ -15,4 +15,12 @@ class SelectColorScheme implements Action {
     this.payload = selection;
   }
 }
-export { OpenMenu, SelectColorScheme }
+
+class AccelerometerReading implements Action {
+  type = AccelerometerReading;
+  payload: any;
+  constructor (payload: any) {
+    this.payload = payload;
+  }
+}
+export { OpenMenu, SelectColorScheme, AccelerometerReading }

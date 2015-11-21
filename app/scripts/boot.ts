@@ -10,9 +10,14 @@ import Gator from "./gator.js";
 class SpiritLevel {
   private state = new SpiritLevelState();
   private context = console;
-  callbacks: ((state: SpiritLevelState) => void)[] = []; ;
+  callbacks: ((state: SpiritLevelState) => void)[] = [];
+  accelerometerReading(raw: any) {
+    var vector = Vector.create(raw);
+    var action = new Action.AccelerometerReading(vector);
+    this.dispatch(action);
+  }
   dispatch(action: Action.Action) {
-    if(action.type == function(){ 5; }) {
+    if(action.type == Action.AccelerometerReading) {
       this.state = SpiritLevelState.newReading(this.state, action.payload, this.context);
     }
     if(action.type == Action.OpenMenu) {
