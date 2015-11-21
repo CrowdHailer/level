@@ -23,6 +23,7 @@
     "files": [
         "app/scripts/actions.ts",
         "app/scripts/boot.ts",
+        "app/scripts/gator.d.ts",
         "app/scripts/spirit_level_state.ts",
         "app/scripts/vector.ts",
         "test/accelerometer_test.ts",

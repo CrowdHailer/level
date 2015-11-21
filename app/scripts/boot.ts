@@ -1,9 +1,11 @@
 console.log("starting");
-
+/// <reference path="./gator.d.ts" />
 import * as Vector from "./vector.ts";
 import * as Action from "./actions.ts";
 
 import SpiritLevelState from "./spirit_level_state.ts";
+import Gator from "./gator.js";
+
 
 class SpiritLevel {
   private state = new SpiritLevelState();
@@ -81,10 +83,13 @@ function closest(selector: string, element: any) {
   }
 };
 
-
 ready(function(){
   spiritLevel.callbacks.push(spiritLevelDisplay.update);
   // spiritLevel.dispatch({type: "ACCELEROMETER_READING", payload: Vector.create({x: 5, y: 11})});
+  var g = Gator(document, null).on("click", "svg", function (e: any) {
+    console.log("gator", e);
+  });
+  console.log(g.id);
   window.addEventListener("click", function _(event) {
     event.preventDefault();
     var t = event.target;
