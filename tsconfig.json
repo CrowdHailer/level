@@ -26,6 +26,7 @@
         "app/scripts/dom.ts",
         "app/scripts/gator.d.ts",
         "app/scripts/spirit_level_state.ts",
+        "app/scripts/util.ts",
         "app/scripts/vector.ts",
         "test/accelerometer_test.ts",
         "test/dispatcher_test.ts",

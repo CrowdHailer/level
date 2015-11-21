@@ -1,13 +1,10 @@
 /*jshint esnext: true */
 "use strict";
+import * as _ from "./util.ts";
 
 var PRESCISION = 6;
 
-var round = function (precision: number) {
-  return function (value: number) {
-    return parseFloat(value.toPrecision(precision));
-  };
-}(PRESCISION);
+var round = _.round(PRESCISION);
 
 var VectorPrototype = {
   toString: function () {

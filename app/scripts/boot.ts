@@ -45,6 +45,10 @@ var $spiritLevel = document.querySelector("[data-component~=spirit-level]");
 var spiritLevel = new SpiritLevel();
 spiritLevel.callbacks.push(function a (state){ console.log(state); });
 
+import * as _ from "./util.ts";
+
+var PRESCISION = 2;
+var round = _.round(PRESCISION);
 function SpiritLevelDisplay($root: Element) {
 
   var $bubble = $root.querySelector("#bubble");
@@ -52,12 +56,12 @@ function SpiritLevelDisplay($root: Element) {
   var $yReadout = $root.querySelector("[data-hook~=yOffset]");
   return {
     update: function (spiritLevelState: SpiritLevelState) {
-      var x = spiritLevelState.xOffset.toString();
-      var y = spiritLevelState.yOffset.toString();
-      $bubble.setAttribute("cx", x);
-      $bubble.setAttribute("cy", y);
-      $xReadout.textContent = x;
-      $yReadout.textContent = y;
+      var x = spiritLevelState.xOffset;
+      var y = spiritLevelState.yOffset;
+      $bubble.setAttribute("cx", x.toString());
+      $bubble.setAttribute("cy", y.toString());
+      $xReadout.textContent = round(x).toString();
+      $yReadout.textContent = round(y).toString();
       if (spiritLevelState.minimised) {
         $root.classList.add("minimised");
       } else {
