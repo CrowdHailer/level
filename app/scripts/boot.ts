@@ -69,43 +69,31 @@ function SpiritLevelDisplay($root: Element) {
     }
   };
 }
+class UserInterface {
+  $root: any;
+  constructor (element: any, actions: {dispatch: any}) {
+    this.$root = element;
+    var events = Gator(element, null);
+    events.on("click", "[data-hook~=open-menu]", function (e: any) {
+      e.preventDefault();
+      var action = new Action.OpenMenu();
+      spiritLevel.dispatch(action);
+    });
+    events.on("click", "[data-hook~=select-color-scheme]", function (e: any) {
+      e.preventDefault();
+      var action = new Action.SelectColorScheme("blueberry");
+      spiritLevel.dispatch(action);
+    });
+  }
+}
+
 
 var spiritLevelDisplay = SpiritLevelDisplay($spiritLevel);
-
-function closest(selector: string, element: any) {
-
-  while (element) {
-    element.webkitMatchesSelector;
-    if (element.webkitMatchesSelector(selector)) {
-      return element;
-    }
-    element = element.parentElement;
-  }
-};
 
 ready(function(){
   spiritLevel.callbacks.push(spiritLevelDisplay.update);
   // spiritLevel.dispatch({type: "ACCELEROMETER_READING", payload: Vector.create({x: 5, y: 11})});
-  var g = Gator(document, null).on("click", "svg", function (e: any) {
-    console.log("gator", e);
-  });
-  console.log(g.id);
-  window.addEventListener("click", function _(event) {
-    event.preventDefault();
-    var t = event.target;
-    console.log(t);
-    var c = closest("[data-hook~=open-menu]", t);
-    if (c) {
-      var action = new Action.OpenMenu();
-      spiritLevel.dispatch(action);
-    }
-    var c2 = closest("[data-hook~=select-color-scheme]", t);
-    if (c2) {
-
-      var action2 = new Action.SelectColorScheme("blueberry");
-      spiritLevel.dispatch(action2);
-    }
-  });
+  var ui = new UserInterface(document, spiritLevel);
 });
 
 export { spiritLevel }
