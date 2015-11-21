@@ -33,13 +33,7 @@ class SpiritLevel {
     }
   }
 }
-function ready(fn: any) {
-  if (document.readyState !== "loading"){
-    fn();
-  } else {
-    document.addEventListener("DOMContentLoaded", fn);
-  }
-}
+
 
 var $spiritLevel = document.querySelector("[data-component~=spirit-level]");
 
@@ -69,7 +63,7 @@ function SpiritLevelDisplay($root: Element) {
     }
   };
 }
-class UserInterface {
+class UserInput {
   $root: any;
   constructor (element: any, actions: {dispatch: any}) {
     this.$root = element;
@@ -90,10 +84,12 @@ class UserInterface {
 
 var spiritLevelDisplay = SpiritLevelDisplay($spiritLevel);
 
+import { ready } from "./dom.ts";
+
 ready(function(){
   spiritLevel.callbacks.push(spiritLevelDisplay.update);
   // spiritLevel.dispatch({type: "ACCELEROMETER_READING", payload: Vector.create({x: 5, y: 11})});
-  var ui = new UserInterface(document, spiritLevel);
+  var ui = new UserInput(document, spiritLevel);
 });
 
 export { spiritLevel }
