@@ -4,10 +4,11 @@
   "description": "'Spirit level web app'",
   "main": "index.js",
   "scripts": {
+    "start": "superstatic",
     "prebuild": "rm -rf www && mkdir www",
     "build": "npm run -s build:markup && npm run -s build:scripts && npm run -s build:styles",
     "build:markup": "cp app/index.html www/",
-    "build:scripts": "node build.js",
+    "build:scripts": "rollup -c",
     "build:styles": "node-sass app/styles/app.scss > www/app.css",
     "pretest:bundle": "rm -rf tmp && mkdir tmp",
     "test": "npm run -s test:bundle && npm run -s test:run",

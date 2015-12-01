@@ -31,6 +31,7 @@
         "app/scripts/user_input.ts",
         "app/scripts/util.ts",
         "app/scripts/vector.ts",
+        "client/boot.ts",
         "test/accelerometer_test.ts",
         "test/dispatcher_test.ts",
         "test/jasmine.d.ts",
