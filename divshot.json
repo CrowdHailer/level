@@ -1,9 +1,0 @@
-{
-  "name": "level-wks14",
-  "root": "www",
-  "clean_urls": true,
-  "error_page": "error.html",
-  "routes": {
-    "/**": "index.html"
-  }
-}
