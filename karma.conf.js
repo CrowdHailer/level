@@ -1,6 +1,5 @@
 // Karma configuration
-// Generated on Thu Nov 12 2015 16:53:20 GMT+0000 (GMT)
-"use strict";
+// Generated on Mon Dec 14 2015 17:29:26 GMT+0000 (GMT)
 
 module.exports = function(config) {
   config.set({
@@ -16,7 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'tmp/test_bundle.js'
+      'test/*-test.js',
+      {pattern: 'test/*', watched: true, included: false, served: false, nocache: false}
     ],
 
 
@@ -28,6 +28,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/*': ['rollup']
     },
 
 
@@ -56,15 +57,15 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Firefox'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultanous
     concurrency: Infinity
-  });
-};
+  })
+}
