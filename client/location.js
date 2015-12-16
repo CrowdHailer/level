@@ -2,6 +2,7 @@
 'use strict';
 
 import * as QString from "query-string";
+// DEBT call router
 export default function Location(app){
   function url(projection){
     var path = "/";
