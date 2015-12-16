@@ -76,4 +76,16 @@ function Location(projection){
   this.update = update;
 }
 
-export default new Client();
+import { Delegator } from "./utils/dom";
+function Controller($root){
+  var delegator = new Delegator($root);
+  delegator.on("click", "[data-command~=open-menu]", function(evt){
+    evt.preventDefault();
+    client.openMenu();
+
+  });
+}
+var controller = Controller(document);
+
+var client = new Client();
+export default client;
