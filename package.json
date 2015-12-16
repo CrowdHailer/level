@@ -34,6 +34,7 @@
     "url": "https://github.com/CrowdHailer/level/issues"
   },
   "devDependencies": {
+    "carbide": "CrowdHailer/carbide.js",
     "chokidar-cli": "^1.2.0",
     "jasmine": "^2.4.1",
     "karma": "^0.13.15",
@@ -42,7 +43,10 @@
     "karma-rollup-preprocessor": "^2.0.0",
     "live-server": "^0.9.0",
     "rollup": "^0.21.2",
-    "carbide": "CrowdHailer/carbide.js"
+    "rollup-plugin-commonjs": "^1.4.0",
+    "rollup-plugin-npm": "^1.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "query-string": "^3.0.0"
+  }
 }
