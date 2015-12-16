@@ -6,24 +6,38 @@ import View from "./view";
 import $ from "anon/dom";
 
 import * as QString from "query-string";
+var State = {
+  create: function(location){
+    var queryString = location.search;
+    var query = QString.parse(queryString);
+
+    var state = Map({
+      menu: Map({
+        open: location.pathname == "/menu",
+      }),
+      accelerometer: Map({
+        reading: Map({
+          x: 0,
+          y: 0,
+          z: 0
+        }),
+      }),
+      theme: query.theme || "APPLE"
+    });
+
+    return state;
+  },
+  openMenu: function(state){
+    return state.update("menu", function(map){ return map.set("open", true); });
+  },
+  closeMenu: function(state){
+    return state.update("menu", function(map){ return map.set("open", false); });
+  }
+};
+
 function Client(){
   this.$view = new View(document);
-  var queryString = location.search;
-  var query = QString.parse(queryString);
-
-  var state = Map({
-    menu: Map({
-      open: location.pathname == "/menu",
-    }),
-    accelerometer: Map({
-      reading: Map({
-        x: 0,
-        y: 0,
-        z: 0
-      }),
-    }),
-    theme: query.theme || "APPLE"
-  });
+  var state = State.create(window.location);
   Object.defineProperty(this, "menuOpen", {
     get: function(){
       return state.menu.open;
@@ -39,13 +53,13 @@ function Client(){
 
   this.openMenu = function(){
     if (state.menu.open) { return; }
-    state = state.update("menu", function(map){ return map.set("open", true); });
+    state = State.openMenu(state);
     this.location.update();
     this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
   this.closeMenu = function(){
     if (!state.menu.open) { return; }
-    state = state.update("menu", function(map){ return map.set("open", false); });
+    state = State.closeMenu(state);
     this.location.update();
     // DEBT should call update on an actor
     this.$view.isSpiritLevelMinimised = this.menuOpen;
