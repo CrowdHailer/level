@@ -6,8 +6,8 @@ import View from "./view";
 
 import * as QString from "query-string";
 function Client(){
-  var $view = new View(document);
-  window.$view = $view;
+  this.$view = new View(document);
+  window.$view = this.$view;
   var queryString = location.search;
   var query = QString.parse(queryString);
 
@@ -33,6 +33,12 @@ function Client(){
       return url + "?" + queryString;
     }
   });
+  Object.defineProperty(this, "menuOpen", {
+    get: function(){
+      return state.menu.open;
+    }
+  });
+
   this.location = new Location(this);
 
   this.openMenu = function(){
@@ -40,12 +46,14 @@ function Client(){
     // DEBT replaces menu map will fail with new keys
     state = state.set("menu", Map({open: true}));
     this.location.update();
+    this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
   this.closeMenu = function(){
     if (!state.menu.open) { return; }
     // DEBT replaces menu map will fail with new keys
     state = state.set("menu", Map({open: false}));
     this.location.update();
+    this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
 }
 
