@@ -15,7 +15,8 @@ export default function View($root){
 
       $bubble.setAttribute("cx", angle);
       $angleX.innerHTML = angle;
-    }
+    },
+    enumerable: true
   });
   Object.defineProperty(this, "angleY", {
     set: function(angle){
@@ -25,7 +26,8 @@ export default function View($root){
 
       $bubble.setAttribute("cy", angle);
       $angleY.innerHTML = angle;
-    }
+    },
+    enumerable: true
   });
   Object.defineProperty(this, "menuActive", {
     set: function(minimised){
@@ -38,7 +40,8 @@ export default function View($root){
       } else {
         $spiritLevel.classList.remove("minimised");
       }
-    }
+    },
+    enumerable: true
   });
   Object.defineProperty(this, "theme", {
     set: function(theme){
@@ -51,6 +54,18 @@ export default function View($root){
       $spiritLevel.classList.remove("cherry");
       $spiritLevel.classList.remove("peach");
       $spiritLevel.classList.add(theme);
-    }
+    },
+    enumerable: true
   });
 }
+
+Object.defineProperty(View.prototype, "render", {
+  value: function(object){
+    for (var display in this) {
+      var value = object[display];
+      if (value == void 0) { return; }
+      this[display] = value;
+    }
+  },
+  enumerable: false
+});

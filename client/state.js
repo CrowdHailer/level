@@ -9,8 +9,8 @@ export default {
     var query = QString.parse(queryString);
 
     var state = Map({
-      menu: location.pathname == "/menu",
-      accelerometerReading: Map({
+      menuActive: location.pathname == "/menu",
+      accelerationReading: Map({
           x: 0,
           y: 0,
           z: 0
@@ -27,6 +27,6 @@ export default {
     return state.set("menuActive", false);
   },
   accelerationReading: function(state, reading){
-    return state.set("accelerometerReading", Map(reading));
+    return state.set("accelerationReading", Map(reading));
   }
 };

@@ -77,10 +77,12 @@ var myLocation = new Location(app);
 app.onUpdate(myLocation.update);
 myLocation.update();
 app.onUpdate(function(){
-  $view.isSpiritLevelMinimised = app.state.menuActive;
-  $view.theme = app.state.theme;
-  console.log(app.state.accelerometerReading.x)
-  $view.angleX = app.state.accelerometerReading.x.toFixed(2) || "0";
+  var state = app.state;
+  $view.render({
+    angleX: (state.accelerationReading.x || 0).toFixed(2),
+    angleY: (state.accelerationReading.y || 0).toFixed(2),
+    menuActive: state.menuActive
+  });
 });
 export default app;
 
