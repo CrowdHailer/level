@@ -61,11 +61,16 @@ export default function View($root){
 
 Object.defineProperty(View.prototype, "render", {
   value: function(object){
-    for (var display in this) {
-      var value = object[display];
-      if (value == void 0) { return; }
-      this[display] = value;
-    }
+    var view = this;
+    window.cancelAnimationFrame(view.requestID);
+    this.requestID = window.requestAnimationFrame(function(){
+
+      for (var display in view) {
+        var value = object[display];
+        if (value == void 0) { return; }
+        view[display] = value;
+      }
+    });
   },
   enumerable: false
 });
