@@ -8,9 +8,10 @@ import $ from "anon/dom";
 import State from "./state";
 
 import * as Dispatcher from "anon/dispatcher";
-function Client(){
-  this.$view = new View(document);
+function App(){
+  var dispatcher = Dispatcher.create(window.console);
   var state = State.create(window.location);
+
   Object.defineProperty(this, "menuOpen", {
     get: function(){
       return state.menu.open;
@@ -22,9 +23,6 @@ function Client(){
     }
   });
 
-
-  var dispatcher = Dispatcher.create(window.console);
-
   this.onUpdate = function(cb){
     dispatcher = dispatcher.register(cb);
   };
@@ -32,14 +30,11 @@ function Client(){
     if (state.menu.open) { return; }
     state = State.openMenu(state);
     dispatcher.dispatch();
-    this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
   this.closeMenu = function(){
     if (!state.menu.open) { return; }
     state = State.closeMenu(state);
     dispatcher.dispatch();
-    // DEBT should call update on an actor
-    this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
   this.selectTheme = function(theme){
     // TODO raise error for unknown theme;
@@ -48,12 +43,7 @@ function Client(){
     state = state.set("theme", theme);
 
     dispatcher.dispatch();
-    this.$view.theme = state.theme;
   };
-  // Setup step that should be called when initializing a presenter
-  this.$view.theme = state.theme;
-  this.location = new Location(this);
-  this.onUpdate(this.location.update);
 }
 
 import * as QString from "query-string";
@@ -83,14 +73,24 @@ function Controller($root){
   var delegator = new Delegator($root);
   delegator.on("click", "[data-command~=open-menu]", function(evt){
     evt.preventDefault();
-    client.openMenu();
+    app.openMenu();
   });
   delegator.on("click", ".minimised", function(evt){
     evt.preventDefault();
-    client.closeMenu();
+    app.closeMenu();
   });
 }
 var controller = Controller(document);
 
-var client = new Client();
-export default client;
+var app = new App();
+var $view = new View(document);
+$view.isSpiritLevelMinimised = app.menuOpen;
+$view.theme = app.theme;
+var myLocation = new Location(app);
+app.onUpdate(myLocation.update);
+myLocation.update();
+app.onUpdate(function(){
+  $view.isSpiritLevelMinimised = app.menuOpen;
+  $view.theme = app.theme;
+});
+export default app;
