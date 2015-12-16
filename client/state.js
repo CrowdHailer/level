@@ -27,6 +27,11 @@ export default {
     return state.set("menuActive", false);
   },
   accelerationReading: function(state, reading){
-    return state.set("accelerationReading", Map(reading));
+    var map = Map({
+      x: reading.x,
+      y: reading.y,
+      z: reading.z,
+    });
+    return state.set("accelerationReading", map);
   }
 };

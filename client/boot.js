@@ -39,6 +39,7 @@ function App(){
     dispatcher.dispatch();
   };
   this.accelerationReading = function(reading){
+    var state1 = state;
     state = State.accelerationReading(state, reading);
     dispatcher.dispatch();
   };
@@ -53,22 +54,33 @@ var app = new App();
 var myLocation = new Location(app);
 var controller = Controller(document, app);
 
-var $view = new View(document);
-$view.isSpiritLevelMinimised = app.state.menuActive;
-$view.theme = app.state.theme;
+// Humble view
+function Component($root, app){
+  function wrap(state){
+    return {
+      angleX: (state.accelerationReading.x || 0).toFixed(2),
+      angleY: (state.accelerationReading.y || 0).toFixed(2),
+      theme: state.theme,
+      menuActive: state.menuActive
+    };
+  }
+  var view = new View($root);
 
-app.onUpdate(function(){
-  var state = app.state;
-  $view.render({
-    angleX: (state.accelerationReading.x || 0).toFixed(2),
-    angleY: (state.accelerationReading.y || 0).toFixed(2),
-    menuActive: state.menuActive
-  });
-});
+  function update(){
+    var presentation = wrap(app.state);
+    view.render(presentation);
+  }
+
+  this.update = update;
+  update();
+  app.onUpdate(update);
+}
+var component = new Component(document, app);
 export default app;
 
-window.addEventListener("devicemotion", function (deviceMotionEvent) {
+function handleReading(deviceMotionEvent) {
   var acceleration = deviceMotionEvent.accelerationIncludingGravity;
   // DEBT rectify for browsers here
   app.accelerationReading(acceleration);
-});
+}
+window.addEventListener("devicemotion", handleReading);
