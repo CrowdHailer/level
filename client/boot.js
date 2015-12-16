@@ -1,13 +1,13 @@
 /* jshint esnext: true */
 'use strict';
 
-import Map from "../node_modules/carbide/map";
+import Map from "carbide/map";
 import View from "./view";
+import $ from "anon/dom";
 
 import * as QString from "query-string";
 function Client(){
   this.$view = new View(document);
-  window.$view = this.$view;
   var queryString = location.search;
   var query = QString.parse(queryString);
 
@@ -43,15 +43,13 @@ function Client(){
 
   this.openMenu = function(){
     if (state.menu.open) { return; }
-    // DEBT replaces menu map will fail with new keys
-    state = state.set("menu", Map({open: true}));
+    state = state.update("menu", function(map){ return map.set("open", true); });
     this.location.update();
     this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
   this.closeMenu = function(){
     if (!state.menu.open) { return; }
-    // DEBT replaces menu map will fail with new keys
-    state = state.set("menu", Map({open: false}));
+    state = state.update("menu", function(map){ return map.set("open", false); });
     this.location.update();
     // DEBT should call update on an actor
     this.$view.isSpiritLevelMinimised = this.menuOpen;
