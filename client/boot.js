@@ -66,26 +66,10 @@ function Location(app){
   this.update = update;
 }
 
-import { Delegator } from "./utils/dom";
-function Controller($root){
-  var delegator = new Delegator($root);
-  delegator.on("click", "[data-command~=open-menu]", function(evt){
-    evt.preventDefault();
-    app.openMenu();
-  });
-  delegator.on("click", ".minimised", function(evt){
-    evt.preventDefault();
-    app.closeMenu();
-  });
-  delegator.on("click", "[data-command~=select-theme]", function(evt){
-    evt.preventDefault();
-    app.selectTheme(evt.trigger.dataset.theme);
-    app.closeMenu();
-  });
-}
-var controller = Controller(document);
+import Controller from "./controller";
 
 var app = new App();
+var controller = Controller(document, app);
 var $view = new View(document);
 $view.isSpiritLevelMinimised = app.state.menuOpen;
 $view.theme = app.state.theme;
