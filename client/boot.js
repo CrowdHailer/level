@@ -35,6 +35,7 @@ var State = {
   }
 };
 
+import * as Dispatcher from "anon/dispatcher";
 function Client(){
   this.$view = new View(document);
   var state = State.create(window.location);
@@ -49,18 +50,22 @@ function Client(){
     }
   });
 
-  this.location = new Location(this);
 
+  var dispatcher = Dispatcher.create(window.console);
+
+  this.onUpdate = function(cb){
+    dispatcher = dispatcher.register(cb);
+  };
   this.openMenu = function(){
     if (state.menu.open) { return; }
     state = State.openMenu(state);
-    this.location.update();
+    dispatcher.dispatch();
     this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
   this.closeMenu = function(){
     if (!state.menu.open) { return; }
     state = State.closeMenu(state);
-    this.location.update();
+    dispatcher.dispatch();
     // DEBT should call update on an actor
     this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
@@ -69,11 +74,14 @@ function Client(){
     if (state.theme === theme) { return; }
 
     state = state.set("theme", theme);
-    this.location.update();
+
+    dispatcher.dispatch();
     this.$view.theme = state.theme;
   };
   // Setup step that should be called when initializing a presenter
   this.$view.theme = state.theme;
+  this.location = new Location(this);
+  this.onUpdate(this.location.update);
 }
 
 function Location(projection){
