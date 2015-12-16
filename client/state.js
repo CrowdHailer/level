@@ -9,7 +9,7 @@ export default {
     var query = QString.parse(queryString);
 
     var state = Map({
-      menuOpen: location.pathname == "/menu",
+      menu: location.pathname == "/menu",
       accelerometerReading: Map({
           x: 0,
           y: 0,
@@ -21,10 +21,10 @@ export default {
     return state;
   },
   openMenu: function(state){
-    return state.set("menuOpen", true);
+    return state.set("menuActive", true);
   },
   closeMenu: function(state){
-    return state.set("menuOpen", false);
+    return state.set("menuActive", false);
   },
   accelerationReading: function(state, reading){
     return state.set("accelerometerReading", Map(reading));

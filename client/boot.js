@@ -21,12 +21,12 @@ function App(){
     dispatcher = dispatcher.register(cb);
   };
   this.openMenu = function(){
-    if (state.menuOpen) { return; }
+    if (state.menuActive) { return; }
     state = State.openMenu(state);
     dispatcher.dispatch();
   };
   this.closeMenu = function(){
-    if (!state.menuOpen) { return; }
+    if (!state.menuActive) { return; }
     state = State.closeMenu(state);
     dispatcher.dispatch();
   };
@@ -48,7 +48,7 @@ import * as QString from "query-string";
 function Location(app){
   function url(projection){
     var path = "/";
-    if (projection.menuOpen) {
+    if (projection.menuActive) {
       path = path + "menu";
     }
 
@@ -71,13 +71,13 @@ import Controller from "./controller";
 var app = new App();
 var controller = Controller(document, app);
 var $view = new View(document);
-$view.isSpiritLevelMinimised = app.state.menuOpen;
+$view.isSpiritLevelMinimised = app.state.menuActive;
 $view.theme = app.state.theme;
 var myLocation = new Location(app);
 app.onUpdate(myLocation.update);
 myLocation.update();
 app.onUpdate(function(){
-  $view.isSpiritLevelMinimised = app.state.menuOpen;
+  $view.isSpiritLevelMinimised = app.state.menuActive;
   $view.theme = app.state.theme;
   console.log(app.state.accelerometerReading.x)
   $view.angleX = app.state.accelerometerReading.x.toFixed(2) || "0";

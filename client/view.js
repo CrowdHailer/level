@@ -27,10 +27,10 @@ export default function View($root){
       $angleY.innerHTML = angle;
     }
   });
-  Object.defineProperty(this, "isSpiritLevelMinimised", {
+  Object.defineProperty(this, "menuActive", {
     set: function(minimised){
       if (typeof minimised !== 'boolean') {
-        throw new TypeError("isSpiritLevelMinimised property should be a boolean");
+        throw new TypeError("menuActive property should be a boolean");
       }
 
       if (minimised) {
