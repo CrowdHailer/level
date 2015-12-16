@@ -79,6 +79,11 @@ function Controller($root){
     evt.preventDefault();
     app.closeMenu();
   });
+  delegator.on("click", "[data-command~=select-theme]", function(evt){
+    evt.preventDefault();
+    app.selectTheme(evt.trigger.dataset.theme);
+    app.closeMenu();
+  });
 }
 var controller = Controller(document);
 
