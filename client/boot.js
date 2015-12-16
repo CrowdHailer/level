@@ -103,7 +103,10 @@ function Controller($root){
   delegator.on("click", "[data-command~=open-menu]", function(evt){
     evt.preventDefault();
     client.openMenu();
-
+  });
+  delegator.on("click", ".minimised", function(evt){
+    evt.preventDefault();
+    client.closeMenu();
   });
 }
 var controller = Controller(document);
