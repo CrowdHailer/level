@@ -26,14 +26,27 @@ function Client(){
   });
   Object.defineProperty(this, "url", {
     get: function(){
-      var url = "";
-      if (state.menu.open) { url = url + "/menu"; }
+      var url = "/";
+      if (state.menu.open) { url = url + "menu"; }
       var query = {theme: state.theme.toLowerCase()};
       queryString = QString.stringify(query);
       return url + "?" + queryString;
     }
   });
   this.location = new Location(this);
+
+  this.openMenu = function(){
+    if (state.menu.open) { return; }
+    // DEBT replaces menu map will fail with new keys
+    state = state.set("menu", Map({open: true}));
+    this.location.update();
+  };
+  this.closeMenu = function(){
+    if (!state.menu.open) { return; }
+    // DEBT replaces menu map will fail with new keys
+    state = state.set("menu", Map({open: false}));
+    this.location.update();
+  };
 }
 
 function Location(projection){
@@ -44,4 +57,4 @@ function Location(projection){
   this.update = update;
 }
 
-new Client();
+export default new Client();
