@@ -44,38 +44,19 @@ function App(){
   };
 }
 
-import * as QString from "query-string";
-function Location(app){
-  function url(projection){
-    var path = "/";
-    if (projection.menuActive) {
-      path = path + "menu";
-    }
 
-    var query = {theme: projection.theme.toLowerCase()};
-    var queryString = QString.stringify(query);
-
-    return path + "?" + queryString;
-  }
-
-
-  history.replaceState({}, "", url(app.state));
-  function update(){
-    history.pushState({}, "", url(app.state));
-  }
-  this.update = update;
-}
 
 import Controller from "./controller";
+import Location from "./location";
 
 var app = new App();
+var myLocation = new Location(app);
 var controller = Controller(document, app);
+
 var $view = new View(document);
 $view.isSpiritLevelMinimised = app.state.menuActive;
 $view.theme = app.state.theme;
-var myLocation = new Location(app);
-app.onUpdate(myLocation.update);
-myLocation.update();
+
 app.onUpdate(function(){
   var state = app.state;
   $view.render({
