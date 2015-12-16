@@ -11,9 +11,9 @@ function Client(){
   var queryString = location.search;
   var query = QString.parse(queryString);
 
-  this.state = Map({
+  var state = Map({
     menu: Map({
-      open: false,
+      open: location.pathname == "/menu",
     }),
     accelerometer: Map({
       reading: Map({
@@ -24,17 +24,22 @@ function Client(){
     }),
     theme: query.theme || "APPLE"
   });
-  this.location = new Location();
-  this.location.update(this.state);
+  Object.defineProperty(this, "url", {
+    get: function(){
+      var url = "";
+      if (state.menu.open) { url = url + "/menu"; }
+      var query = {theme: state.theme.toLowerCase()};
+      queryString = QString.stringify(query);
+      return url + "?" + queryString;
+    }
+  });
+  this.location = new Location(this);
 }
 
-function Location(){
-  function update(state){
-    var queryString = QString.stringify({
-      theme: state.theme
-    });
-    console.log(queryString);
-    history.replaceState({url: queryString}, "", "?" + queryString);
+function Location(projection){
+  history.replaceState({}, "", projection.url);
+  function update(){
+    history.pushState({}, "", projection.url);
   }
   this.update = update;
 }
