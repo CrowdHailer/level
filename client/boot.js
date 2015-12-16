@@ -14,12 +14,17 @@ function App(){
 
   Object.defineProperty(this, "menuOpen", {
     get: function(){
-      return state.menu.open;
+      return state.menuOpen;
     }
   });
   Object.defineProperty(this, "theme", {
     get: function(){
       return state.theme;
+    }
+  });
+  Object.defineProperty(this, "state", {
+    get: function(){
+      return state;
     }
   });
 
@@ -42,6 +47,10 @@ function App(){
 
     state = state.set("theme", theme);
 
+    dispatcher.dispatch();
+  };
+  this.accelerationReading = function(reading){
+    state = State.accelerationReading(state, reading);
     dispatcher.dispatch();
   };
 }
@@ -97,5 +106,13 @@ myLocation.update();
 app.onUpdate(function(){
   $view.isSpiritLevelMinimised = app.menuOpen;
   $view.theme = app.theme;
+  console.log(app.state.accelerometerReading.x)
+  $view.angleX = app.state.accelerometerReading.x.toFixed(2) || "0";
 });
 export default app;
+
+window.addEventListener("devicemotion", function (deviceMotionEvent) {
+  var acceleration = deviceMotionEvent.accelerationIncludingGravity;
+  // DEBT rectify for browsers here
+  app.accelerationReading(acceleration);
+});

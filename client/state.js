@@ -9,15 +9,11 @@ export default {
     var query = QString.parse(queryString);
 
     var state = Map({
-      menu: Map({
-        open: location.pathname == "/menu",
-      }),
-      accelerometer: Map({
-        reading: Map({
+      menuOpen: location.pathname == "/menu",
+      accelerometerReading: Map({
           x: 0,
           y: 0,
           z: 0
-        }),
       }),
       theme: query.theme || "APPLE"
     });
@@ -25,9 +21,12 @@ export default {
     return state;
   },
   openMenu: function(state){
-    return state.update("menu", function(map){ return map.set("open", true); });
+    return state.set("menuOpen", true);
   },
   closeMenu: function(state){
-    return state.update("menu", function(map){ return map.set("open", false); });
+    return state.set("menuOpen", false);
+  },
+  accelerationReading: function(state, reading){
+    return state.set("accelerometerReading", Map(reading));
   }
 };
