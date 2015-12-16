@@ -40,4 +40,17 @@ export default function View($root){
       }
     }
   });
+  Object.defineProperty(this, "theme", {
+    set: function(theme){
+      if (typeof theme !== 'string') {
+        throw new TypeError("theme property should be a string");
+      }
+
+      $spiritLevel.classList.remove("apple");
+      $spiritLevel.classList.remove("blueberry");
+      $spiritLevel.classList.remove("cherry");
+      $spiritLevel.classList.remove("peach");
+      $spiritLevel.classList.add(theme);
+    }
+  });
 }

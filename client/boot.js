@@ -53,8 +53,19 @@ function Client(){
     // DEBT replaces menu map will fail with new keys
     state = state.set("menu", Map({open: false}));
     this.location.update();
+    // DEBT should call update on an actor
     this.$view.isSpiritLevelMinimised = this.menuOpen;
   };
+  this.selectTheme = function(theme){
+    // TODO raise error for unknown theme;
+    if (state.theme === theme) { return; }
+
+    state = state.set("theme", theme);
+    this.location.update();
+    this.$view.theme = state.theme;
+  };
+  // Setup step that should be called when initializing a presenter
+  this.$view.theme = state.theme;
 }
 
 function Location(projection){
