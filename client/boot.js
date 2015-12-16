@@ -24,18 +24,14 @@ function Client(){
     }),
     theme: query.theme || "APPLE"
   });
-  Object.defineProperty(this, "url", {
-    get: function(){
-      var url = "/";
-      if (state.menu.open) { url = url + "menu"; }
-      var query = {theme: state.theme.toLowerCase()};
-      queryString = QString.stringify(query);
-      return url + "?" + queryString;
-    }
-  });
   Object.defineProperty(this, "menuOpen", {
     get: function(){
       return state.menu.open;
+    }
+  });
+  Object.defineProperty(this, "theme", {
+    get: function(){
+      return state.theme;
     }
   });
 
@@ -67,9 +63,22 @@ function Client(){
 }
 
 function Location(projection){
-  history.replaceState({}, "", projection.url);
+  function url(projection){
+    var path = "/";
+    if (projection.menuOpen) {
+      path = path + "menu";
+    }
+
+    var query = {theme: projection.theme.toLowerCase()};
+    var queryString = QString.stringify(query);
+
+    return path + "?" + queryString;
+  }
+
+
+  history.replaceState({}, "", url(projection));
   function update(){
-    history.pushState({}, "", projection.url);
+    history.pushState({}, "", url(projection));
   }
   this.update = update;
 }
