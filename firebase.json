@@ -1,0 +1,15 @@
+{
+  "firebase": "level-wks14",
+  "public": "www",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ],
+  "rewrites": [
+    {
+      "source": "/**",
+      "destination": "/index.html"
+    }
+  ]
+}
