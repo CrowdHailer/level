@@ -8,8 +8,8 @@ import Controller from "./controller";
 export default function Component($root, app){
   function wrap(state){
     return {
-      angleX: (state.accelerationReading.x || 0).toFixed(2),
-      angleY: (state.accelerationReading.y || 0).toFixed(2),
+      angleX: (state.acceleration.x || 0).toFixed(2),
+      angleY: (state.acceleration.y || 0).toFixed(2),
       theme: state.theme,
       menuActive: state.menuActive
     };

@@ -32,6 +32,6 @@ export default {
       y: reading.y,
       z: reading.z,
     });
-    return state.set("accelerationReading", map);
+    return state.set("acceleration", map);
   }
 };

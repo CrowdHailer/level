@@ -3,9 +3,9 @@
 
 import State from "./state";
 import * as Dispatcher from "anon/dispatcher";
-export default function App(){
+export default function App(setup){
   var dispatcher = Dispatcher.create(window.console);
-  var state = State.create(window.location);
+  var state = setup.state;
 
   Object.defineProperty(this, "state", {
     get: function(){
