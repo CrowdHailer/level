@@ -4,20 +4,7 @@
   "description": "'Spirit level web app'",
   "main": "index.js",
   "scripts": {
-    "start": "superstatic",
-    "prebuild": "rm -rf www && mkdir www",
-    "build": "npm run -s build:markup && npm run -s build:scripts && npm run -s build:styles",
-    "build:markup": "cp app/index.html www/",
-    "build:scripts": "rollup -c",
-    "build:styles": "node-sass app/styles/app.scss > www/app.css",
-    "pretest:bundle": "rm -rf tmp && mkdir tmp",
-    "test": "npm run -s test:bundle && npm run -s test:run",
-    "test:watch": "chokidar '**/*.js' -i '**/bundle.js' -c 'npm -s test'",
-    "test:bundle": "node build_test.js",
-    "test:run": "karma start",
-    "prefetch": "rm -rf app/styles/vendor && mkdir app/styles/vendor",
-    "fetch": "npm run fetch:scut -s",
-    "fetch:scut": "curl https://raw.githubusercontent.com/davidtheclark/scut/master/dist/_scut.scss > ./app/styles/vendor/_scut.scss"
+    "test": "karma start ./karma.test.conf.js"
   },
   "repository": {
     "type": "git",
