@@ -19,4 +19,22 @@ Object.defineProperty(Vector.prototype, "magnitude", {
   }
 });
 
+Vector.prototype.toString = function toString(){
+  return "<Vector x: " + this.x + ", y: " + this.y + ", z: " + this.z + ">";
+};
+
+export function scale(multiplier, vector){
+  var x = multiplier * vector.x;
+  var y = multiplier * vector.y;
+  var z = multiplier * vector.z;
+  return new Vector({x: x, y: y, z: z});
+}
+
+export function normalize(vector){
+  var x = vector.x / vector.magnitude;
+  var y = vector.y / vector.magnitude;
+  var z = vector.z / vector.magnitude;
+  return new Vector({x: x, y: y, z: z});
+}
+
 export var create = Vector;

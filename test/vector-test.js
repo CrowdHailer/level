@@ -4,6 +4,9 @@
 
 import * as Vector from "../client/vector";
 
+// DEBT are not properly equal to instances of the same. Should implement is protocol.
+// DEBT to string method should be available on struct.
+
 describe("Vector", function() {
   var vector;
   beforeEach(function(){
@@ -26,30 +29,44 @@ describe("Vector", function() {
     expect(vector.magnitude).toBeCloseTo(3.742);
   });
 
-  xit("should print an inspectable string version", function () {
-    var vector = Vector.create({x: 3, y: 4, z: 5});
-    expect(vector.toString()).toEqual("<Vector x: 3, y: 4, z: 5>");
+  it("should print an inspectable string version", function () {
+    expect(vector.toString()).toEqual("<Vector x: 1, y: 2, z: 3>");
   });
 
+  describe("that is scaled", function(){
+    beforeEach(function(){
+      vector = Vector.scale(2, vector);
+    });
 
-  xit("should be able to scale a vector", function () {
-    var vector = Vector.create({x: 1, y: 2, z: 0});
-    var new_vector = Vector.scale(2, vector);
-    expect(new_vector.x).toEqual(2);
-    expect(new_vector.y).toEqual(4);
-    expect(new_vector.z).toEqual(0);
+    it("should have a x value", function() {
+      expect(vector.x).toEqual(2);
+    });
+
+    it("should have a y value", function() {
+      expect(vector.y).toEqual(4);
+    });
+
+    it("should have a z value", function() {
+      expect(vector.z).toEqual(6);
+    });
   });
 
-  xit("should be equal to same vector", function () {
-    var vector1 = Vector.create({x: 1, y: 2, z: 0});
-    var vector2 = Vector.create({x: 1, y: 2, z: 0});
-    expect(vector1).toEqual(vector2);
-  });
+  describe("that is normalized", function(){
+    beforeEach(function(){
+      vector = Vector.normalize(vector);
+    });
 
-  xit("should be able to normalize a vector", function () {
-    var vector = Vector.create({x: 0, y: 3, z: 4});
-    var normalizedVector = Vector.create({x: 0, y: 3/5, z: 4/5});
-    expect(Vector.normalize(vector)).toEqual(normalizedVector);
+    it("should have a x value", function() {
+      expect(vector.x).toBeCloseTo(0.267);
+    });
+
+    it("should have a y value", function() {
+      expect(vector.y).toBeCloseTo(0.535);
+    });
+
+    it("should have a z value", function() {
+      expect(vector.z).toBeCloseTo(0.802);
+    });
   });
 
   xit("can calculate the dot product of two vectors", function () {
