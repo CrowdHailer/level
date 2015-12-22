@@ -95,4 +95,10 @@ describe("Vector Angle", function(){
     var vector2 = Vector.create({x: 1, y: 1, z: 0});
     expect(Vector.angle(vector1, vector2)).toBeCloseTo(45);
   });
+
+  it("will return zero if either vector has zero magnitude", function(){
+    var vector1 = Vector.create({x: 0, y: 0, z: 0});
+    var vector2 = Vector.create({x: 1, y: 1, z: 0});
+    expect(Vector.angle(vector1, vector2)).toBeCloseTo(0);
+  });
 });

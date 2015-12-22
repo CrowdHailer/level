@@ -25,12 +25,6 @@ var state = new Struct({
 
 var logger = wrap(development, {prefix: "LEVEL", logLevel: state.logLevel});
 
-logger.log(uri.query["log-level"]);
-logger.log("log");
-logger.debug("debug");
-logger.info("info");
-logger.warn("warn");
-
 var app = new App({state: state, logger: logger});
 var router = new Router(app);
 var component = new Component(document, app);

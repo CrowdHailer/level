@@ -31,6 +31,9 @@ export function scale(multiplier, vector){
 }
 
 export function normalize(vector){
+  if (vector.magnitude === 0) {
+    throw new RangeError("Zero vector cannot be normalized");
+  }
   var x = vector.x / vector.magnitude;
   var y = vector.y / vector.magnitude;
   var z = vector.z / vector.magnitude;
@@ -42,8 +45,13 @@ export function dotProduct (v1, v2) {
 }
 
 export function angle (v1, v2) {
-    var n1 = normalize(v1);
-    var n2 = normalize(v2);
+    var n1, n2;
+    try {
+      n1 = normalize(v1);
+      n2 = normalize(v2);
+    } catch (err) {
+      return 0;
+    }
     var cosTheta = dotProduct(n1, n2);
     var thetaRad = Math.acos(cosTheta);
     var thetaDeg = (180/Math.PI) * thetaRad;
@@ -51,3 +59,4 @@ export function angle (v1, v2) {
 }
 
 export var create = Vector;
+export default Vector;

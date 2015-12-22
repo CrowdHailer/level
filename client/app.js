@@ -3,6 +3,8 @@
 
 import * as State from "./state";
 import * as Dispatcher from "anon/dispatcher";
+import * as Vector from "./vector";
+
 export default function App(setup){
   var dispatcher = Dispatcher.create(setup.logger);
   var state = setup.state;
@@ -35,7 +37,10 @@ export default function App(setup){
     dispatcher.dispatch();
   };
   this.accelerationReading = function(reading){
-    var state1 = state;
+    if (reading.x == void 0) {
+      return;
+    }
+    reading = Vector.create(reading);
     state = State.accelerationReading(state, reading);
     dispatcher.dispatch(reading);
   };
