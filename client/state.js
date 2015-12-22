@@ -1,37 +1,14 @@
 /* jshint esnext: true */
 'use strict';
 
-import Map from "carbide/map";
-import * as QString from "query-string";
-export default {
-  create: function(location){
-    var queryString = location.search;
-    var query = QString.parse(queryString);
+export function openMenu(state){
+  return state.set("menuActive", true);
+}
 
-    var state = Map({
-      menuActive: location.pathname == "/menu",
-      accelerationReading: Map({
-          x: 0,
-          y: 0,
-          z: 0
-      }),
-      theme: query.theme || "APPLE"
-    });
+export function closeMenu(state){
+  return state.set("menuActive", false);
+}
 
-    return state;
-  },
-  openMenu: function(state){
-    return state.set("menuActive", true);
-  },
-  closeMenu: function(state){
-    return state.set("menuActive", false);
-  },
-  accelerationReading: function(state, reading){
-    var map = Map({
-      x: reading.x,
-      y: reading.y,
-      z: reading.z,
-    });
-    return state.set("acceleration", map);
-  }
-};
+export function accelerationReading(state, reading){
+  return state.set("acceleration", reading);
+}

@@ -1,7 +1,7 @@
 /* jshint esnext: true */
 "use strict";
 
-import State from "./state";
+import * as State from "./state";
 import * as Dispatcher from "anon/dispatcher";
 export default function App(setup){
   var dispatcher = Dispatcher.create(window.console);
