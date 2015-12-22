@@ -34,7 +34,6 @@
     "url": "https://github.com/CrowdHailer/level/issues"
   },
   "devDependencies": {
-    "carbide": "CrowdHailer/carbide.js",
     "chokidar-cli": "^1.2.0",
     "jasmine": "^2.4.1",
     "karma": "^0.13.15",

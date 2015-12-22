@@ -1,0 +1,3 @@
+[submodule "client/node_modules/carbide"]
+	path = client/node_modules/carbide
+	url = git@github.com:CrowdHailer/carbide.js.git
