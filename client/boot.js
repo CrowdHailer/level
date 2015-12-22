@@ -31,7 +31,7 @@ logger.debug("debug");
 logger.info("info");
 logger.warn("warn");
 
-var app = new App({state: state});
+var app = new App({state: state, logger: logger});
 var router = new Router(app);
 var component = new Component(document, app);
 

@@ -4,7 +4,7 @@
 import * as State from "./state";
 import * as Dispatcher from "anon/dispatcher";
 export default function App(setup){
-  var dispatcher = Dispatcher.create(window.console);
+  var dispatcher = Dispatcher.create(setup.logger);
   var state = setup.state;
 
   Object.defineProperty(this, "state", {
@@ -37,6 +37,6 @@ export default function App(setup){
   this.accelerationReading = function(reading){
     var state1 = state;
     state = State.accelerationReading(state, reading);
-    dispatcher.dispatch();
+    dispatcher.dispatch(reading);
   };
 }
