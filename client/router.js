@@ -3,7 +3,7 @@
 
 import * as QString from "query-string";
 // DEBT call router
-export default function Location(app){
+export default function Router(app){
   function url(projection){
     var path = "/";
     if (projection.menuActive) {
@@ -18,8 +18,14 @@ export default function Location(app){
 
 
   history.replaceState({}, "", url(app.state));
+  var current = "";
   function update(){
-    history.pushState({}, "", url(app.state));
+    var replacement = url(app.state);
+    if (current === replacement) {
+      return;
+    }
+    history.pushState({}, "", replacement);
+    current = replacement;
   }
   this.update = update;
   update();

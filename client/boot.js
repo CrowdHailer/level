@@ -52,5 +52,5 @@ function handleReading(deviceMotionEvent) {
   }
   app.accelerationReading(acceleration);
 }
-var handleReadingThrottled = throttle(handleReading, 100);
+var handleReadingThrottled = throttle(handleReading, 50);
 window.addEventListener("devicemotion", handleReadingThrottled);
