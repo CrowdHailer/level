@@ -10,7 +10,7 @@ import * as Vector from "../client/vector";
 describe("Vector", function() {
   var vector;
   beforeEach(function(){
-    vector = new Vector.create({x: 1, y: 2, z: 3});
+    vector = Vector.create({x: 1, y: 2, z: 3});
   });
 
   it("should have a x value", function() {
@@ -68,19 +68,31 @@ describe("Vector", function() {
       expect(vector.z).toBeCloseTo(0.802);
     });
   });
+});
 
-  xit("can calculate the dot product of two vectors", function () {
+describe("Dot Product", function(){
+  it("will calculate the product of two vectors", function(){
     var vector1 = Vector.create({x: 1, y: 2, z: 0});
     var vector2 = Vector.create({x: 0, y: 3, z: 4});
     expect(Vector.dotProduct(vector1, vector2)).toEqual(6);
   });
+});
 
-  xit("can calculate angle between two vectors", function () {
+describe("Vector Angle", function(){
+  it("will calculate the angle between parallel vectors", function(){
+    var vector1 = Vector.create({x: 1, y: 0, z: 0});
+    expect(Vector.angle(vector1, vector1)).toEqual(0);
+  });
+
+  it("will calculate the angle between perpendicular vectors", function(){
+    var vector1 = Vector.create({x: 1, y: 0, z: 0});
+    var vector2 = Vector.create({x: 0, y: 0, z: 1});
+    expect(Vector.angle(vector1, vector2)).toEqual(90);
+  });
+
+  it("will calculate the angle between offset vectors", function(){
     var vector1 = Vector.create({x: 1, y: 0, z: 0});
     var vector2 = Vector.create({x: 1, y: 1, z: 0});
-    var vector3 = Vector.create({x: 0, y: 0, z: 1});
-    expect(Vector.angle(vector1, vector1)).toEqual(0);
-    expect(Vector.angle(vector1, vector2)).toEqual(45);
-    expect(Vector.angle(vector1, vector3)).toEqual(90);
+    expect(Vector.angle(vector1, vector2)).toBeCloseTo(45);
   });
 });

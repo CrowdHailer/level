@@ -5,7 +5,7 @@ import Struct from "./node_modules/carbide/struct";
 var VECTOR_DEFAULTS = {x: 0, y: 0, z: 0};
 
 function Vector(raw){
-  if ( !(this instanceof Vector) ) { return new Struct(VECTOR_DEFAULTS, raw); }
+  if ( !(this instanceof Vector) ) { return new Vector(raw); }
 
   return Struct.call(this, VECTOR_DEFAULTS, raw);
 }
@@ -35,6 +35,19 @@ export function normalize(vector){
   var y = vector.y / vector.magnitude;
   var z = vector.z / vector.magnitude;
   return new Vector({x: x, y: y, z: z});
+}
+
+export function dotProduct (v1, v2) {
+    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+}
+
+export function angle (v1, v2) {
+    var n1 = normalize(v1);
+    var n2 = normalize(v2);
+    var cosTheta = dotProduct(n1, n2);
+    var thetaRad = Math.acos(cosTheta);
+    var thetaDeg = (180/Math.PI) * thetaRad;
+    return thetaDeg;
 }
 
 export var create = Vector;
