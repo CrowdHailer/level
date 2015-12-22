@@ -1,7 +1,7 @@
 /* jshint esnext: true */
 'use strict';
 
-import { Delegator } from "./utils/dom";
+import { Delegator } from "./node_modules/anon/dom";
 export default function Controller($root, app){
   var delegator = new Delegator($root);
   delegator.on("click", "[data-command~=open-menu]", function(evt){
