@@ -40,8 +40,10 @@ export default function App(setup){
     if (reading.x == void 0) {
       return;
     }
-    reading = Vector.create(reading);
-    state = State.accelerationReading(state, reading);
+    // DEBT inplace because a device motion event has no keys that are enumerable
+    reading = {x: reading.x, y: reading.y, z: reading.z};
+    var vector = Vector.create(reading);
+    state = State.accelerationReading(state, vector);
     dispatcher.dispatch(reading);
   };
 }

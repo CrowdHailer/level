@@ -31,9 +31,26 @@ var component = new Component(document, app);
 
 export default app;
 
+import { throttle } from "./node_modules/anon/function";
 function handleReading(deviceMotionEvent) {
   var acceleration = deviceMotionEvent.accelerationIncludingGravity;
-  // DEBT rectify for browsers here
+
+  if (navigator.userAgent.match(/Windows/i)) {
+      acceleration = {
+          x: -1 * acceleration.x,
+          y: -1 * acceleration.y,
+          z: -1 * acceleration.z
+      };
+  } else if (navigator.userAgent.match(/Android/i)) {
+      acceleration = acceleration;
+  } else {
+      acceleration = {
+          x: -1 * acceleration.x,
+          y: -1 * acceleration.y,
+          z: -1 * acceleration.z
+      };
+  }
   app.accelerationReading(acceleration);
 }
-window.addEventListener("devicemotion", handleReading);
+var handleReadingThrottled = throttle(handleReading, 100);
+window.addEventListener("devicemotion", handleReadingThrottled);
