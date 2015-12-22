@@ -10,7 +10,7 @@ export default function Location(app){
       path = path + "menu";
     }
 
-    var query = {theme: projection.theme.toLowerCase()};
+    var query = {theme: projection.theme.toLowerCase(), "log-level": projection.logLevel};
     var queryString = QString.stringify(query);
 
     return path + "?" + queryString;
