@@ -14,120 +14,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="/level.css" media="screen">
   <!-- <noscript>
-      <style> .js-only { display: none } </style>
+    <style> .js-only { display: none } </style>
   </noscript> -->
 </head>
 
 <body>
-    <svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <defs>
-            <symbol id="icon-twitter" viewBox="0 0 951 1024">
-            	<title>twitter</title>
-            	<path class="path1" d="M925.714 233.143q-38.286 56-92.571 95.429 0.571 8 0.571 24 0 74.286-21.714 148.286t-66 142-105.429 120.286-147.429 83.429-184.571 31.143q-154.857 0-283.429-82.857 20 2.286 44.571 2.286 128.571 0 229.143-78.857-60-1.143-107.429-36.857t-65.143-91.143q18.857 2.857 34.857 2.857 24.571 0 48.571-6.286-64-13.143-106-63.714t-42-117.429v-2.286q38.857 21.714 83.429 23.429-37.714-25.143-60-65.714t-22.286-88q0-50.286 25.143-93.143 69.143 85.143 168.286 136.286t212.286 56.857q-4.571-21.714-4.571-42.286 0-76.571 54-130.571t130.571-54q80 0 134.857 58.286 62.286-12 117.143-44.571-21.143 65.714-81.143 101.714 53.143-5.714 106.286-28.571z"></path>
-            </symbol>
-            <symbol id="icon-facebook" viewBox="0 0 585 1024">
-            	<title>facebook</title>
-            	<path class="path1" d="M548 6.857v150.857h-89.714q-49.143 0-66.286 20.571t-17.143 61.714v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571q0-106.286 59.429-164.857t158.286-58.571q84 0 130.286 6.857z"></path>
-            </symbol>
-        </defs>
-    </svg>
-    <div id="splash-screen" data-component="splash-component" hidden>
-        <section>
-            <h1>Level</h1>
-            <span class="subheading">A spirit level for the web</span>
-            <footer data-hook="load-status" class="js-only">loading...</footer>
-            <noscript>
-                <footer>
-                    Failed! <a href="#" style="text-decoration:underline">About level</a>
-                </footer>
-            </noscript>
-        </section>
-    </div>
-    <main>
-        <section id="spirit-level" data-display="spirit-level">
-            <header>
-                <h1>Spirit Level</h1>
-                <div class="right">x:<span data-display="angleX"></span>° y:<span data-display="angleY"></span>°</div>
-            </header>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
+  <svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+      <symbol id="icon-twitter" viewBox="0 0 951 1024">
+        <title>twitter</title>
+        <path class="path1" d="M925.714 233.143q-38.286 56-92.571 95.429 0.571 8 0.571 24 0 74.286-21.714 148.286t-66 142-105.429 120.286-147.429 83.429-184.571 31.143q-154.857 0-283.429-82.857 20 2.286 44.571 2.286 128.571 0 229.143-78.857-60-1.143-107.429-36.857t-65.143-91.143q18.857 2.857 34.857 2.857 24.571 0 48.571-6.286-64-13.143-106-63.714t-42-117.429v-2.286q38.857 21.714 83.429 23.429-37.714-25.143-60-65.714t-22.286-88q0-50.286 25.143-93.143 69.143 85.143 168.286 136.286t212.286 56.857q-4.571-21.714-4.571-42.286 0-76.571 54-130.571t130.571-54q80 0 134.857 58.286 62.286-12 117.143-44.571-21.143 65.714-81.143 101.714 53.143-5.714 106.286-28.571z"></path>
+      </symbol>
+      <symbol id="icon-facebook" viewBox="0 0 585 1024">
+        <title>facebook</title>
+        <path class="path1" d="M548 6.857v150.857h-89.714q-49.143 0-66.286 20.571t-17.143 61.714v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571q0-106.286 59.429-164.857t158.286-58.571q84 0 130.286 6.857z"></path>
+      </symbol>
+    </defs>
+  </svg>
+  <div id="splash-screen" hidden>
+    <section>
+      <h1>Level</h1>
+      <span class="subheading">A spirit level for the web</span>
+      <footer data-hook="load-status" class="js-only">loading...</footer>
+      <noscript>
+        <footer>
+          Failed! <a href="#" style="text-decoration:underline">About level</a>
+        </footer>
+      </noscript>
+    </section>
+  </div>
+  <main>
+    <section id="spirit-level" data-display="spirit-level" onclick="event.preventDefault(); level.hideMenu()">
+      <header>
+        <h1>Spirit Level</h1>
+        <div class="right">x:<span data-display="angleX"></span>° y:<span data-display="angleY"></span>°</div>
+      </header>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
 
-                <g transform="matrix(1,0,0,-1,0,0)">
-                    <circle data-display="bubble" id="bubble" cx="0" cy="0" r="10" fill="white"></circle>
-                    <circle class="background" cx="0" cy="0" r="90"></circle>
-                    <circle class="dashed" cx="0" cy="0" r="45"></circle>
-                    <circle class="solid" cx="0" cy="0" r="10"></circle>
-                    <line x1="0" y1="-90" x2="0" y2="-10" />
-                    <line x1="0" y1="10" x2="0" y2="90" />
-                    <line x1="-90" y1="0" x2="-10" y2="0" />
-                    <line x1="10" y1="0" x2="90" y2="0" />
-                </g>
-            </svg>
-        </section>
-        <section id="menu">
-            <h1><a
-                href="https://www.facebook.com/sharer/sharer.php?u=http://level.workshop14.io"
-                onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
-                target="_blank"
-                title="Share on Facebook"
-                class="social-link">
-                <svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg>
-            </a>
-            <a
-                href="https://twitter.com/home?status=Spirit%20level%20for%20your%20device%20http://level.workshop14.io"
-                onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
-                target="_blank"
-                title="Share on Twitter"
-                class="social-link">
-                <svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
-            </a></h1>
-            <ul>
-                <li>
-                    <a href="/" data-command="select-theme" data-theme="apple">
-                        Apple <span class="apple primary"></span> <span class="apple secondary"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/blueberry" data-command="select-theme" data-theme="blueberry">
-                        Blueberry <span class="blueberry primary"></span> <span class="blueberry secondary"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/cherry" data-command="select-theme" data-theme="cherry">
-                        Cherry <span class="cherry primary"></span> <span class="cherry secondary"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/peach" data-command="select-theme" data-theme="peach">
-                        Peach <span class="peach primary"></span> <span class="peach secondary"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/about">
-                        -----------
-                    </a>
-                </li>
-                <li>
-                    <a href="/about">
-                        About Level
-                    </a>
-                </li>
-                <li>
-                    <a href="/calibrate">
-                        Calibrate
-                    </a>
-                </li>
-                <li>
+        <g transform="matrix(1,0,0,-1,0,0)">
+          <circle data-display="bubble" id="bubble" cx="0" cy="0" r="10" fill="white"></circle>
+          <circle class="background" cx="0" cy="0" r="90"></circle>
+          <circle class="dashed" cx="0" cy="0" r="45"></circle>
+          <circle class="solid" cx="0" cy="0" r="10"></circle>
+          <line x1="0" y1="-90" x2="0" y2="-10" />
+          <line x1="0" y1="10" x2="0" y2="90" />
+          <line x1="-90" y1="0" x2="-10" y2="0" />
+          <line x1="10" y1="0" x2="90" y2="0" />
+        </g>
+      </svg>
+    </section>
+    <section id="menu">
+      <h1><a
+        href="https://www.facebook.com/sharer/sharer.php?u=http://level.workshop14.io"
+        onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+        target="_blank"
+        title="Share on Facebook"
+        class="social-link">
+        <svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg>
+      </a>
+      <a
+      href="https://twitter.com/home?status=Spirit%20level%20for%20your%20device%20http://level.workshop14.io"
+      onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+      target="_blank"
+      title="Share on Twitter"
+      class="social-link">
+      <svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
+    </a></h1>
+    <ul>
+      <li>
+        <a href="/" data-command="select-theme" data-theme="apple">
+          Apple <span class="apple primary"></span> <span class="apple secondary"></span>
+        </a>
+      </li>
+      <li>
+        <a href="/blueberry" data-command="select-theme" data-theme="blueberry">
+          Blueberry <span class="blueberry primary"></span> <span class="blueberry secondary"></span>
+        </a>
+      </li>
+      <li>
+        <a href="/cherry" data-command="select-theme" data-theme="cherry">
+          Cherry <span class="cherry primary"></span> <span class="cherry secondary"></span>
+        </a>
+      </li>
+      <li>
+        <a href="/peach" data-command="select-theme" data-theme="peach">
+          Peach <span class="peach primary"></span> <span class="peach secondary"></span>
+        </a>
+      </li>
+      <li>
+        <a href="/about">
+          -----------
+        </a>
+      </li>
+      <li>
+        <a href="/about">
+          About Level
+        </a>
+      </li>
+      <li>
+        <a href="/calibrate">
+          Calibrate
+        </a>
+      </li>
+      <li>
 
-                </li>
-            </ul>
-        </section>
-    </main>
-    <footer class="page">
-        <nav>
-            <a href="http://workshop14.io">Workshop 14</a>
-            <a href="/menu" class="right" data-command="open-menu">menu</a>
-        </nav>
-    </footer>
+      </li>
+    </ul>
+  </section>
+</main>
+<footer class="page">
+  <nav>
+    <a href="http://workshop14.io">Workshop 14</a>
+    <a href="/menu" class="right" onclick="event.preventDefault(); level.showMenu();">menu</a>
+  </nav>
+</footer>
 
 </body>
 </html>
