@@ -1,0 +1,4 @@
+[submodule "client/anon"]
+	path = client/anon
+	url = git@github.com:workshop14/anon.js.git
+	branch = master
