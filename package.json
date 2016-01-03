@@ -4,7 +4,9 @@
   "description": "Spirit level web app",
   "scripts": {
     "prebuild": "rm -rf www && mkdir www",
-    "build": "cp assets/index.html assets/CNAME www/",
+    "build": "npm run build:assets && npm run build:client",
+    "build:assets": "cp assets/index.html assets/CNAME www/",
+    "build:client": "rollup -c",
     "predeploy": "npm run build",
     "deploy": "surge www",
     "profile": "psi level.workshop14.io"
@@ -24,6 +26,7 @@
     "url": "https://github.com/CrowdHailer/level/issues"
   },
   "devDependencies": {
+    "rollup": "^0.24.0",
     "surge": "^0.17.4"
   },
   "dependencies": {}
