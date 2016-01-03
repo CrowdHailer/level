@@ -4,11 +4,14 @@
   "description": "Spirit level web app",
   "scripts": {
     "prebuild": "rm -rf www && mkdir www",
-    "build": "npm run build:assets && npm run build:client",
+    "build": "npm run build:assets && npm run build:client && npm run build:styles",
     "build:assets": "cp assets/index.html assets/CNAME www/",
     "build:client": "npm run bundle:client && npm run minify:client",
     "bundle:client": "rollup -c",
     "minify:client": "uglifyjs --compress --mangle  -- www/level.js > www/level.min.js",
+    "build:styles": "node-sass assets/styles/client.scss > www/level.css",
+    "fetch": "npm run fetch:scut -s",
+    "fetch:scut": "curl https://raw.githubusercontent.com/davidtheclark/scut/master/dist/_scut.scss > ./assets/styles/vendor/_scut.scss",
     "predeploy": "npm run build",
     "deploy": "surge www",
     "profile": "psi level.workshop14.io"
@@ -28,6 +31,7 @@
     "url": "https://github.com/CrowdHailer/level/issues"
   },
   "devDependencies": {
+    "node-sass": "^3.4.2",
     "rollup": "^0.24.0",
     "surge": "^0.17.4",
     "uglify-js": "^2.6.1"
