@@ -25,6 +25,19 @@ To list all projects you have deployed use
 $ ./node_modules/.bin/surge list
 ```
 
+### Profile with [Page Speed Insights](https://www.npmjs.com/package/psi)
+
+To run the profiling execute the profile task
+```
+$ npm run profile
+```
+
+At the moment this is not part of any automation but the following should be added.
+
+- Run after deploy
+- If staging env setup run after deploy to staging and before deploy to production.
+- Would be nice to find a version that can run on locally hosted projects. 
+
 ## Resources
 
 Fruity color schemes

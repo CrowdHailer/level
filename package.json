@@ -6,7 +6,8 @@
     "prebuild": "rm -rf www && mkdir www",
     "build": "cp assets/index.html assets/CNAME www/",
     "predeploy": "npm run build",
-    "deploy": "surge www"
+    "deploy": "surge www",
+    "profile": "psi level.workshop14.io"
   },
   "repository": {
     "type": "git",
