@@ -3,6 +3,10 @@
   "version": "2.0.0",
   "description": "Spirit level web app",
   "scripts": {
+    "prebuild": "rm -rf www && mkdir www",
+    "build": "cp assets/index.html assets/CNAME www/",
+    "predeploy": "npm run build",
+    "deploy": "surge www"
   },
   "repository": {
     "type": "git",
@@ -19,7 +23,7 @@
     "url": "https://github.com/CrowdHailer/level/issues"
   },
   "devDependencies": {
+    "surge": "^0.17.4"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
