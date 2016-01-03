@@ -53,4 +53,11 @@ export default function Level(state){
     level.view.render(state);
     level.logger.info("New Reading");
   };
+
+  this.applyPopState = function(poppedState){
+    state = Object.assign({}, state, poppedState);
+
+    level.view.render(state);
+    level.logger.info("Return to State");
+  };
 }
