@@ -55,9 +55,10 @@ export default function Level(state){
   };
 
   this.applyPopState = function(poppedState){
+    console.log("popped state", poppedState)
     state = Object.assign({}, state, poppedState);
 
-    level.view.render(state);
+    // level.view.render(state);
     level.logger.info("Return to State");
   };
 }

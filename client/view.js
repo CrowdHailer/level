@@ -12,8 +12,6 @@ function url(projection){
 
 export default function View() {
   this.render = function(projection){
-    console.log(url(projection));
     history.pushState({}, "", url(projection));
-    console.log(projection);
   };
 }
