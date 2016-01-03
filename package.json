@@ -1,0 +1,25 @@
+{
+  "name": "Level",
+  "version": "2.0.0",
+  "description": "Spirit level web app",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CrowdHailer/level.git"
+  },
+  "keywords": [
+    "webapp",
+    "offline",
+    "level"
+  ],
+  "author": "Peter Saxton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CrowdHailer/level/issues"
+  },
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
