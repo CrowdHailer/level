@@ -5,7 +5,7 @@
   "scripts": {
     "prebuild": "rm -rf www && mkdir www",
     "build": "npm run build:assets && npm run build:client && npm run build:styles",
-    "build:assets": "cp assets/index.html assets/CNAME www/",
+    "build:assets": "cp assets/*.html assets/CNAME www/",
     "build:client": "npm run bundle:client && npm run minify:client",
     "bundle:client": "rollup -c",
     "minify:client": "uglifyjs --compress --mangle  -- www/level.js > www/level.min.js",
