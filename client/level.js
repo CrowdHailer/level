@@ -51,15 +51,14 @@ export default function Level(state){
     state = Object.assign({}, state, {reading: reading});
 
     level.view.render(state);
-    level.logger.info("New Reading");
+    level.logger.info("New Reading", reading);
   };
 
   this.applyPopState = function(poppedState){
-    console.log("popped state", poppedState)
     // Could query Router to get state
     state = Object.assign({}, state, poppedState);
 
     // level.view.render(state);
-    level.logger.info("Apply url State");
+    level.logger.info("Apply url State", poppedState);
   };
 }
