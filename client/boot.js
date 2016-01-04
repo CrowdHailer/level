@@ -32,7 +32,10 @@ level.applyPopState(stateFromLocation(window.location));
 import { throttle } from "./anon/function";
 function handleReading(deviceMotionEvent) {
   var acceleration = deviceMotionEvent.accelerationIncludingGravity;
-
+  // Use to call setup complete only once
+  // DEBT setup complete should be a derived property
+  // build on top of view status and accelerometer status
+  var stillToSetup = true;
   if (navigator.userAgent.match(/Windows/i)) {
       acceleration = {
           x: -1 * acceleration.x,
@@ -49,7 +52,11 @@ function handleReading(deviceMotionEvent) {
       };
   }
   // TODO handle bad reading
+  if (stillToSetup) {
+    level.setupComplete();
+  }
   level.newReading(acceleration);
+
 }
 var handleReadingThrottled = throttle(handleReading, 50);
 window.addEventListener("devicemotion", handleReadingThrottled);

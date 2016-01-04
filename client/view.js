@@ -10,8 +10,17 @@ function url(projection){
   return path + "?" + queryString;
 }
 
+function loadStatusToMessage(status){
+  if (status === "COMPLETED") {
+    return 'Ready! Click to begin';
+  }
+  return 'Loading...';
+}
+
 export default function View() {
   this.render = function(projection){
+    // DEBT setup as debug one levelled console
+    // console.log(projection);
     history.pushState({}, "", url(projection));
     var minimised = projection.menuVisible;
     if ($spiritLevel) {
@@ -31,14 +40,19 @@ export default function View() {
         $splashScreen.classList.add("hidden");
       }
     }
+    if ($loadStatus) {
+      var message = loadStatusToMessage(projection.setup);
+      $loadStatus.innerHTML = message;
+    }
   };
 }
 
 import { ready } from "./anon/dom";
 
-var $root, $spiritLevel, $splashScreen;
+var $root, $spiritLevel, $splashScreen, $loadStatus;
 ready(function(){
   $root = document.documentElement;
   $spiritLevel = $root.querySelector("[data-display~=spirit-level]");
   $splashScreen = $root.querySelector("[data-display~=splash-screen]");
+  $loadStatus = $root.querySelector("[data-display~=load-status]");
 });
