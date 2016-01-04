@@ -82,22 +82,22 @@
     </a></h1>
     <ul>
       <li>
-        <a href="/" data-command="select-theme" data-theme="apple">
+        <a href="/" onclick="event.preventDefault(); level.selectTheme('apple');">
           Apple <span class="apple primary"></span> <span class="apple secondary"></span>
         </a>
       </li>
       <li>
-        <a href="/blueberry" data-command="select-theme" data-theme="blueberry">
+        <a href="/blueberry" onclick="event.preventDefault(); level.selectTheme('blueberry');">
           Blueberry <span class="blueberry primary"></span> <span class="blueberry secondary"></span>
         </a>
       </li>
       <li>
-        <a href="/cherry" data-command="select-theme" data-theme="cherry">
+        <a href="/cherry" onclick="event.preventDefault(); level.selectTheme('cherry');">
           Cherry <span class="cherry primary"></span> <span class="cherry secondary"></span>
         </a>
       </li>
       <li>
-        <a href="/peach" data-command="select-theme" data-theme="peach">
+        <a href="/peach" onclick="event.preventDefault(); level.selectTheme('peach');">
           Peach <span class="peach primary"></span> <span class="peach secondary"></span>
         </a>
       </li>
@@ -109,11 +109,6 @@
       <li>
         <a href="/about">
           About Level
-        </a>
-      </li>
-      <li>
-        <a href="/calibrate">
-          Calibrate
         </a>
       </li>
       <li>

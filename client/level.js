@@ -41,10 +41,10 @@ export default function Level(state){
   this.selectTheme = function(theme){
     if (state.theme === theme) { return; }
 
-    state = Object.assign({}, state, {theme: theme});
+    state = Object.assign({}, state, {theme: theme, menuVisible: false});
 
     level.view.render(state);
-    level.logger.info("Select Theme");
+    level.logger.info("Select Theme", theme);
   };
 
   this.newReading = function(reading){
@@ -56,9 +56,10 @@ export default function Level(state){
 
   this.applyPopState = function(poppedState){
     console.log("popped state", poppedState)
+    // Could query Router to get state
     state = Object.assign({}, state, poppedState);
 
     // level.view.render(state);
-    level.logger.info("Return to State");
+    level.logger.info("Apply url State");
   };
 }

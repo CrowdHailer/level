@@ -20,6 +20,11 @@ export default function View() {
       } else {
         $spiritLevel.classList.remove("minimised");
       }
+      $spiritLevel.classList.remove("apple");
+      $spiritLevel.classList.remove("blueberry");
+      $spiritLevel.classList.remove("cherry");
+      $spiritLevel.classList.remove("peach");
+      $spiritLevel.classList.add(projection.theme);
     }
   };
 }
@@ -30,5 +35,4 @@ var $root, $spiritLevel;
 ready(function(){
   $root = document.documentElement;
   $spiritLevel = $root.querySelector("[data-display~=spirit-level]");
-  console.log($spiritLevel);
 });
