@@ -36,7 +36,17 @@ At the moment this is not part of any automation but the following should be add
 
 - Run after deploy
 - If staging env setup run after deploy to staging and before deploy to production.
-- Would be nice to find a version that can run on locally hosted projects. 
+- Would be nice to find a version that can run on locally hosted projects.
+
+### Google Webmaster Tools
+
+> Google Webmaster Tools reveals how Google looks your site online. Webmasters use this tool to fix problems with the site if any. It offers lot of tools for webmasters with which one can improve the visibility of the site and fix problems if any. It will give you the following information
+
+Webmaster tools from Google is used to give information about how Google (the search engine) is crawling your site.
+It is most useful to use the Google product as most of the information comes from Google.
+Alternatives such as [Bing webmaster tools](http://www.bing.com/toolbox/webmaster) check how your site is performing in Bing searches.
+
+**NOTE** [Webmaster tools are different to analytics](http://www.careerbless.com/web/website/general/topic1.php) and there are many alternative to this service.
 
 ## Resources
 
