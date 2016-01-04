@@ -30,32 +30,32 @@ window.onpopstate = function(){
 level.applyPopState(stateFromLocation(window.location));
 
 import { throttle } from "./anon/function";
+import * as Vector from "./vector";
 function handleReading(deviceMotionEvent) {
   var acceleration = deviceMotionEvent.accelerationIncludingGravity;
   // Use to call setup complete only once
   // DEBT setup complete should be a derived property
   // build on top of view status and accelerometer status
   var stillToSetup = true;
-  if (navigator.userAgent.match(/Windows/i)) {
-      acceleration = {
-          x: -1 * acceleration.x,
-          y: -1 * acceleration.y,
-          z: -1 * acceleration.z
-      };
-  } else if (navigator.userAgent.match(/Android/i)) {
-      acceleration = acceleration;
-  } else {
-      acceleration = {
-          x: -1 * acceleration.x,
-          y: -1 * acceleration.y,
-          z: -1 * acceleration.z
-      };
+
+  try {
+    acceleration = Vector.create(acceleration);
+    if (navigator.userAgent.match(/Windows/i)) {
+        acceleration = Vector.scale(-1, acceleration);
+    } else if (navigator.userAgent.match(/Android/i)) {
+        acceleration = acceleration;
+    } else {
+        acceleration = Vector.scale(-1, acceleration);
+    }
+    // TODO handle bad reading
+    if (stillToSetup) {
+      level.setupComplete();
+    }
+    level.newReading(vector);
+
+  } catch (e) {
+    console.log("level.setupFailed()");
   }
-  // TODO handle bad reading
-  if (stillToSetup) {
-    level.setupComplete();
-  }
-  level.newReading(acceleration);
 
 }
 var handleReadingThrottled = throttle(handleReading, 50);
