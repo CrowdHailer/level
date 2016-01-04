@@ -63,3 +63,10 @@ var handleReadingThrottled = throttle(handleReading, 50);
 window.addEventListener("devicemotion", handleReadingThrottled);
 
 export default level;
+import { ready } from "./anon/dom";
+
+ready(function(){
+  setTimeout(function () {
+    level.view.render(level.view.projection);
+  }, 10);
+});

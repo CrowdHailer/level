@@ -21,7 +21,9 @@ function loadStatusToMessage(status){
 }
 
 export default function View() {
+  var view = this;
   this.render = function(projection){
+    view.projection = projection;
     // DEBT setup as debug one levelled console
     // console.log(projection);
     history.pushState({}, "", url(projection));
@@ -58,4 +60,5 @@ ready(function(){
   $spiritLevel = $root.querySelector("[data-display~=spirit-level]");
   $splashScreen = $root.querySelector("[data-display~=splash-screen]");
   $loadStatus = $root.querySelector("[data-display~=load-status]");
+  // DEBT this hack means that a render is called after all the pieces are available.
 });
