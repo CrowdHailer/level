@@ -36,6 +36,7 @@ function handleReading(deviceMotionEvent) {
   // Use to call setup complete only once
   // DEBT setup complete should be a derived property
   // build on top of view status and accelerometer status
+  // this.sensorError
   var stillToSetup = true;
 
   try {
@@ -54,7 +55,7 @@ function handleReading(deviceMotionEvent) {
     level.newReading(vector);
 
   } catch (e) {
-    console.log("level.setupFailed()");
+    level.setupFailed();
   }
 
 }

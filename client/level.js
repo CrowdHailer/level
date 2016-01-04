@@ -10,9 +10,18 @@ export default function Level(state){
     level.view.render(state);
     level.logger.info("Setup Complete");
   };
+  this.setupFailed = function(){
+    if (state.setup === "FAILED") { return; }
+
+    state = Object.assign({}, state, {setup: "FAILED"});
+
+    level.view.render(state);
+    level.logger.info("Setup Failed");
+  };
 
   this.acknowledgeSplashScreen = function(){
     if (state.splashScreenAcknowledged === true) { return; }
+    if (state.setup !== "COMPLETED") { return; }
 
     state = Object.assign({}, state, {splashScreenAcknowledged: true});
 

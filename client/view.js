@@ -14,6 +14,9 @@ function loadStatusToMessage(status){
   if (status === "COMPLETED") {
     return 'Ready! Click to begin';
   }
+  if (status === "FAILED") {
+    return 'No Sensor Detected! Device needs accelerometer';
+  }
   return 'Loading...';
 }
 
