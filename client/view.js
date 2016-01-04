@@ -26,13 +26,19 @@ export default function View() {
       $spiritLevel.classList.remove("peach");
       $spiritLevel.classList.add(projection.theme);
     }
+    if($splashScreen){
+      if(projection.splashScreenAcknowledged){
+        $splashScreen.classList.add("hidden");
+      }
+    }
   };
 }
 
 import { ready } from "./anon/dom";
 
-var $root, $spiritLevel;
+var $root, $spiritLevel, $splashScreen;
 ready(function(){
   $root = document.documentElement;
   $spiritLevel = $root.querySelector("[data-display~=spirit-level]");
+  $splashScreen = $root.querySelector("[data-display~=splash-screen]");
 });
