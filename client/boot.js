@@ -181,10 +181,10 @@ function Display($root){
   var $splashScreen = $root.querySelector("[data-display~=splash-screen]");
   var $loadStatus = $root.querySelector("[data-display~=load-status]");
 
-  // $splashScreen.addEventListener("click", function(){
-  //   // DEBT needed for safari
-  //   window.level.acknowledgeSplashScreen();
-  // });
+  $splashScreen.addEventListener("click", function(){
+    // DEBT needed for safari
+    window.level.acknowledgeSplashScreen();
+  });
 
   Object.defineProperty(this, 'splashScreenAcknowledged', {
     set: function(toggle){
@@ -250,3 +250,6 @@ function Display($root){
     enumerable: true
   });
 }
+setTimeout(function () {
+  level.acknowledgeSplashScreen()
+}, 2000);
