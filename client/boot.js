@@ -24,6 +24,7 @@ function RouterController(router, app){
 var routerController = RouterController(router, level);
 
 // This is good as the application state can exist without a router representation of it.
+// instead when registering router controller as listener to router it gets state and calls app with it.
 level.applyPopState(router.state);
 
 import { throttle } from "./anon/function";

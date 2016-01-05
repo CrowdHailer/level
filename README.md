@@ -6,6 +6,15 @@ Level is a browser based spirit level to demonstrate the capability of native we
 
 ## Technology
 
+### Served using the [Harp static web server](http://harpjs.com/)
+
+Harp has the same routing rules as surge.sh for client side routing and 404 pages.
+
+To run the project locally use the start script.
+```
+$ npm start
+```
+
 ### Hosted on [Surge](surge.sh)
 
 If npm package surge is not globally available you can use the version installed as a dependency on this project.
