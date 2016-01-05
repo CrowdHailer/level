@@ -1,3 +1,6 @@
+import "./polyfill";
+onerror = function(e){ alert(e) }
+
 import Level from "./level";
 import * as Logger from "./anon/logger";
 
@@ -177,6 +180,11 @@ function Display($root){
   var $spiritLevel = $root.querySelector("[data-display~=spirit-level]");
   var $splashScreen = $root.querySelector("[data-display~=splash-screen]");
   var $loadStatus = $root.querySelector("[data-display~=load-status]");
+
+  // $splashScreen.addEventListener("click", function(){
+  //   // DEBT needed for safari
+  //   window.level.acknowledgeSplashScreen();
+  // });
 
   Object.defineProperty(this, 'splashScreenAcknowledged', {
     set: function(toggle){
