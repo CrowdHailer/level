@@ -3,7 +3,7 @@ export default function View() {
   var callbacks = [];
   this.render = function(projection){
     view.projection = projection;
-    console.debug(projection);
+    // console.debug(projection);
     callbacks.forEach(function(cb){
       cb(projection);
     });

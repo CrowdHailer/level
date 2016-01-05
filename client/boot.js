@@ -50,7 +50,7 @@ function handleReading(deviceMotionEvent) {
     if (stillToSetup) {
       level.setupComplete();
     }
-    level.newReading(vector);
+    level.newReading(acceleration);
 
   } catch (e) {
     level.setupFailed();
@@ -102,38 +102,54 @@ function loadStatusToMessage(status){
 }
 
 function formatNumber(number){
-    number = number || 0;
-    var string = '';
-    var array = (number + '').split('.');
-    var digits = array[0];
-    var tmp;
-    if (digits.indexOf('-') != -1){
-        string += '-';
-        tmp = digits.split('-')[1];
-        if (tmp.length == 1){
-            string += '0';
-        }
-        string += tmp;
-    } else {
-        string += '+';
-        if (digits.length == 1) {
-            string += '0';
-        }
-        string += digits;
+  number = number || 0;
+  var string = '';
+  var array = (number + '').split('.');
+  var digits = array[0];
+  var tmp;
+  if (digits.indexOf('-') != -1){
+    string += '-';
+    tmp = digits.split('-')[1];
+    if (tmp.length == 1){
+      string += '0';
     }
-    var decimals = array[1] || '0';
-    if (decimals.length == 1) {
-        decimals += '0';
+    string += tmp;
+  } else {
+    string += '+';
+    if (digits.length == 1) {
+      string += '0';
     }
-    string = string + '.' + decimals;
-    return string.slice(0, 6);
+    string += digits;
+  }
+  var decimals = array[1] || '0';
+  if (decimals.length == 1) {
+    decimals += '0';
+  }
+  string = string + '.' + decimals;
+  return string.slice(0, 6);
 }
 
 import { ready } from "./anon/dom";
 var $root, $spiritLevel, $splashScreen, $loadStatus;
+Object.defineProperty(View.prototype, "render", {
+  value: function(object){
+    var view = this;
+    window.cancelAnimationFrame(view.requestID);
+    this.requestID = window.requestAnimationFrame(function(){
+
+      for (var display in view) {
+        var value = object[display];
+        if (value == void 0) { return; }
+        view[display] = value;
+      }
+    });
+  },
+  enumerable: false
+});
+
 ready(function(){
   var display = new Display(document.documentElement);
-  level.view.addCallback(function(projection){
+  function renderDomDisplay(projection){
     var angles = {x: 0, y: 0};
     if (projection.reading) {
       angles = projectAcceleration(projection.reading);
@@ -144,6 +160,13 @@ ready(function(){
     display.loadStatus = loadStatusToMessage(projection.setup);
     display.angleX = formatNumber(angles.x);
     display.angleY = formatNumber(angles.y);
+  }
+  var requestID;
+  level.view.addCallback(function(projection){
+    window.cancelAnimationFrame(requestID);
+    requestID = window.requestAnimationFrame(function(){
+      renderDomDisplay(projection);
+    });
   });
 });
 window.Vector = Vector;

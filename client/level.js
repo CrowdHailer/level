@@ -60,7 +60,8 @@ export default function Level(state){
     state = Object.assign({}, state, {reading: reading});
 
     level.view.render(state);
-    level.logger.info("New Reading", reading);
+    // TODO make debug
+    // level.logger.debug("New Reading", reading);
   };
 
   this.applyPopState = function(poppedState){
