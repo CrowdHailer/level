@@ -38,7 +38,7 @@ export function scale(multiplier, vector){
 }
 
 export function normalize(vector){
-  if (vector.magnitude === 0) {
+  if (!vector.magnitude || vector.magnitude === 0) {
     throw new RangeError("Zero vector cannot be normalized");
   }
   var x = vector.x / vector.magnitude;

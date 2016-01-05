@@ -59,9 +59,38 @@ function handleReading(deviceMotionEvent) {
 }
 var handleReadingThrottled = throttle(handleReading, 50);
 window.addEventListener("devicemotion", handleReadingThrottled);
-
 export default level;
-import { ready } from "./anon/dom";
+
+// PROJECTION LOGIC
+var NEUTRAL_ACCELERATION = Vector.create({x: 0, y: 0, z: 1});
+
+function projectAcceleration(acceleration){
+  // The acceleration is the 3D vector representing the current acceleration of the phone.
+  // The neutral acceleration is the normalized reading if the phone was lying screen up on a level surface.
+
+  // angle is the deviation in degrees of the current acceleration from the neutral acceleration
+  var angle = Vector.angle(NEUTRAL_ACCELERATION, acceleration);
+  // console.log(acceleration.toString());
+  // console.log(NEUTRAL_ACCELERATION.toString());
+  // console.log(angle);
+
+  // xOffset^2 + yOffset^2 = angle^2
+  // acceleration.x * f = xOffset
+  // acceleration.y * f = yOffset
+  // implies
+  // f^2 = angle^2/(acceleration.x^2 + acceleration.x^2)
+  var f;
+  if (angle === 0) {
+    f = 0;
+  } else {
+    f = Math.sqrt((angle * angle) / (acceleration.x * acceleration.x + acceleration.y * acceleration.y));
+  }
+  return {
+    x: acceleration.x * f,
+    y: acceleration.y * f
+  };
+}
+// PRESENTATION LOGIC
 function loadStatusToMessage(status){
   if (status === "COMPLETED") {
     return 'Ready! Click to begin';
@@ -71,17 +100,23 @@ function loadStatusToMessage(status){
   }
   return 'Loading...';
 }
+import { ready } from "./anon/dom";
 var $root, $spiritLevel, $splashScreen, $loadStatus;
 ready(function(){
   var display = new Display(document.documentElement);
   level.view.addCallback(function(projection){
+    var angles = {x: 0, y: 0};
+    if (projection.reading) {
+      angles = projectAcceleration(projection.reading);
+    }
+    console.log(angles);
     display.splashScreenAcknowledged = projection.splashScreenAcknowledged;
     display.menuVisible = projection.menuVisible;
     display.theme = projection.theme;
     display.loadStatus = loadStatusToMessage(projection.setup);
   });
 });
-
+window.Vector = Vector;
 function Display($root){
   var $bubble = $root.querySelector("[data-display~=bubble]");
   var $angleX = $root.querySelector("[data-display~=angleX]");
