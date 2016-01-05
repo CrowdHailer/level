@@ -9,18 +9,18 @@ var logger = window.console;
 var level = Level(INITIAL_STATE);
 level.logger = logger;
 
-import View from "./view";
-level.view = new View();
-// level.view = {
-//   render: function(){}
-// };
 import Router from "./router";
 var router = Router(window);
+import View from "./view";
+level.view = new View(router);
 
 function RouterController(router, app){
   router.callback = app.applyPopState;
 }
 
+var routerController = RouterController(router, level);
+
+// This is good as the application state can exist without a router representation of it.
 level.applyPopState(router.state);
 
 import { throttle } from "./anon/function";

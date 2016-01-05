@@ -8,13 +8,11 @@ function loadStatusToMessage(status){
   return 'Loading...';
 }
 
-export default function View() {
+export default function View(router) {
   var view = this;
-  this.render = function(projection){
-    view.projection = projection;
-    // DEBT setup as debug one levelled console
-    console.debug(projection);
-    // history.pushState({}, "", urlFromState(projection));
+  var callbacks = [function (projection) {
+    router.state = projection;
+  }, function (projection) {
     var minimised = projection.menuVisible;
     if ($spiritLevel) {
       if (minimised) {
@@ -37,6 +35,13 @@ export default function View() {
       var message = loadStatusToMessage(projection.setup);
       $loadStatus.innerHTML = message;
     }
+  }];
+  this.render = function(projection){
+    view.projection = projection;
+    console.debug(projection);
+    callbacks.forEach(function(cb){
+      cb(projection);
+    });
   };
 }
 

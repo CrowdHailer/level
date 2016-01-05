@@ -31,9 +31,14 @@ export default function Router(window) {
     return parseLocation(location);
   }
 
+  var lastURL;
   function pushState(state) {
     if (withinPopStateCallback) { return; }
-    history.pushState({}, "", urlFromState(state));
+    var url = urlFromState(state);
+    if (url === lastURL) { return; }
+    console.log("here");
+    history.pushState({}, "", url);
+    lastURL = url;
   }
   function replaceState(state) {
     history.replaceState({}, "", urlFromState(state));
