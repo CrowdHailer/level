@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "node-sass": "^3.4.2",
+    "psi": "^2.0.2",
     "rollup": "^0.24.0",
     "surge": "^0.17.4",
     "uglify-js": "^2.6.1"
