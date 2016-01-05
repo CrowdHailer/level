@@ -14,7 +14,7 @@
     "fetch:scut": "curl https://raw.githubusercontent.com/davidtheclark/scut/master/dist/_scut.scss > ./assets/styles/vendor/_scut.scss",
     "predeploy": "npm run build",
     "deploy": "surge www",
-    "profile": "psi desktop level.workshop14.io",
+    "profile": "psi level.workshop14.io",
     "profile:desktop": "psi --strategy desktop level.workshop14.io",
     "prestart": "npm run build",
     "start": "harp server www"
