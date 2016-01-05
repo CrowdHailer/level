@@ -49,7 +49,6 @@ function handleReading(deviceMotionEvent) {
     } else {
       acceleration = Vector.scale(-1, acceleration);
     }
-    // TODO handle bad reading
     if (stillToSetup) {
       level.setupComplete();
     }

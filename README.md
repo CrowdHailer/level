@@ -57,6 +57,31 @@ Alternatives such as [Bing webmaster tools](http://www.bing.com/toolbox/webmaste
 
 **NOTE** [Webmaster tools are different to analytics](http://www.careerbless.com/web/website/general/topic1.php) and there are many alternative to this service.
 
+## TODOs
+These are improvements that could be made on a production app.
+
+### Appcache
+Set up app cache.
+
+### Social links
+replace opengraph markup
+https://github.com/CrowdHailer/level/blob/c7a2bcd5b3104e444e2c71b4a17a7e1c0c2f9b60/app/index.html
+
+### Minify HTML
+
+### Minify CSS
+
+### Critical CSS
+With a splash screen it is easy to separate splash css from the rest of the css
+Second step is to lasy load the remaining css.
+
+### Setup Deploy Chain
+Have a staging environment that can be used as the page speed index test app.
+Then deploy to production can be conditional on testing the speed on the development site
+
+### Lint
+Use eslint which is the most able to deal with partial use of es6. Needed for rollup.
+
 ## Resources
 
 Fruity color schemes
