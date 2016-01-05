@@ -72,28 +72,84 @@ function loadStatusToMessage(status){
 }
 var $root, $spiritLevel, $splashScreen, $loadStatus;
 ready(function(){
-  $root = document.documentElement;
-  $spiritLevel = $root.querySelector("[data-display~=spirit-level]");
-  $splashScreen = $root.querySelector("[data-display~=splash-screen]");
-  $loadStatus = $root.querySelector("[data-display~=load-status]");
-  // DEBT this hack means that a render is called after all the pieces are available.
-  function domRender (projection) {
-    var minimised = projection.menuVisible;
-    if (minimised) {
-      $spiritLevel.classList.add("minimised");
-    } else {
-      $spiritLevel.classList.remove("minimised");
-    }
-    $spiritLevel.classList.remove("apple");
-    $spiritLevel.classList.remove("blueberry");
-    $spiritLevel.classList.remove("cherry");
-    $spiritLevel.classList.remove("peach");
-    $spiritLevel.classList.add(projection.theme);
-    if(projection.splashScreenAcknowledged){
-      $splashScreen.classList.add("hidden");
-    }
-    var message = loadStatusToMessage(projection.setup);
-    $loadStatus.innerHTML = message;
-  }
-  level.view.addCallback(domRender);
+  var display = new Display(document.documentElement);
+  level.view.addCallback(function(projection){
+    display.splashScreenAcknowledged = projection.splashScreenAcknowledged;
+    display.menuVisible = projection.menuVisible;
+    display.theme = projection.theme;
+    display.loadStatus = loadStatusToMessage(projection.setup);
+  });
 });
+
+function Display($root){
+  var $bubble = $root.querySelector("[data-display~=bubble]");
+  var $angleX = $root.querySelector("[data-display~=angleX]");
+  var $angleY = $root.querySelector("[data-display~=angleY]");
+  var $spiritLevel = $root.querySelector("[data-display~=spirit-level]");
+  var $splashScreen = $root.querySelector("[data-display~=splash-screen]");
+  var $loadStatus = $root.querySelector("[data-display~=load-status]");
+
+  Object.defineProperty(this, 'splashScreenAcknowledged', {
+    set: function(toggle){
+      if (toggle) {
+        $splashScreen.classList.add("hidden");
+      }
+    }
+  });
+  Object.defineProperty(this, 'loadStatus', {
+    set: function(message){
+      // DEBT error on bad value
+      $loadStatus.innerHTML = message;
+    }
+  });
+  Object.defineProperty(this, "menuVisible", {
+    set: function(minimised){
+      if (typeof minimised !== 'boolean') {
+        throw new TypeError("menuVisible property should be a boolean");
+      }
+
+      if (minimised) {
+        $spiritLevel.classList.add("minimised");
+      } else {
+        $spiritLevel.classList.remove("minimised");
+      }
+    },
+    enumerable: true
+  });
+  Object.defineProperty(this, "angleX", {
+    set: function(angle){
+      if (typeof angle !== 'string') {
+        throw new TypeError("angleX property should be a string");
+      }
+
+      $bubble.setAttribute("cx", angle);
+      $angleX.innerHTML = angle;
+    },
+    enumerable: true
+  });
+  Object.defineProperty(this, "angleY", {
+    set: function(angle){
+      if (typeof angle !== 'string') {
+        throw new TypeError("angleY property should be a string");
+      }
+
+      $bubble.setAttribute("cy", angle);
+      $angleY.innerHTML = angle;
+    },
+    enumerable: true
+  });
+  Object.defineProperty(this, "theme", {
+    set: function(theme){
+      if (typeof theme !== 'string') {
+        throw new TypeError("theme property should be a string");
+      }
+
+      $spiritLevel.classList.remove("apple");
+      $spiritLevel.classList.remove("blueberry");
+      $spiritLevel.classList.remove("cherry");
+      $spiritLevel.classList.remove("peach");
+      $spiritLevel.classList.add(theme);
+    },
+    enumerable: true
+  });
+}
