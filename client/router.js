@@ -36,7 +36,6 @@ export default function Router(window) {
     if (withinPopStateCallback) { return; }
     var url = urlFromState(state);
     if (url === lastURL) { return; }
-    console.log("here");
     history.pushState({}, "", url);
     lastURL = url;
   }

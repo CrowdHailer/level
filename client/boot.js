@@ -12,7 +12,10 @@ level.logger = logger;
 import Router from "./router";
 var router = Router(window);
 import View from "./view";
-level.view = new View(router);
+level.view = new View();
+level.view.addCallback(function (projection) {
+  router.state = projection;
+});
 
 function RouterController(router, app){
   router.callback = app.applyPopState;
@@ -36,11 +39,11 @@ function handleReading(deviceMotionEvent) {
   try {
     acceleration = Vector.create(acceleration);
     if (navigator.userAgent.match(/Windows/i)) {
-        acceleration = Vector.scale(-1, acceleration);
+      acceleration = Vector.scale(-1, acceleration);
     } else if (navigator.userAgent.match(/Android/i)) {
-        acceleration = acceleration;
+      acceleration = acceleration;
     } else {
-        acceleration = Vector.scale(-1, acceleration);
+      acceleration = Vector.scale(-1, acceleration);
     }
     // TODO handle bad reading
     if (stillToSetup) {
@@ -58,9 +61,39 @@ window.addEventListener("devicemotion", handleReadingThrottled);
 
 export default level;
 import { ready } from "./anon/dom";
-
+function loadStatusToMessage(status){
+  if (status === "COMPLETED") {
+    return 'Ready! Click to begin';
+  }
+  if (status === "FAILED") {
+    return 'No Sensor Detected! Device needs accelerometer';
+  }
+  return 'Loading...';
+}
+var $root, $spiritLevel, $splashScreen, $loadStatus;
 ready(function(){
-  setTimeout(function () {
-    level.view.render(level.view.projection);
-  }, 10);
+  $root = document.documentElement;
+  $spiritLevel = $root.querySelector("[data-display~=spirit-level]");
+  $splashScreen = $root.querySelector("[data-display~=splash-screen]");
+  $loadStatus = $root.querySelector("[data-display~=load-status]");
+  // DEBT this hack means that a render is called after all the pieces are available.
+  function domRender (projection) {
+    var minimised = projection.menuVisible;
+    if (minimised) {
+      $spiritLevel.classList.add("minimised");
+    } else {
+      $spiritLevel.classList.remove("minimised");
+    }
+    $spiritLevel.classList.remove("apple");
+    $spiritLevel.classList.remove("blueberry");
+    $spiritLevel.classList.remove("cherry");
+    $spiritLevel.classList.remove("peach");
+    $spiritLevel.classList.add(projection.theme);
+    if(projection.splashScreenAcknowledged){
+      $splashScreen.classList.add("hidden");
+    }
+    var message = loadStatusToMessage(projection.setup);
+    $loadStatus.innerHTML = message;
+  }
+  level.view.addCallback(domRender);
 });
