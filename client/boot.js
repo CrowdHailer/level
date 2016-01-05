@@ -100,6 +100,35 @@ function loadStatusToMessage(status){
   }
   return 'Loading...';
 }
+
+function formatNumber(number){
+    number = number || 0;
+    var string = '';
+    var array = (number + '').split('.');
+    var digits = array[0];
+    var tmp;
+    if (digits.indexOf('-') != -1){
+        string += '-';
+        tmp = digits.split('-')[1];
+        if (tmp.length == 1){
+            string += '0';
+        }
+        string += tmp;
+    } else {
+        string += '+';
+        if (digits.length == 1) {
+            string += '0';
+        }
+        string += digits;
+    }
+    var decimals = array[1] || '0';
+    if (decimals.length == 1) {
+        decimals += '0';
+    }
+    string = string + '.' + decimals;
+    return string.slice(0, 6);
+}
+
 import { ready } from "./anon/dom";
 var $root, $spiritLevel, $splashScreen, $loadStatus;
 ready(function(){
@@ -109,11 +138,12 @@ ready(function(){
     if (projection.reading) {
       angles = projectAcceleration(projection.reading);
     }
-    console.log(angles);
     display.splashScreenAcknowledged = projection.splashScreenAcknowledged;
     display.menuVisible = projection.menuVisible;
     display.theme = projection.theme;
     display.loadStatus = loadStatusToMessage(projection.setup);
+    display.angleX = formatNumber(angles.x);
+    display.angleY = formatNumber(angles.y);
   });
 });
 window.Vector = Vector;
