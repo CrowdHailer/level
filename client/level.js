@@ -67,7 +67,7 @@ export default function Level(state){
     // Could query Router to get state
     state = Object.assign({}, state, poppedState);
 
-    // level.view.render(state);
+    level.view.render(state);
     level.logger.info("Apply url State", poppedState);
   };
 }

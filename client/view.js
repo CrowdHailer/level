@@ -1,15 +1,3 @@
-// calculate url from projection
-function url(projection){
-  var path = "/";
-  if (projection.menuVisible) {
-    path = path + "menu";
-  }
-
-  var queryString = "theme=" + projection.theme;
-
-  return path + "?" + queryString;
-}
-
 function loadStatusToMessage(status){
   if (status === "COMPLETED") {
     return 'Ready! Click to begin';
@@ -25,8 +13,8 @@ export default function View() {
   this.render = function(projection){
     view.projection = projection;
     // DEBT setup as debug one levelled console
-    // console.log(projection);
-    history.pushState({}, "", url(projection));
+    console.debug(projection);
+    // history.pushState({}, "", urlFromState(projection));
     var minimised = projection.menuVisible;
     if ($spiritLevel) {
       if (minimised) {

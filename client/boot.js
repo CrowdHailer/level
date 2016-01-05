@@ -11,23 +11,17 @@ level.logger = logger;
 
 import View from "./view";
 level.view = new View();
+// level.view = {
+//   render: function(){}
+// };
+import Router from "./router";
+var router = Router(window);
 
-function stateFromLocation(location){
-  var THEME_MATCH = /theme=([^&]+)/;
-  var query = location.search.slice(1);
-
-  var theme = (query.match(THEME_MATCH) || [])[1] || "apple";
-
-  var menuVisible = location.pathname === "/menu";
-  return {theme: theme, menuVisible: menuVisible};
+function RouterController(router, app){
+  router.callback = app.applyPopState;
 }
 
-window.onpopstate = function(){
-  var state = stateFromLocation(window.location);
-  level.applyPopState(state);
-};
-
-level.applyPopState(stateFromLocation(window.location));
+level.applyPopState(router.state);
 
 import { throttle } from "./anon/function";
 import * as Vector from "./vector";
