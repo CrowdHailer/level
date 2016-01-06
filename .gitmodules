@@ -1,0 +1,7 @@
+[submodule "client/node_modules/carbide"]
+	path = client/node_modules/carbide
+	url = git@github.com:CrowdHailer/carbide.js.git
+[submodule "client/node_modules/anon"]
+	path = client/node_modules/anon
+	url = git@github.com:workshop14/anon.js.git
+	branch = master

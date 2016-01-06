@@ -38,7 +38,7 @@
     <meta name="twitter:site" content="@crowdhailer" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-    <link rel="stylesheet" href="/styles/app.css" media="screen" title="no title">
+    <link rel="stylesheet" href="/app.css" media="screen" title="no title">
     <noscript>
         <style> .js-only { display: none } </style>
     </noscript>
@@ -56,7 +56,7 @@
             </symbol>
         </defs>
     </svg>
-    <div id="splash-screen">
+    <div id="splash-screen" data-component="splash-component" hidden>
         <section>
             <h1>Level</h1>
             <span class="subheading">A spirit level for the web</span>
@@ -69,16 +69,16 @@
         </section>
     </div>
     <main>
-        <section id="spirit-level">
+        <section id="spirit-level" data-display="spirit-level">
             <header>
                 <h1>Spirit Level</h1>
-                <div class="right">x:<span data-hook="angleX"></span>° y:<span data-hook="angleY"></span>°</div>
+                <div class="right">x:<span data-display="angleX"></span>° y:<span data-display="angleY"></span>°</div>
             </header>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
 
                 <g transform="matrix(1,0,0,-1,0,0)">
+                    <circle data-display="bubble" id="bubble" cx="0" cy="0" r="10" fill="white"></circle>
                     <circle class="background" cx="0" cy="0" r="90"></circle>
-                    <circle id="bubble" cx="0" cy="0" r="10" fill="white"></circle>
                     <circle class="dashed" cx="0" cy="0" r="45"></circle>
                     <circle class="solid" cx="0" cy="0" r="10"></circle>
                     <line x1="0" y1="-90" x2="0" y2="-10" />
@@ -86,9 +86,6 @@
                     <line x1="-90" y1="0" x2="-10" y2="0" />
                     <line x1="10" y1="0" x2="90" y2="0" />
                 </g>
-                <!-- <g>
-                    <line x1="0" y1="-90" x2="90" y2="0" />
-                </g> -->
             </svg>
         </section>
         <section id="menu">
@@ -110,22 +107,22 @@
             </a></h1>
             <ul>
                 <li>
-                    <a href="/">
+                    <a href="/" data-command="select-theme" data-theme="apple">
                         Apple <span class="apple primary"></span> <span class="apple secondary"></span>
                     </a>
                 </li>
                 <li>
-                    <a href="/blueberry">
+                    <a href="/blueberry" data-command="select-theme" data-theme="blueberry">
                         Blueberry <span class="blueberry primary"></span> <span class="blueberry secondary"></span>
                     </a>
                 </li>
                 <li>
-                    <a href="/cherry">
+                    <a href="/cherry" data-command="select-theme" data-theme="cherry">
                         Cherry <span class="cherry primary"></span> <span class="cherry secondary"></span>
                     </a>
                 </li>
                 <li>
-                    <a href="/peach">
+                    <a href="/peach" data-command="select-theme" data-theme="peach">
                         Peach <span class="peach primary"></span> <span class="peach secondary"></span>
                     </a>
                 </li>
@@ -153,10 +150,10 @@
     <footer class="page">
         <nav>
             <a href="http://workshop14.io">Workshop 14</a>
-            <a href="/menu" class="right">menu</a>
+            <a href="/menu" class="right" data-command="open-menu">menu</a>
         </nav>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="/client.js"></script>
 </body>
 </html>
