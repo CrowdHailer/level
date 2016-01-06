@@ -4,6 +4,31 @@ Level
 
 Level is a browser based spirit level to demonstrate the capability of native web applications. The live application can be viewed [here](http://level.workshop14.io).
 
+## Installation
+
+Clone the repository
+```
+$ git clone
+```
+Fetch npm dependencies
+```
+$ npm i
+```
+Fetch the submodules
+```
+$ git submodules update
+```
+Fetch styles
+```
+$ mkdir assets/styles/vendor
+$ npm run fetch
+```
+
+Start
+```
+$ npm run start
+``` 
+
 ## Technology
 
 ### Served using the [Harp static web server](http://harpjs.com/)
