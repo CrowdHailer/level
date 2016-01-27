@@ -10,8 +10,6 @@
     "bundle:client": "rollup -c",
     "minify:client": "uglifyjs --compress --mangle  -- www/level.js > www/level.min.js",
     "build:styles": "node-sass assets/styles/client.scss > www/level.css",
-    "fetch": "npm run fetch:scut -s",
-    "fetch:scut": "curl https://raw.githubusercontent.com/davidtheclark/scut/master/dist/_scut.scss > ./assets/styles/vendor/_scut.scss",
     "predeploy": "npm run build",
     "deploy": "surge www",
     "profile": "psi level.workshop14.io",
@@ -37,7 +35,7 @@
     "harp": "^0.20.1",
     "node-sass": "^3.4.2",
     "psi": "^2.0.2",
-    "rollup": "^0.24.0",
+    "rollup": "^0.25.0",
     "surge": "^0.17.4",
     "uglify-js": "^2.6.1"
   },
