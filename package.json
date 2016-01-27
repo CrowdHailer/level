@@ -8,7 +8,7 @@
     "build:assets": "cp assets/*.html assets/CNAME www/",
     "build:client": "npm run bundle:client && npm run minify:client",
     "bundle:client": "rollup -c",
-    "minify:client": "uglifyjs --compress --mangle  -- www/level.js > www/level.min.js",
+    "minify:client": "uglifyjs www/level.js -cm -o www/level.min.js --in-source-map www/level.js.map --source-map www/level.min.js.map",
     "build:styles": "node-sass assets/styles/client.scss > www/level.css",
     "predeploy": "npm run build",
     "deploy": "surge www",
